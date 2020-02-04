@@ -1,4 +1,5 @@
-gulpfile.js
-package-look.json
+.node-version
+package-lock.json
 package.json
+gulpfile.js
 /node_modules/
