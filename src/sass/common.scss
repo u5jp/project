@@ -1,0 +1,10 @@
+.scssTest{
+    display: grid;
+    font-size: 11px;
+
+    .test{
+        display: flex;
+        flex:1;
+        margin-top:10px;
+    }
+}
