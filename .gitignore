@@ -2,4 +2,5 @@
 package-lock.json
 package.json
 gulpfile.js
+webpack.config.js
 /node_modules/
