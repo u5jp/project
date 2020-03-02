@@ -1,15 +1,369 @@
-.crazy{
-    font-size: 100px;
-    .lp-kv{
+@mixin lines {
+	@for $value from 1 through 3{
+		.c-nav_hamburger_line#{$value}{
+			top:$value * 8 + 3 + px;
+		}
+		&:hover{
+			.c-nav_hamburger_line#{$value}{
+				&:before,&:after{
+					transform: translateX(200%);
+					transition-property:transform;
+					transition-timing-function:cubic-bezier(0.19, 1, 0.22, 1) ;
+					transition-duration:1s;
+					transition-delay:$value*50 + ms;
+				}
+			}
+		}
+	}
+}
+@mixin crosses {
+	@for $value from 1 through 2{
+		.c-nav_hamburger_cross#{$value}{
+			top: 19px;
 
-        position: relative;
-        > :not(:first-child){
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-        }
-    }
+			@if $value == 1 {
+				transform: rotate(45deg);
+			}
+			@else if $value == 2 {
+				transform: rotate(135deg);
+			}
+		}
+		&:hover{
+			.c-nav_hamburger_cross#{$value}{
+				&:before,&:after{
+					transform: translateX(200%);
+					transition-property:transform;
+					transition-timing-function:cubic-bezier(0.19, 1, 0.22, 1) ;
+					transition-duration:1s;
+					transition-delay:$value*50 + ms;
+				}
+			}
+		}
+	}
+}
+
+.crazy{
+	font-family: "Noto Sans JP", 游ゴシック体, "Yu Gothic", YuGothic, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", メイリオ, Meiryo, sans-serif;
+	-webkit-font-smoothing: antialiased;
+	@keyframes moveScrollPointer {
+		0% {
+			transform: translate3d(0px, 0px, 0px);
+		}
+		100% {
+			transform: translate3d(0px, 54px, 0px);
+		}
+	}
+	@keyframes moveScrollPointerIn {
+		0% {
+			transform: scale(0);
+		}
+	
+		10% {
+			transform: scale(1);
+		}
+	
+		65% {
+			transform: scale(1);
+		}
+
+		100% {
+			transform: scale(0);
+		}
+	}
+
+	.c-nav{
+		position: fixed;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		z-index: 999;
+		perspective: 500px;
+
+		.c-nav_logo{
+			top: 33px;
+			left: 44px;
+			display: block;
+			position: absolute;
+			z-index: 99999;
+			fill:#fff;
+		}
+
+		.c-nav_label{
+			position: absolute;
+			top: 50%;
+			left: 56px;
+			transform: translate(-50%,-50%);
+			&:hover{
+				&:before{
+					height: 100%;
+				}
+			}
+			&:before{
+				content: "";
+				display: block;
+				position: absolute;
+				width: 1.5px;
+				height: 0;
+				background-color: #000;
+				right: 50%;
+				transform: translateX(50%);
+				transition: height 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
+			}
+		}
+
+		.c-nav_scroll{
+			width: 1px;
+			height: 54px;
+			position: absolute;
+			bottom: 25px;
+			left: 60px;
+			background-color: #ababab;
+			&_pointer{
+				width: 9px;
+				height: 9px;
+				position: absolute;
+				left: -4px;
+				top: -4px;
+				animation: moveScrollPointer 1.2s cubic-bezier(.215,.61,.355,1) 0s infinite normal;
+				&:before{
+					content: "";
+					display: block;
+					width: 9px;
+					height: 9px;
+					border-radius: 50%;
+					background-color: #000;
+					animation: moveScrollPointerIn 1.2s cubic-bezier(.215,.61,.355,1) 0s infinite normal;
+				}
+			}
+		}
+
+		.c-nav_utility{
+			width: 32px;
+			line-height: 1.5;
+			top: 50%;
+			right: 45px;
+			transform: translateY(-50%);
+			position: absolute;
+			.c-nav_utility_sns{
+				>li{
+					padding: 10px 0;
+					a{
+						svg{
+							margin: 0 auto;
+							transition:transform 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
+						}
+					}
+					&:hover{
+						svg{
+							transform: scale(1.4);
+						}
+					}
+				}
+			}
+			.c-nav_utility_recruit{
+				position: relative;
+				height: 47px;
+				margin-top: 17px;
+				&:hover{
+					>:first-child:before{
+						height: 140px;
+					}
+				}
+				>:first-child:before{
+					content: "";
+					display: block;
+					position: absolute;
+					background: #000;
+					width: 2px;
+					height: 47px;
+					right: 50%;
+					transform: translate(50%);
+					transition: height 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
+				}
+				img{
+					position: absolute;
+					top: 60px;
+					right: 50%;
+					transform: translate(50%);
+				}
+			}
+		}
+
+		.c-nav_hamburger{
+			position: absolute;
+			top: 26px;
+			right: 41px;
+			width: 40px;
+			height: 40px;
+			cursor: pointer;
+			z-index: 9999;
+			@include lines;
+			@include crosses;
+			>div{
+				position: absolute;
+				height: 2px;
+				width: 24px;
+				left: 9px;
+				overflow: hidden;
+				&::before{
+					content: "";
+					display: block;
+					width: 24px;
+					height: 2px;
+					position: absolute;
+					top: 0px;
+					left: -48px;
+				}
+				&:after{
+					content: "";
+					display: block;
+					width: 24px;
+					height: 2px;
+					position: absolute;
+					top: 0px;
+					left: 0px;
+				}
+				&[class*="line"]{
+					&::before,&:after{
+						background: #000;
+					}
+				}
+				&[class*="cross"]{
+					&::before,&:after{
+						background: #fff;
+					}
+				}
+				
+				&.is-opened{
+					
+				}
+			}
+		}
+
+		.c-nav_popup{
+			opacity: 0;
+			transform: translate3d(0px, 0px, -50px);
+			transition:  0.6s cubic-bezier(0.075, 0.82, 0.165, 1);
+			position: fixed;
+			top:0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			z-index: 5000;
+			background: #000;
+			&.is-opened{
+				opacity: 1;
+				transform: translate3d(0px, 0px, 0px);
+			}
+			.c-nav_popup_list{
+				position: absolute;
+				bottom: 50%;
+				right: 50%;
+				transform: translate(50%,50%);
+				font-size: 14px;
+				padding-top: 50px;
+				>li{
+					padding: 17px 0;
+					letter-spacing: 0.15em;
+					font-weight: bold;
+					cursor: pointer;
+					>a{
+						position: relative;
+						color: #fff;
+						&:before{
+							content: "";
+							display: block;
+							position: absolute;
+							width: 0;
+							height: 2px;
+							right:0;
+							left: auto;
+							background-color: #fff;
+							bottom: 50%;
+							transform: translateY(50%);
+							transition: width 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
+						}
+					}
+					&:last-child{
+						cursor:auto;
+						&:before{
+							margin-top: 25px;
+							height: 1px;
+							width: 15px;
+							content: "";
+							display: block;
+							background-color: grey;
+						}
+					}
+					&:hover{
+						a{
+							&:before{
+								width: 100%;
+								right: auto;
+								left: 0;
+							}
+						}
+					}
+				}
+			}
+			.c-nav_popup_list_sns{
+				display: flex;
+				margin: 40px;
+				margin-left: -18px;
+				>li{
+					position: relative;
+					width: 45px;
+					height: 45px;
+					cursor: pointer;
+					>a{
+						position: absolute;
+						bottom: 50%;
+						right: 50%;
+						transform: translate(50%,50%);
+						svg{
+							fill: #fff;
+							transition:transform 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
+						}
+					}
+					&:hover{
+						svg{
+							transform: scale(1.4);
+						}
+					}
+				}
+			}
+		}
+		
+	}
+
+	.p-kv{
+		position: fixed;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+
+		p{
+			position: absolute;
+			top: -104px;
+			left: -5px;
+		}
+
+		&_carousel{
+			> :not(:first-child){
+				position: absolute;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+			}
+			img{
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+			}
+		}
+	}
 }
 

@@ -112,10 +112,23 @@ eval("module.exports = function (module) {\n  if (!module.webpackPolyfill) {\n  
 /*!************************!*\
   !*** ./src/js/main.js ***!
   \************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-eval("var $ = __webpack_require__(/*! jquery */ \"./node_modules/jquery/dist/jquery.js\"); // import $ from \"jquery\"\n\n\nvar babel = function babel() {\n  console.log(\"hello World\");\n  console.dir($);\n};\n\n$(function () {\n  $(\"#btn\").click(function () {\n    $(this).after('<div>テスト</div>');\n  });\n  $(\"div\").click(function () {\n    $(this).css('background', 'red');\n  });\n  $(\".test\").on(\"click\", function () {\n    console.log(\"test\");\n    window.alert(\"hello world\");\n  });\n});\nbabel();\n\n//# sourceURL=webpack:///./src/js/main.js?");
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ \"./node_modules/jquery/dist/jquery.js\");\n/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _modules_crazy_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/crazy.js */ \"./src/js/modules/crazy.js\");\n// const $ = require(\"jquery\");\n\n\n\nvar babel = function babel() {\n  console.log(\"hello World\");\n  console.dir(jquery__WEBPACK_IMPORTED_MODULE_0___default.a);\n};\n\nbabel();\n\n//# sourceURL=webpack:///./src/js/main.js?");
+
+/***/ }),
+
+/***/ "./src/js/modules/crazy.js":
+/*!*********************************!*\
+  !*** ./src/js/modules/crazy.js ***!
+  \*********************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ \"./node_modules/jquery/dist/jquery.js\");\n/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);\n\nconsole.log(\"crazytdst\"); // $(function() {\n//     $(\"#btn\").click(function() {\n//         $(this).after('<div>テスト</div>');\n//     });\n//     $(\"div\").click(function() {\n//         $(this).css('background', 'red');\n//     });\n//     $(\".test\").on(\"click\", () =>{\n//         console.log(\"test\");\n//         window.alert(\"hello world\");\n//     })\n// });\n\n(function (w, d) {\n  var $hambuger = d.getElementsByClassName(\"c-nav_hamburger\")[0];\n  var $popup = d.getElementsByClassName(\"c-nav_popup\")[0];\n  var $test = d.getElementsByClassName(\"test\")[0];\n  $hambuger.addEventListener(\"click\", function () {\n    console.log(\"test\");\n\n    if (!$popup.classList.contains(\"is-opened\")) {\n      $popup.classList.add(\"is-opened\");\n    } else {\n      $popup.classList.remove(\"is-opened\");\n    }\n  });\n  console.log($hambuger);\n})(window, document);\n\n//# sourceURL=webpack:///./src/js/modules/crazy.js?");
 
 /***/ })
 
