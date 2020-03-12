@@ -1,50 +1,106 @@
-@mixin lines {
-	@for $value from 1 through 3{
+@mixin leadDelay{
+	@for $value from 1 through 10{
+		&:nth-child(#{$value}){
+			transition-delay: ($value - 1) * 0.15s;
+		}
+	}
+}
+
+//nav用mixin start
+@mixin menuOpenDelay{
+	@for $value from 1 through 10{
+		&:nth-child(#{$value}){
+			transition-delay: 0.10 + $value*0.04s;
+		}
+	}
+}
+
+@mixin lines($delays) {
+	@each $delay in $delays{
+		$value: index($delays, $delay);
 		.c-nav_hamburger_line#{$value}{
 			top:$value * 8 + 3 + px;
 		}
+		.c-nav_hamburger_line#{$value}{
+			>div{
+				transition: 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+				transition-delay: $delay+s;
+			}
+		}
 		&:hover{
 			.c-nav_hamburger_line#{$value}{
-				&:before,&:after{
-					transform: translateX(200%);
-					transition-property:transform;
-					transition-timing-function:cubic-bezier(0.19, 1, 0.22, 1) ;
-					transition-duration:1s;
-					transition-delay:$value*50 + ms;
+				>div{
+					&:before,&:after{
+						transform: translateX(200%);
+						transition-property:transform;
+						transition-timing-function:cubic-bezier(0.19, 1, 0.22, 1) ;
+						transition-duration:1s;
+						transition-delay:$value*50 + ms;
+					}
+				}
+			}
+		}
+		&.is-opened{
+			.c-nav_hamburger_line#{$value}{
+				>div{
+					left: 24px !important;
+					&:before,&:after{
+						transition: none;
+					}
 				}
 			}
 		}
 	}
 }
-@mixin crosses {
-	@for $value from 1 through 2{
+
+@mixin crosses($delays,$rotates) {
+	@each $delay in $delays{
+		$value: index($delays, $delay);
 		.c-nav_hamburger_cross#{$value}{
 			top: 19px;
-
-			@if $value == 1 {
-				transform: rotate(45deg);
-			}
-			@else if $value == 2 {
-				transform: rotate(135deg);
-			}
+			transform:rotate(nth($rotates,$value)+deg);
 		}
 		&:hover{
 			.c-nav_hamburger_cross#{$value}{
-				&:before,&:after{
-					transform: translateX(200%);
-					transition-property:transform;
-					transition-timing-function:cubic-bezier(0.19, 1, 0.22, 1) ;
-					transition-duration:1s;
-					transition-delay:$value*50 + ms;
+				>div{
+					&:before,&:after{
+						transform: translateX(200%);
+						transition: none;
+					}
 				}
 			}
 		}
+		&.is-opened{
+			.c-nav_hamburger_cross#{$value}{
+				>div{
+					left: 0px !important;
+					transition: 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+					transition-delay: $delay+s;
+				}
+			}
+			&:hover{
+				.c-nav_hamburger_cross#{$value}{
+					>div{
+						&:before,&:after{
+							transition-property:transform;
+							transition-timing-function:cubic-bezier(0.19, 1, 0.22, 1) ;
+							transition-duration:1s;
+							transition-delay:$value*50 + ms;
+						}
+					}
+				}
+			}
+		}
+
 	}
 }
+//nav用mixin end
 
 .crazy{
 	font-family: "Noto Sans JP", 游ゴシック体, "Yu Gothic", YuGothic, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", メイリオ, Meiryo, sans-serif;
 	-webkit-font-smoothing: antialiased;
+
+	//nav用style start
 	@keyframes moveScrollPointer {
 		0% {
 			transform: translate3d(0px, 0px, 0px);
@@ -86,7 +142,11 @@
 			display: block;
 			position: absolute;
 			z-index: 99999;
-			fill:#fff;
+			fill:#000;
+			transition: fill 0.6s ease;
+			&.is-opened{
+				fill:#fff;
+			}
 		}
 
 		.c-nav_label{
@@ -198,51 +258,72 @@
 			height: 40px;
 			cursor: pointer;
 			z-index: 9999;
-			@include lines;
-			@include crosses;
+			@include lines($delays:(0,0.1,0.05));
+			@include crosses($delays:(0.15,0.20),$rotates:(45,135));
 			>div{
 				position: absolute;
 				height: 2px;
 				width: 24px;
 				left: 9px;
 				overflow: hidden;
-				&::before{
-					content: "";
-					display: block;
-					width: 24px;
-					height: 2px;
+				>div{
 					position: absolute;
-					top: 0px;
-					left: -48px;
-				}
-				&:after{
-					content: "";
-					display: block;
+					height: 100%;
 					width: 24px;
-					height: 2px;
-					position: absolute;
-					top: 0px;
-					left: 0px;
-				}
-				&[class*="line"]{
+					left: 0;
+					&::before{
+						content: "";
+						display: block;
+						width: 24px;
+						height: 2px;
+						position: absolute;
+						top: 0px;
+						left: -48px;
+					}
+					&:after{
+						content: "";
+						display: block;
+						width: 24px;
+						height: 2px;
+						position: absolute;
+						top: 0px;
+						left: 0px;
+					}
 					&::before,&:after{
 						background: #000;
 					}
-				}
-				&[class*="cross"]{
-					&::before,&:after{
-						background: #fff;
+					&[class*="line"]{
+						// &::before,&:after{
+						// 	background: #000;
+						// }
+					}
+					&[class*="cross"]{
+						left: -24px;
+						// &::before,&:after{
+						// 	background: #fff;
+						// }
 					}
 				}
-				
-				&.is-opened{
-					
+			}
+			&.is-opened{
+				>div{
+					>div::after,>div::before{
+						background: #fff;
+					}
+					// >div[class*="line"]{
+					// 	left: 24px;
+					// }
+					// >div[class*="cross"]{
+					// 	left: 0;
+					// }
 				}
 			}
 		}
 
 		.c-nav_popup{
 			opacity: 0;
+			z-index: -1;
+			pointer-events: none;
 			transform: translate3d(0px, 0px, -50px);
 			transition:  0.6s cubic-bezier(0.075, 0.82, 0.165, 1);
 			position: fixed;
@@ -250,27 +331,40 @@
 			right: 0;
 			bottom: 0;
 			left: 0;
-			z-index: 5000;
 			background: #000;
+			display: flex;
+			justify-content: center;
+			align-items: center;
 			&.is-opened{
 				opacity: 1;
+				z-index: 5000;
+				pointer-events: auto;
 				transform: translate3d(0px, 0px, 0px);
+				.c-nav_popup_list{
+					>li{
+						opacity: 1;
+						transform: translate3d(0px, 0px, 0px);
+						transition-duration: 0.6s;
+						transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+						transition-property: transform, opacity;
+						@include menuOpenDelay;
+					}
+				}
 			}
 			.c-nav_popup_list{
-				position: absolute;
-				bottom: 50%;
-				right: 50%;
-				transform: translate(50%,50%);
 				font-size: 14px;
 				padding-top: 50px;
+				perspective:500px;
 				>li{
-					padding: 17px 0;
 					letter-spacing: 0.15em;
 					font-weight: bold;
-					cursor: pointer;
+					opacity: 0;
+					transform: translate3d(0px, 0px, 50px);
 					>a{
 						position: relative;
 						color: #fff;
+						display: inline-block;
+						padding: 17px 0;
 						&:before{
 							content: "";
 							display: block;
@@ -282,7 +376,14 @@
 							background-color: #fff;
 							bottom: 50%;
 							transform: translateY(50%);
-							transition: width 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
+							transition: width 0.4s cubic-bezier(0.42, 0.0, 0.58, 1.0);
+						}
+						&:hover{
+							&:before{
+								width: 100%;
+								right: auto;
+								left: 0;
+							}
 						}
 					}
 					&:last-child{
@@ -294,15 +395,6 @@
 							content: "";
 							display: block;
 							background-color: grey;
-						}
-					}
-					&:hover{
-						a{
-							&:before{
-								width: 100%;
-								right: auto;
-								left: 0;
-							}
 						}
 					}
 				}
@@ -336,21 +428,21 @@
 		}
 		
 	}
+	//nav用style end
+
+	//kvセクション start
 
 	.p-kv{
 		position: fixed;
+		overflow: hidden;
 		top: 0;
 		right: 0;
 		bottom: 0;
 		left: 0;
+		transition:transform .8s cubic-bezier(1,0,0,1) .1s;
 
-		p{
-			position: absolute;
-			top: -104px;
-			left: -5px;
-		}
+		.p-kv_carousel{
 
-		&_carousel{
 			> :not(:first-child){
 				position: absolute;
 				top: 0;
@@ -359,11 +451,109 @@
 				left: 0;
 			}
 			img{
+				@keyframes slideIndexKv {
+					0% {
+						opacity: 0;
+						transform: translate3d(-50px, 0px, 0px);
+						z-index: 10;
+					}
+					70% {
+						opacity: 1;
+						z-index: 1;
+					}
+					100% {
+						opacity: 0;
+						transform: translate3d(0px, 0px, 0px);
+					}
+				}
+				opacity: 0;
 				width: 100%;
 				height: 100%;
 				object-fit: cover;
+				&.is-animate{
+					animation: slideIndexKv 6s cubic-bezier(0.19, 1, 0.22, 1);
+				}
 			}
 		}
+
+		.p-kv_textaBox{
+			position: absolute;
+			top: 6.91667%;
+			bottom: 6.91667%;
+			left: 0;
+			right: 0;
+			z-index: 100;
+			display: flex;
+			justify-content: center;
+			align-items: flex-end;
+			.p-kv_textaBox_lead{
+				overflow: hidden;
+
+				>div{
+					transform: translateX(-100.5%);
+					transition-duration: 0.8s;
+					transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+					transition-property: transform;
+					@include leadDelay();
+					>span{
+						padding-bottom: 8px;
+						position: relative;
+						display: block;
+						float: left;
+					}
+					&.is-show{
+						>span{
+							&:before{
+								transform:scaleY(0);
+							}
+						}
+					}
+					>span{
+						font-size: 75px;
+						font-weight: bold;
+						&:before{
+							content: "";
+							position: absolute;
+							top: 12px;
+							right: 0;
+							bottom: 0%;
+							left: 0;
+							background: #000;
+							transform-origin: bottom;
+							transition-delay: 0s;
+							transition-duration: 1s;
+							transition-timing-function: cubic-bezier(.075,.82,.165,1);
+						}
+						&:after{
+							content: "";
+							display: block;
+							position: absolute;
+							bottom: 0px;
+							right: 0px;
+							left: 0px;
+							height: 7px;
+							background: #000;
+						}
+					}
+				}
+
+				&.is-active{
+					>div{
+						transform: translateX(0%);
+					}
+				}
+			}
+		}
+
+	}
+
+	.test{
+		position: relative;
+		top: 5000px;
+	}
+	.p-contents{
+		transition:transform .8s cubic-bezier(1,0,0,1) .1s;
+		height: 5000px;
 	}
 }
 

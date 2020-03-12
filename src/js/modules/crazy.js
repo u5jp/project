@@ -13,22 +13,156 @@ console.log("crazytdst");
 //         console.log("test");
 //         window.alert("hello world");
 //     })
-
 // });
 
-(function(w,d){
-const $hambuger = d.getElementsByClassName("c-nav_hamburger")[0];
-const $popup = d.getElementsByClassName("c-nav_popup")[0];
-const $test = d.getElementsByClassName("test")[0];
+((w,d) =>{
+    let scroll = {
+        disable : () =>{
+            d.addEventListener("mousewheel",scroll.control,{passive:false});
+            d.addEventListener("touchmove",scroll.control,{passive:false});
+        },
+        enable:() =>{
+            d.removeEventListener("mousewheel",scroll.control,{passive:false});
+            d.removeEventListener("touchmove",scroll.control,{passive:false});
+        },
+        control: (event) =>{
+            event.preventDefault();
+        }
+    };
+    // scroll.disable();
 
-$hambuger.addEventListener("click",function(){
-    console.log("test");
-    if(!$popup.classList.contains("is-opened")){
-        $popup.classList.add("is-opened")
-    }else{
-        $popup.classList.remove("is-opened")
+    const domEach = ( elements , callback ) => {
+		Array.prototype.forEach.call( elements ,(element) => {
+			callback( element );
+		});
     }
 
-})
-console.log($hambuger)
+    const sc = (() =>{
+        const scrollElement = 'scrollingElement' in document ? document.scrollingElement : document.documentElement;
+        let flag,curPos;
+        let prePos = 10000;
+
+        return ()=>{
+            curPos = scrollElement.scrollTop;
+            flag = prePos>=curPos?true:false;
+            console.log(prePos)
+            console.log(curPos)
+            prePos = curPos;
+            console.log(flag);
+            return flag
+        }
+    })();
+    
+    w.addEventListener("DOMContentLoaded",() =>{
+
+
+
+        //nav
+        (()=>{
+            const $hambuger = d.getElementsByClassName("c-nav_hamburger")[0];
+            const $popup = d.getElementsByClassName("c-nav_popup")[0];
+            const $logo = d.getElementsByClassName("c-nav_logo")[0];
+            
+            $hambuger.addEventListener("click",() =>{
+                console.log("test");
+                if(!$popup.classList.contains("is-opened")){
+                    $popup.classList.add("is-opened");
+                    $hambuger.classList.add("is-opened");
+                    $logo.classList.add("is-opened");
+                }else{
+                    $popup.classList.remove("is-opened");
+                    $hambuger.classList.remove("is-opened");
+                    $logo.classList.remove("is-opened");
+                }
+            
+            });
+        })();
+
+        //KVtext
+        (()=>{
+            const $lead = d.getElementsByClassName("p-kv_textaBox_lead")[0];
+            w.addEventListener("load",function(){
+                $lead.classList.add("is-active");
+                console.log($lead.children);
+                domEach($lead.children,(child) => {
+                    child.addEventListener('transitionend', () => {
+                        child.classList.add("is-show")
+                    },{once: true});
+                })
+            });
+        })();
+
+        //KVcarousel
+        (()=>{
+            const $carousel = d.getElementsByClassName("p-kv_carousel")[0];
+            const $children = $carousel.children;
+            const time = 5000;
+
+            let changeImage = () => {
+                let current = 0;
+                return ()=> {
+                current = current === $children.length-1?0:current += 1;
+                $children[current].classList.add('is-animate');
+                }
+            }
+            let kvAnimate = changeImage();
+
+            kvAnimate();
+            setInterval(()=>{kvAnimate()},time);
+
+            domEach($children,(child) => {
+                child.addEventListener('animationend', () => {
+                    child.classList.remove('is-animate');
+                });
+            })
+
+        })();
+
+        w.addEventListener("load",()=>{
+        //KV→コンテンツ移動
+            (()=>{
+                const $kvSec = d.getElementsByClassName("p-kv")[0];
+                $kvSec.style.transform = "translate3d(0px,0px,0px)"
+                const $mainSec = d.getElementsByClassName("p-contents")[0];
+                //$mainSec.style.transform = "translate3d(0px,"+ window.innerHeight +"px,0px)"
+
+                console.log($kvSec.offsetHeight)
+                console.log($kvSec.style.transform)
+                console.log(window.innerHeight)
+                console.log(window.outerHeight)
+
+
+                let parseTranslate3d = (string) => {
+                    var array = string.replace('translate3d', '').match(/-?[\d\.]+/g);
+                    for (var i = 0; i < array.length; i++) {
+                        array[i] = Number(array[i]);
+                    }
+                    return array;
+                }
+                //使用方法
+                w.addEventListener("scroll",()=>{
+                        let kvY = parseTranslate3d($kvSec.style.transform)[1];
+                        // let mainSecY = parseTranslate3d($mainSec.style.transform)[1];
+                        console.log(kvY)
+                        if(sc()){
+                            console.log("up");
+                            // if(mainSecY  == 0){
+                            //     $kvSec.style.transform = "translate3d(0px,0px,0px)"
+                            //     $mainSec.style.transform = "translate3d(0px,"+ window.innerHeight +"px,0px)"
+                            // }
+                        }else{
+                            console.log("down");
+                            if(kvY  == 0){
+                                $kvSec.style.transform = "translate3d(0px,-100%,0px)"
+                                //$mainSec.style.transform = "translate3d(0px,0px,0px)"
+                            };
+                        }
+                });
+
+            })();
+
+        });
+
+
+    });
 })(window,document);
