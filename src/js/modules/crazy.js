@@ -29,7 +29,6 @@ console.log("crazytdst");
             event.preventDefault();
         }
     };
-    // scroll.disable();
 
     const domEach = ( elements , callback ) => {
 		Array.prototype.forEach.call( elements ,(element) => {
@@ -119,45 +118,73 @@ console.log("crazytdst");
         })();
 
         w.addEventListener("load",()=>{
+            setTimeout(function () {
+                window.scrollTo(0, 0);
+            }, 0);
         //KV→コンテンツ移動
             (()=>{
                 const $kvSec = d.getElementsByClassName("p-kv")[0];
-                $kvSec.style.transform = "translate3d(0px,0px,0px)"
                 const $mainSec = d.getElementsByClassName("p-contents")[0];
-                //$mainSec.style.transform = "translate3d(0px,"+ window.innerHeight +"px,0px)"
+                $kvSec.style.transform = "translate3d(0px,0px,0px)";
+                $mainSec.style.transform = "translate3d(0px,"+ window.innerHeight +"px,0px)";
 
+
+                //デバッグ用
+                $kvSec.style.transform = "translate3d(0px,-100%,0px)"
+                $mainSec.style.transform = "translate3d(0px,0px,0px)"
                 console.log($kvSec.offsetHeight)
                 console.log($kvSec.style.transform)
                 console.log(window.innerHeight)
                 console.log(window.outerHeight)
-
+                //
 
                 let parseTranslate3d = (string) => {
+                    $mainSec.style.transition = "transform .8s cubic-bezier(1,0,0,1) .1s"
                     var array = string.replace('translate3d', '').match(/-?[\d\.]+/g);
                     for (var i = 0; i < array.length; i++) {
                         array[i] = Number(array[i]);
                     }
                     return array;
                 }
-                //使用方法
-                w.addEventListener("scroll",()=>{
-                        let kvY = parseTranslate3d($kvSec.style.transform)[1];
-                        // let mainSecY = parseTranslate3d($mainSec.style.transform)[1];
-                        console.log(kvY)
-                        if(sc()){
-                            console.log("up");
-                            // if(mainSecY  == 0){
-                            //     $kvSec.style.transform = "translate3d(0px,0px,0px)"
-                            //     $mainSec.style.transform = "translate3d(0px,"+ window.innerHeight +"px,0px)"
-                            // }
-                        }else{
-                            console.log("down");
-                            if(kvY  == 0){
-                                $kvSec.style.transform = "translate3d(0px,-100%,0px)"
-                                //$mainSec.style.transform = "translate3d(0px,0px,0px)"
-                            };
+
+                scroll.disable();
+
+                let scrollJudge = (e) =>{
+                    let kvY = parseTranslate3d($kvSec.style.transform)[1];
+                    let mainSecY = parseTranslate3d($mainSec.style.transform)[1];
+                    if(window.pageYOffset == 0 && e.deltaY <= 0){
+                        console.log("上")
+                        if(mainSecY  == 0){
+                            juggeInvalid();
+                            $kvSec.style.transform = "translate3d(0px,0px,0px)"
+                            $mainSec.style.transform = "translate3d(0px,"+ window.innerHeight +"px,0px)"
+                            $mainSec.addEventListener('transitionend', () => {
+                                scroll.disable();
+                                d.addEventListener("mousewheel",scrollJudge);
+                            },{once: true});
                         }
-                });
+                    }else if(e.deltaY > 0){
+                        console.log("下")
+                        if(kvY  == 0){
+                            juggeInvalid();
+                            $kvSec.style.transform = "translate3d(0px,-100%,0px)"
+                            $mainSec.style.transform = "translate3d(0px,0px,0px)"
+                            $mainSec.addEventListener('transitionend', () => {
+                                scroll.enable();
+                                d.addEventListener("mousewheel",scrollJudge);
+                            },{once: true});
+                        };
+                    }
+                }
+
+                let juggeInvalid = (e) =>{
+                    scroll.disable();
+                    d.removeEventListener("mousewheel",scrollJudge);
+                    d.removeEventListener("touchmove",scrollJudge);
+                }
+
+                d.addEventListener("mousewheel",scrollJudge);
+                d.addEventListener("touchmove",scrollJudge);
 
             })();
 
@@ -166,3 +193,61 @@ console.log("crazytdst");
 
     });
 })(window,document);
+
+                        // if(sc()){
+                    //     console.log("up");
+                    //     if(mainSecY  == 0){
+                    //         $kvSec.style.transform = "translate3d(0px,0px,0px)"
+                    //         $mainSec.style.transform = "translate3d(0px,"+ window.innerHeight +"px,0px)"
+                    //     }
+                    // }else{
+                    //     console.log("down");
+                    //     if(kvY  == 0){
+                    //         $kvSec.style.transform = "translate3d(0px,-100%,0px)"
+                    //         $mainSec.style.transform = "translate3d(0px,0px,0px)"
+                    //     };
+                    // }
+
+                                    //使用方法
+                // w.addEventListener("scroll",()=>{
+                //         let kvY = parseTranslate3d($kvSec.style.transform)[1];
+                //         let mainSecY = parseTranslate3d($mainSec.style.transform)[1];
+                //         console.log(kvY)
+                //         if(sc()){
+                //             console.log("up");
+                //             if(mainSecY  == 0){
+                //                 $kvSec.style.transform = "translate3d(0px,0px,0px)"
+                //                 $mainSec.style.transform = "translate3d(0px,"+ window.innerHeight +"px,0px)"
+                //             }
+                //         }else{
+                //             console.log("down");
+                //             if(kvY  == 0){
+                //                 $kvSec.style.transform = "translate3d(0px,-100%,0px)"
+                //                 $mainSec.style.transform = "translate3d(0px,0px,0px)"
+                //             };
+                //         }
+                // });
+
+                                // var preventScroll={
+                //     x:0,
+                //     y:0,
+                //     setPos(x=window.pageXOffset,y=window.pageYOffset){
+                //         console.log("setPos")
+                //         this.x=x;
+                //         this.y=y;
+                //     },
+                //     handleEvent(){
+                //         window.scrollTo(this.x,this.y);
+                //     },
+                //     enable(){
+                //         this.setPos();
+                //         window.addEventListener("scroll",this);
+                //     },
+                //     disable(){
+                //         window.removeEventListener("scroll",this);
+                //     }
+                // };
+                // preventScroll.enable();
+                // d.addEventListener("mousewheel",function(){
+                //     console.log("ホイール");
+                // });
