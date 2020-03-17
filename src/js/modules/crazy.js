@@ -307,20 +307,60 @@ console.log("crazytdst");
                         const $kvSec = d.getElementsByClassName("p-kv")[0];
                         const $mainSec = d.getElementsByClassName("p-contents")[0];
                         const $crazy = d.getElementsByClassName("crazy")[0];
-                        $kvSec.style.transform = "translate3d(0px,0px,0px)";
-                        $mainSec.style.transform = "translate3d(0px,"+ window.innerHeight +"px,0px)";
                         
-
+                        $mainSec.style.display = "none";
                         console.log($crazy);
                         $crazy.style.transform = "translate3d(0px,0px,0px)";
+                        $crazy.style.transition = "transform .8s cubic-bezier(1,0,0,1) .1s"
 
                         let parseTranslate3d = (string) => {
-                            $crazy.style.transition = "transform .8s cubic-bezier(1,0,0,1) .1s"
                             var array = string.replace('translate3d', '').match(/-?[\d\.]+/g);
                             for (var i = 0; i < array.length; i++) {
                                 array[i] = Number(array[i]);
                             }
                             return array;
+                        }
+
+                        let scrollDownJudge = (e) =>{
+                            preventScroll.disable();
+                            console.log(window.pageYOffset);
+                            console.log($kvSec.offsetHeight);
+                            console.log(window.innerHeight);
+                            // let kvY = parseTranslate3d($kvSec.style.transform)[1];
+                            // let mainSecY = parseTranslate3d($mainSec.style.transform)[1];
+                            if($kvSec.offsetHeight == window.pageYOffset + window.innerHeight){
+                                console.log("下");
+                                preventScroll.enable();
+                                $mainSec.style.display = "block";
+                                $crazy.style.transform = "translate3d(0px, - "+ $kvSec.offsetHeight + "px,0px)"
+                                $crazy.addEventListener('transitionend', function transitionend(e){
+                                    console.log("traen下");
+                                    preventScroll.disable();
+                                    e.currentTarget.removeEventListener(e.type, transitionend);
+                                });
+                            }else if($mainSec.style.display == "block" && window.pageYOffset==0){
+                                console.log("上");
+                                preventScroll.enable();
+                                $crazy.style.transform = "translate3d(0px,0px,0px)"
+                                $crazy.addEventListener('transitionend', function transitionend(e){
+                                    console.log("traen上");
+                                    $mainSec.style.display = "none";
+                                    preventScroll.disable();
+                                    e.currentTarget.removeEventListener(e.type, transitionend);
+                                },{once: true});
+                            }
+        
+                            // if(window.pageYOffset + $kvSec.offsetHeight > window.innerHeight + 50){
+                            //     console.log("下")
+                            //     if(kvY  == 0){
+                            //         juggeInvalid();
+                            //         $crazy.style.transform = "translate3d(0px, - "+ $kvSec.offsetHeight + "px,0px)"
+                            //         w.removeEventListener("resize",resize);
+                            //         $crazy.addEventListener('transitionend', () => {
+                            //             preventScroll.disable();
+                            //         },{once: true});
+                            //     };
+                            // }
                         }
         
                         let resize = (e) =>{
@@ -328,25 +368,25 @@ console.log("crazytdst");
                             // $mainSec.style.transform = "translate3d(0px,"+ window.innerHeight +"px,0px)";
                         }
                         // scroll.disable();
-                        let scrollDownJudge = (e) =>{
-                            console.log(window.pageYOffset);
-                            console.log($kvSec.offsetHeight);
-                            console.log(window.innerHeight);
-                            let kvY = parseTranslate3d($kvSec.style.transform)[1];
-                            let mainSecY = parseTranslate3d($mainSec.style.transform)[1];
+                        // let scrollDownJudge = (e) =>{
+                        //     console.log(window.pageYOffset);
+                        //     console.log($kvSec.offsetHeight);
+                        //     console.log(window.innerHeight);
+                        //     let kvY = parseTranslate3d($kvSec.style.transform)[1];
+                        //     let mainSecY = parseTranslate3d($mainSec.style.transform)[1];
         
-                            if(window.pageYOffset + $kvSec.offsetHeight > window.innerHeight + 50){
-                                console.log("下")
-                                if(kvY  == 0){
-                                    juggeInvalid();
-                                    $crazy.style.transform = "translate3d(0px, - "+ $kvSec.offsetHeight + "px,0px)"
-                                    w.removeEventListener("resize",resize);
-                                    $crazy.addEventListener('transitionend', () => {
-                                        preventScroll.disable();
-                                    },{once: true});
-                                };
-                            }
-                        }
+                        //     if(window.pageYOffset + $kvSec.offsetHeight > window.innerHeight + 50){
+                        //         console.log("下")
+                        //         if(kvY  == 0){
+                        //             juggeInvalid();
+                        //             $crazy.style.transform = "translate3d(0px, - "+ $kvSec.offsetHeight + "px,0px)"
+                        //             w.removeEventListener("resize",resize);
+                        //             $crazy.addEventListener('transitionend', () => {
+                        //                 preventScroll.disable();
+                        //             },{once: true});
+                        //         };
+                        //     }
+                        // }
 
                         let scrollUpJudge = (e) =>{
 

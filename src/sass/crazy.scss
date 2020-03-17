@@ -112,15 +112,13 @@ _:-ms-lang(x), body {
 //IE・edge対応
 _:-ms-lang(x), .p-kv {
 	position: relative !important;
-	padding-top: 102vh !important;
+	padding-top: 103vh !important;
 }
 
+_:-ms-lang(x), .p-introduction {
+    padding: 50px 0 50px  !important;
+}
 
-.crazy{
-	font-family: "Noto Sans JP", 游ゴシック体, "Yu Gothic", YuGothic, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", メイリオ, Meiryo, sans-serif;
-	-webkit-font-smoothing: antialiased;
-
-	background: #ddd;
 	//nav用style start
 	@keyframes moveScrollPointer {
 		0% {
@@ -428,6 +426,11 @@ _:-ms-lang(x), .p-kv {
 		
 	}
 	//nav用style end
+.crazy{
+	font-family: "Noto Sans JP", 游ゴシック体, "Yu Gothic", YuGothic, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", メイリオ, Meiryo, sans-serif;
+	-webkit-font-smoothing: antialiased;
+
+	background: #ddd;
 
 	.c-button_wrap{
 		margin-top: 30px;
