@@ -99,6 +99,23 @@
 body{
 	width: 100%;
 }
+
+//IE・edge対応
+_:-ms-lang(x), body {
+	position: static !important;
+}
+
+// .p-contents{
+// 	display: none;
+// }
+
+//IE・edge対応
+_:-ms-lang(x), .p-kv {
+	position: relative !important;
+	padding-top: 102vh !important;
+}
+
+
 .crazy{
 	font-family: "Noto Sans JP", 游ゴシック体, "Yu Gothic", YuGothic, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", メイリオ, Meiryo, sans-serif;
 	-webkit-font-smoothing: antialiased;
@@ -540,7 +557,9 @@ body{
 	//kvセクション start
 
 	.p-kv{
+		//IEtest
 		position: fixed;
+		//
 		overflow: hidden;
 		top: 0;
 		right: 0;
@@ -576,6 +595,7 @@ body{
 				width: 100%;
 				height: 100%;
 				object-fit: cover;
+				font-family: 'object-fit:cover;';
 				&.is-animate{
 					animation: slideIndexKv 6s cubic-bezier(0.19, 1, 0.22, 1);
 				}
@@ -594,6 +614,11 @@ body{
 			align-items: flex-end;
 			.p-kv_textBox_lead{
 				overflow: hidden;
+
+				//IE対応
+				display: flex;
+				flex-direction: column;
+				//
 
 				>div{
 					transform: translateX(-100.5%);

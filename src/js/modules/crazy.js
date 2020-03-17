@@ -23,6 +23,25 @@ console.log("crazytdst");
 			callback( element );
 		});
     }
+    var userAgent = window.navigator.userAgent.toLowerCase();
+
+    if(userAgent.indexOf('msie') != -1 ||
+            userAgent.indexOf('trident') != -1) {
+        console.log('Internet Explorerをお使いですね');
+    } else if(userAgent.indexOf('edge') != -1) {
+        console.log('Edgeをお使いですね');
+    } else if(userAgent.indexOf('chrome') != -1) {
+        console.log('Google Chromeをお使いですね');
+    } else if(userAgent.indexOf('safari') != -1) {
+        console.log('Safariをお使いですね');
+    } else if(userAgent.indexOf('firefox') != -1) {
+        console.log('FireFoxをお使いですね');
+    } else if(userAgent.indexOf('opera') != -1) {
+        console.log('Operaをお使いですね');
+    } else {
+        console.log('そんなブラウザは知らん');
+    }
+
 
     // const mutationObserverTarget = d.querySelectorAll(".p-contents .p-itemSlideIn-wrap");
     // const mutationObserver = new MutationObserver((mutations) => {
@@ -43,57 +62,57 @@ console.log("crazytdst");
     
     w.addEventListener("DOMContentLoaded",() =>{
 
-        // (()=>{
+        (()=>{
 
-        //     w.addEventListener("load",()=>{
+            w.addEventListener("load",()=>{
         
-        //     const intersectionObserverOption = {
-        //         // ルートとして指定するDOM（無ければviewport）
-        //         root: document.querySelector('.root'),
-        //         // 上下100px、左右20px手前で発火
-        //         rootMargin: "0px 0px -200px",
-        //         // 交差領域が50%変化するたびに発火
-        //         threshold: [0, 0.5, 1.0]
-        //     };
+            const intersectionObserverOption = {
+                // ルートとして指定するDOM（無ければviewport）
+                root: document.querySelector('.root'),
+                // 上下100px、左右20px手前で発火
+                rootMargin: "0px 0px -200px",
+                // 交差領域が50%変化するたびに発火
+                threshold: [0, 0.5, 1.0]
+            };
 
-        //     const intersectionObserverTarget = d.querySelectorAll(".p-contents > *");
-        //     const intersectionObserver = new IntersectionObserver(callback,intersectionObserverOption);
+            const intersectionObserverTarget = d.querySelectorAll(".p-contents > *");
+            const intersectionObserver = new IntersectionObserver(callback,intersectionObserverOption);
         
-        //     for(var i=0; i < intersectionObserverTarget.length;i++){
-        //         intersectionObserver.observe(intersectionObserverTarget[i]);
-        //     }
+            for(var i=0; i < intersectionObserverTarget.length;i++){
+                intersectionObserver.observe(intersectionObserverTarget[i]);
+            }
 
-        //     const shown=(target)=>{
-        //         // if(!target.classList.contains("p-introduction")){
-        //             let $children = target.querySelectorAll(".p-introduction_text,.p-itemSlideIn-wrap,.c-imageSlideIn-wrap,.c-textSlideIn-wrap,.c-button");
-        //             console.log(target);
-        //             console.log($children);
-        //             for(let i=0; i<$children.length;i++){
-        //                 $children[i].classList.add("is-shown")
-        //                 console.log("target");
-        //             // }
-        //         }
-        //     }
+            const shown=(target)=>{
+                // if(!target.classList.contains("p-introduction")){
+                    let $children = target.querySelectorAll(".p-introduction_text,.p-itemSlideIn-wrap,.c-imageSlideIn-wrap,.c-textSlideIn-wrap,.c-button");
+                    console.log(target);
+                    console.log($children);
+                    for(let i=0; i<$children.length;i++){
+                        $children[i].classList.add("is-shown")
+                        console.log("target");
+                    // }
+                }
+            }
         
-        //     function callback(entries, object) {
-        //         console.log(entries,object);
-        //         entries.forEach((entry)=>{
-        //             // 交差していない
-        //             if (!entry.isIntersecting) return;
+            function callback(entries, object) {
+                console.log(entries,object);
+                entries.forEach((entry)=>{
+                    // 交差していない
+                    if (!entry.isIntersecting) return;
             
-        //             // ターゲット要素
-        //             console.log(entry);
-        //             console.log(entry.target);
+                    // ターゲット要素
+                    console.log(entry);
+                    console.log(entry.target);
         
-        //             shown(entry.target)
+                    shown(entry.target)
             
-        //             // 監視の解除
-        //             //object.unobserve(entry.target);
-        //         });
-        //     };
-        // });
+                    // 監視の解除
+                    //object.unobserve(entry.target);
+                });
+            };
+        });
 
-        // })();
+        })();
 
 
         //nav
@@ -156,14 +175,19 @@ console.log("crazytdst");
 
         })();
 
+        if(!(userAgent.indexOf('msie') != -1 || userAgent.indexOf('trident') != -1 || userAgent.indexOf('edge') != -1)){
+            console.log("IE以外");
         //KV→コンテンツ移動
         (()=>{
             w.addEventListener("load",()=>{
-                let mousewheelevent = 'onwheel' in document ? 'wheel' : 'onmousewheel' in document ? 'mousewheel' : 'DOMMouseScroll';
+                let mousewheelevent = 'wheel';
                 const $kvSec = d.getElementsByClassName("p-kv")[0];
                 const $mainSec = d.getElementsByClassName("p-contents")[0];
                 $kvSec.style.transform = "translate3d(0px,0px,0px)";
                 $mainSec.style.transform = "translate3d(0px,"+ window.innerHeight +"px,0px)";
+
+                let startY;
+
                 //デバッグ用
                 // $kvSec.style.transform = "translate3d(0px,-100%,0px)"
                 // $mainSec.style.transform = "translate3d(0px,0px,0px)"
@@ -187,6 +211,9 @@ console.log("crazytdst");
                 }
                 // scroll.disable();
                 let scrollJudge = (e) =>{
+                    console.log(window.pageYOffset);
+                    console.log(e);
+                    console.log(e.deltaY);
                     let kvY = parseTranslate3d($kvSec.style.transform)[1];
                     let mainSecY = parseTranslate3d($mainSec.style.transform)[1];
                     const $intro = d.getElementsByClassName("p-introduction")[0];
@@ -195,21 +222,24 @@ console.log("crazytdst");
                     const $lead = d.querySelector(".p-introduction .c-textSlideIn-wrap");
                     const introArray = [$intro,$text,$button,$lead]
 
+                    // console.log(startY);
+                    // console.log(e.changedTouches[0].pageY);
+
                     if(window.pageYOffset == 0 && e.deltaY <= 0){
-                        // console.log("上")
+                        console.log("上")
                         if(mainSecY  == 0){
                             juggeInvalid();
                             w.addEventListener("resize",resize);
-                            d.body.style.position="fixed";
                             $kvSec.style.transform = "translate3d(0px,0px,0px)"
                             $mainSec.style.transform = "translate3d(0px,"+ window.innerHeight +"px,0px)"
                             $mainSec.addEventListener('transitionend', () => {
                                 // scroll.disable();
                                 d.addEventListener(mousewheelevent,scrollJudge);
+                                d.body.style.position="fixed";
                             },{once: true});
                         }
-                    }else if(e.deltaY > 0){
-                        // console.log("下")
+                    }else if(e.deltaY > 0 || startY > e.changedTouches[0].pageY){
+                        console.log("下")
                         if(kvY  == 0){
                             juggeInvalid();
                             $kvSec.style.transform = "translate3d(0px,-100%,0px)"
@@ -231,14 +261,119 @@ console.log("crazytdst");
                     d.removeEventListener(mousewheelevent,scrollJudge);
                     d.removeEventListener("touchmove",scrollJudge);
                 }
+
+                let startData = (e) =>{
+                    e.preventDefault();
+                    startY = e.touches[0].pageY;
+                }
+
                 d.addEventListener(mousewheelevent,scrollJudge);
-                d.addEventListener('wheel', function(event) {
-                    console.log(event.deltaY);  // この値
-                });
+                d.addEventListener("click",scrollJudge);
                 d.addEventListener("touchmove",scrollJudge);
+                d.addEventListener("touchstart",startData);
                 w.addEventListener("resize",resize);
             });
         })();
+        }
+
+            if(userAgent.indexOf('msie') != -1 || userAgent.indexOf('trident') != -1 || userAgent.indexOf('edge') != -1){
+                console.log("IE");
+                //IE対応用
+                //KV→コンテンツ移動
+                (()=>{
+                    var preventScroll={
+                        x:0,
+                        y:0,
+                        setPos(x=window.pageXOffset,y=window.pageYOffset){
+                            console.log("setPos")
+                            this.x=x;
+                            this.y=y;
+                        },
+                        handleEvent(){
+                            window.scrollTo(this.x,this.y);
+                        },
+                        enable(){
+                            this.setPos();
+                            window.addEventListener("scroll",this);
+                        },
+                        disable(){
+                            window.removeEventListener("scroll",this);
+                        }
+                    };
+                    // preventScroll.enable;
+                    w.addEventListener("load",()=>{
+                        // preventScroll.disable;
+                        d.body.style.position="static";
+                        const $kvSec = d.getElementsByClassName("p-kv")[0];
+                        const $mainSec = d.getElementsByClassName("p-contents")[0];
+                        const $crazy = d.getElementsByClassName("crazy")[0];
+                        $kvSec.style.transform = "translate3d(0px,0px,0px)";
+                        $mainSec.style.transform = "translate3d(0px,"+ window.innerHeight +"px,0px)";
+                        
+
+                        console.log($crazy);
+                        $crazy.style.transform = "translate3d(0px,0px,0px)";
+
+                        let parseTranslate3d = (string) => {
+                            $crazy.style.transition = "transform .8s cubic-bezier(1,0,0,1) .1s"
+                            var array = string.replace('translate3d', '').match(/-?[\d\.]+/g);
+                            for (var i = 0; i < array.length; i++) {
+                                array[i] = Number(array[i]);
+                            }
+                            return array;
+                        }
+        
+                        let resize = (e) =>{
+                            console.log("tes");
+                            // $mainSec.style.transform = "translate3d(0px,"+ window.innerHeight +"px,0px)";
+                        }
+                        // scroll.disable();
+                        let scrollDownJudge = (e) =>{
+                            console.log(window.pageYOffset);
+                            console.log($kvSec.offsetHeight);
+                            console.log(window.innerHeight);
+                            let kvY = parseTranslate3d($kvSec.style.transform)[1];
+                            let mainSecY = parseTranslate3d($mainSec.style.transform)[1];
+        
+                            if(window.pageYOffset + $kvSec.offsetHeight > window.innerHeight + 50){
+                                console.log("下")
+                                if(kvY  == 0){
+                                    juggeInvalid();
+                                    $crazy.style.transform = "translate3d(0px, - "+ $kvSec.offsetHeight + "px,0px)"
+                                    w.removeEventListener("resize",resize);
+                                    $crazy.addEventListener('transitionend', () => {
+                                        preventScroll.disable();
+                                    },{once: true});
+                                };
+                            }
+                        }
+
+                        let scrollUpJudge = (e) =>{
+
+                            if(window.pageYOffset == 0 && e.deltaY <= 0){
+                                console.log("上")
+                                if(mainSecY  == 0){
+                                    juggeInvalid();
+                                    w.addEventListener("resize",resize);
+                                    $kvSec.style.transform = "translate3d(0px,0px,0px)"
+                                    $mainSec.style.transform = "translate3d(0px,"+ window.innerHeight +"px,0px)"
+                                    $mainSec.addEventListener('transitionend', () => {
+                                        // scroll.disable();
+                                        d.addEventListener(mousewheelevent,scrollJudge);
+                                        d.body.style.position="fixed";
+                                    },{once: true});
+                                }
+                            }
+                        }
+                        let juggeInvalid = (e) =>{
+                            preventScroll.enable();
+                            d.removeEventListener("scroll",scrollDownJudge);
+                        }
+        
+                        d.addEventListener("scroll",scrollDownJudge);
+                    });
+                })();
+            }
 
         // (()=>{
         //     w.addEventListener("load",()=>{
