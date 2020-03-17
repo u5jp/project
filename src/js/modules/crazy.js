@@ -23,8 +23,78 @@ console.log("crazytdst");
 			callback( element );
 		});
     }
+
+    // const mutationObserverTarget = d.querySelectorAll(".p-contents .p-itemSlideIn-wrap");
+    // const mutationObserver = new MutationObserver((mutations) => {
+    //     mutations.forEach((mutation) => {
+    //         // 何かしたいこと
+    //         console.log(mutation.target);
+    //     });
+    // });
+    // const mutationObserverOption = {
+    //     attributes:true,
+    //     // characterData: true,
+    //     // subtree: true,
+    //     // childList: true,
+    // }
+    // for(var i=0; i < mutationObserverTarget.length;i++){
+    //     mutationObserver.observe(mutationObserverTarget[i],mutationObserverOption);
+    // }
     
     w.addEventListener("DOMContentLoaded",() =>{
+
+        // (()=>{
+
+        //     w.addEventListener("load",()=>{
+        
+        //     const intersectionObserverOption = {
+        //         // ルートとして指定するDOM（無ければviewport）
+        //         root: document.querySelector('.root'),
+        //         // 上下100px、左右20px手前で発火
+        //         rootMargin: "0px 0px -200px",
+        //         // 交差領域が50%変化するたびに発火
+        //         threshold: [0, 0.5, 1.0]
+        //     };
+
+        //     const intersectionObserverTarget = d.querySelectorAll(".p-contents > *");
+        //     const intersectionObserver = new IntersectionObserver(callback,intersectionObserverOption);
+        
+        //     for(var i=0; i < intersectionObserverTarget.length;i++){
+        //         intersectionObserver.observe(intersectionObserverTarget[i]);
+        //     }
+
+        //     const shown=(target)=>{
+        //         // if(!target.classList.contains("p-introduction")){
+        //             let $children = target.querySelectorAll(".p-introduction_text,.p-itemSlideIn-wrap,.c-imageSlideIn-wrap,.c-textSlideIn-wrap,.c-button");
+        //             console.log(target);
+        //             console.log($children);
+        //             for(let i=0; i<$children.length;i++){
+        //                 $children[i].classList.add("is-shown")
+        //                 console.log("target");
+        //             // }
+        //         }
+        //     }
+        
+        //     function callback(entries, object) {
+        //         console.log(entries,object);
+        //         entries.forEach((entry)=>{
+        //             // 交差していない
+        //             if (!entry.isIntersecting) return;
+            
+        //             // ターゲット要素
+        //             console.log(entry);
+        //             console.log(entry.target);
+        
+        //             shown(entry.target)
+            
+        //             // 監視の解除
+        //             //object.unobserve(entry.target);
+        //         });
+        //     };
+        // });
+
+        // })();
+
 
         //nav
         (()=>{
@@ -89,6 +159,7 @@ console.log("crazytdst");
         //KV→コンテンツ移動
         (()=>{
             w.addEventListener("load",()=>{
+                let mousewheelevent = 'onwheel' in document ? 'wheel' : 'onmousewheel' in document ? 'mousewheel' : 'DOMMouseScroll';
                 const $kvSec = d.getElementsByClassName("p-kv")[0];
                 const $mainSec = d.getElementsByClassName("p-contents")[0];
                 $kvSec.style.transform = "translate3d(0px,0px,0px)";
@@ -134,7 +205,7 @@ console.log("crazytdst");
                             $mainSec.style.transform = "translate3d(0px,"+ window.innerHeight +"px,0px)"
                             $mainSec.addEventListener('transitionend', () => {
                                 // scroll.disable();
-                                d.addEventListener("mousewheel",scrollJudge);
+                                d.addEventListener(mousewheelevent,scrollJudge);
                             },{once: true});
                         }
                     }else if(e.deltaY > 0){
@@ -146,12 +217,10 @@ console.log("crazytdst");
                             w.removeEventListener("resize",resize);
                             $mainSec.addEventListener('transitionend', () => {
                                 // scroll.enable();
-                                d.addEventListener("mousewheel",scrollJudge);
-                                // $intro.classList.add("is-shown");
-                                // $button.classList.add("is-shown");
-                                for(let i=0;i < introArray.length;i++){
-                                    introArray[i].classList.add("is-shown");
-                                }
+                                d.addEventListener(mousewheelevent,scrollJudge);
+                                // for(let i=0;i < introArray.length;i++){
+                                //     introArray[i].classList.add("is-shown");
+                                // }
                                 d.body.style.position="static";
                             },{once: true});
                         };
@@ -159,43 +228,46 @@ console.log("crazytdst");
                 }
                 let juggeInvalid = (e) =>{
                     // scroll.disable();
-                    d.removeEventListener("mousewheel",scrollJudge);
+                    d.removeEventListener(mousewheelevent,scrollJudge);
                     d.removeEventListener("touchmove",scrollJudge);
                 }
-                d.addEventListener("mousewheel",scrollJudge);
+                d.addEventListener(mousewheelevent,scrollJudge);
+                d.addEventListener('wheel', function(event) {
+                    console.log(event.deltaY);  // この値
+                });
                 d.addEventListener("touchmove",scrollJudge);
                 w.addEventListener("resize",resize);
             });
         })();
 
-        (()=>{
-            w.addEventListener("load",()=>{
-                const $outline = d.getElementsByClassName("p-outline")[0];
-                const $children = $outline.children;
+        // (()=>{
+        //     w.addEventListener("load",()=>{
+        //         const $outline = d.getElementsByClassName("p-outline")[0];
+        //         const $children = $outline.children;
 
-                w.addEventListener("scroll",()=>{
-                    // for(let i=0 ; i < $children.length;i++){
-                    //     if($children[i].offsetTop < w.pageYOffset){
-                    //         $children[i].classList.add("is-shown");
-                    //     }
-                    // }
-                    for(let i=0 ; i < $children.length;i++){
-                        if($children[i].offsetTop - ($outline.offsetHeight/2) < w.pageYOffset){
-                            $children[i].classList.add("is-shown");
-                            for(let j=0 ; j < $children[i].children.length;j++){
-                                $children[i].children[j].classList.add("is-shown");
-                            }
-                        }
-                    }
-                });
-                console.log($outline.offsetTop)
-                console.log($outline.offsetHeight)
-                // console.log($outline.style.transform)
-                console.log(window.innerHeight)
-                console.log(window.outerHeight)
+        //         w.addEventListener("scroll",()=>{
+        //             // for(let i=0 ; i < $children.length;i++){
+        //             //     if($children[i].offsetTop < w.pageYOffset){
+        //             //         $children[i].classList.add("is-shown");
+        //             //     }
+        //             // }
+        //             for(let i=0 ; i < $children.length;i++){
+        //                 if($children[i].offsetTop + ($outline.offsetHeight/2) < w.pageYOffset + w.innerHeight){
+        //                     $children[i].classList.add("is-shown");
+        //                     for(let j=0 ; j < $children[i].children.length;j++){
+        //                         $children[i].children[j].classList.add("is-shown");
+        //                     }
+        //                 }
+        //             }
+        //         });
+        //         console.log($outline.offsetTop)
+        //         console.log($outline.offsetHeight)
+        //         // console.log($outline.style.transform)
+        //         console.log(window.innerHeight)
+        //         console.log(window.outerHeight)
 
-            })
-        })();
+        //     })
+        // })();
 
     });
 })(window,document);
@@ -254,6 +326,6 @@ console.log("crazytdst");
                 //     }
                 // };
                 // preventScroll.enable();
-                // d.addEventListener("mousewheel",function(){
+                // d.addEventListener(mousewheelevent,function(){
                 //     console.log("ホイール");
                 // });

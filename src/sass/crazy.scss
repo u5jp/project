@@ -700,9 +700,7 @@ body{
 			line-height: 2.3;
 			opacity: 0;
 			transition:opacity 0.8s 0.4s;
-		}
-		&.is-shown{
-			.p-introduction_text{
+			&.is-shown{
 				opacity: 1;
 			}
 		}
@@ -712,6 +710,7 @@ body{
 		overflow: hidden;
 		display: flex;
 		flex-direction: column;
+		cursor: pointer;
 		.c-textSlideIn-wrap{
 			transition-delay: 0.4s;
 			>*{
