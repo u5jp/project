@@ -230,21 +230,18 @@ console.log("crazytdst");
                         if(mainSecY  == 0){
                             juggeInvalid();
                             w.addEventListener("resize",resize);
-                            $kvSec.style.transform = "translate3d(0px,0px,0px)"
-                            $mainSec.style.transform = "translate3d(0px,"+ window.innerHeight +"px,0px)"
                             $mainSec.addEventListener('transitionend', () => {
                                 // scroll.disable();
                                 d.addEventListener(mousewheelevent,scrollJudge);
                                 d.body.style.position="fixed";
                             },{once: true});
+                            $kvSec.style.transform = "translate3d(0px,0px,0px)"
+                            $mainSec.style.transform = "translate3d(0px,"+ window.innerHeight +"px,0px)"
                         }
                     }else if(e.deltaY > 0 || startY > e.changedTouches[0].pageY){
                         console.log("下")
                         if(kvY  == 0){
                             juggeInvalid();
-                            $kvSec.style.transform = "translate3d(0px,-100%,0px)"
-                            $mainSec.style.transform = "translate3d(0px,0px,0px)"
-                            w.removeEventListener("resize",resize);
                             $mainSec.addEventListener('transitionend', () => {
                                 // scroll.enable();
                                 d.addEventListener(mousewheelevent,scrollJudge);
@@ -253,6 +250,9 @@ console.log("crazytdst");
                                 // }
                                 d.body.style.position="static";
                             },{once: true});
+                            $kvSec.style.transform = "translate3d(0px,-100%,0px)"
+                            $mainSec.style.transform = "translate3d(0px,0px,0px)"
+                            w.removeEventListener("resize",resize);
                         };
                     }
                 }
@@ -276,9 +276,9 @@ console.log("crazytdst");
         })();
         }
 
+            //IE対応用
             if(userAgent.indexOf('msie') != -1 || userAgent.indexOf('trident') != -1 || userAgent.indexOf('edge') != -1){
                 console.log("IE");
-                //IE対応用
                 //KV→コンテンツ移動
                 (()=>{
                     var preventScroll={
@@ -300,18 +300,24 @@ console.log("crazytdst");
                             window.removeEventListener("scroll",this);
                         }
                     };
-                    // preventScroll.enable;
+                    preventScroll.enable();
                     w.addEventListener("load",()=>{
-                        // preventScroll.disable;
+                        preventScroll.disable();
                         d.body.style.position="static";
                         const $kvSec = d.getElementsByClassName("p-kv")[0];
                         const $mainSec = d.getElementsByClassName("p-contents")[0];
                         const $crazy = d.getElementsByClassName("crazy")[0];
+
+
+                        // $kvSec.style.transform = "translate3d(0px,0px,0px)";
+                        // $mainSec.style.transform = "translate3d(0px,"+ window.innerHeight +"px,0px)";
                         
                         $mainSec.style.display = "none";
                         console.log($crazy);
                         $crazy.style.transform = "translate3d(0px,0px,0px)";
                         $crazy.style.transition = "transform .8s cubic-bezier(1,0,0,1) .1s"
+                        // $kvSec.style.transition = "transform .8s cubic-bezier(1,0,0,1) .1s"
+                        // $mainSec.style.transition = "transform .8s cubic-bezier(1,0,0,1) .1s"
 
                         let parseTranslate3d = (string) => {
                             var array = string.replace('translate3d', '').match(/-?[\d\.]+/g);
@@ -320,97 +326,52 @@ console.log("crazytdst");
                             }
                             return array;
                         }
-
-                        let scrollDownJudge = (e) =>{
-                            preventScroll.disable();
+                        let scrollJudge = (e) =>{
                             console.log(window.pageYOffset);
                             console.log($kvSec.offsetHeight);
                             console.log(window.innerHeight);
                             // let kvY = parseTranslate3d($kvSec.style.transform)[1];
                             // let mainSecY = parseTranslate3d($mainSec.style.transform)[1];
-                            if($kvSec.offsetHeight == window.pageYOffset + window.innerHeight){
+
+                            if($mainSec.style.display == "none" && $kvSec.offsetHeight == window.pageYOffset + window.innerHeight){
                                 console.log("下");
-                                preventScroll.enable();
+                                juggeInvalid();
                                 $mainSec.style.display = "block";
-                                $crazy.style.transform = "translate3d(0px, - "+ $kvSec.offsetHeight + "px,0px)"
                                 $crazy.addEventListener('transitionend', function transitionend(e){
                                     console.log("traen下");
                                     preventScroll.disable();
                                     e.currentTarget.removeEventListener(e.type, transitionend);
+                                    d.addEventListener("scroll",scrollJudge);
                                 });
+                                $crazy.style.transform = "translate3d(0px, - "+ $kvSec.offsetHeight + "px,0px)"
+                                // $kvSec.style.transform = "translate3d(0px,-"+ window.innerHeight + "px,0px)";
+                                // $mainSec.style.transform = "translate3d(0px,-"+ window.innerHeight + "px,0px)";
                             }else if($mainSec.style.display == "block" && window.pageYOffset==0){
                                 console.log("上");
-                                preventScroll.enable();
-                                $crazy.style.transform = "translate3d(0px,0px,0px)"
+                                juggeInvalid();
                                 $crazy.addEventListener('transitionend', function transitionend(e){
                                     console.log("traen上");
                                     $mainSec.style.display = "none";
                                     preventScroll.disable();
                                     e.currentTarget.removeEventListener(e.type, transitionend);
-                                },{once: true});
+                                    d.addEventListener("scroll",scrollJudge);
+                                });
+                                $crazy.style.transform = "translate3d(0px,0px,0px)"
+                                // $kvSec.style.transform = "translate3d(0px,0px,0px)";
+                                // $mainSec.style.transform = "translate3d(0px,0px,0px)";
                             }
-        
-                            // if(window.pageYOffset + $kvSec.offsetHeight > window.innerHeight + 50){
-                            //     console.log("下")
-                            //     if(kvY  == 0){
-                            //         juggeInvalid();
-                            //         $crazy.style.transform = "translate3d(0px, - "+ $kvSec.offsetHeight + "px,0px)"
-                            //         w.removeEventListener("resize",resize);
-                            //         $crazy.addEventListener('transitionend', () => {
-                            //             preventScroll.disable();
-                            //         },{once: true});
-                            //     };
-                            // }
                         }
-        
                         let resize = (e) =>{
                             console.log("tes");
                             // $mainSec.style.transform = "translate3d(0px,"+ window.innerHeight +"px,0px)";
                         }
-                        // scroll.disable();
-                        // let scrollDownJudge = (e) =>{
-                        //     console.log(window.pageYOffset);
-                        //     console.log($kvSec.offsetHeight);
-                        //     console.log(window.innerHeight);
-                        //     let kvY = parseTranslate3d($kvSec.style.transform)[1];
-                        //     let mainSecY = parseTranslate3d($mainSec.style.transform)[1];
-        
-                        //     if(window.pageYOffset + $kvSec.offsetHeight > window.innerHeight + 50){
-                        //         console.log("下")
-                        //         if(kvY  == 0){
-                        //             juggeInvalid();
-                        //             $crazy.style.transform = "translate3d(0px, - "+ $kvSec.offsetHeight + "px,0px)"
-                        //             w.removeEventListener("resize",resize);
-                        //             $crazy.addEventListener('transitionend', () => {
-                        //                 preventScroll.disable();
-                        //             },{once: true});
-                        //         };
-                        //     }
-                        // }
 
-                        let scrollUpJudge = (e) =>{
-
-                            if(window.pageYOffset == 0 && e.deltaY <= 0){
-                                console.log("上")
-                                if(mainSecY  == 0){
-                                    juggeInvalid();
-                                    w.addEventListener("resize",resize);
-                                    $kvSec.style.transform = "translate3d(0px,0px,0px)"
-                                    $mainSec.style.transform = "translate3d(0px,"+ window.innerHeight +"px,0px)"
-                                    $mainSec.addEventListener('transitionend', () => {
-                                        // scroll.disable();
-                                        d.addEventListener(mousewheelevent,scrollJudge);
-                                        d.body.style.position="fixed";
-                                    },{once: true});
-                                }
-                            }
-                        }
                         let juggeInvalid = (e) =>{
                             preventScroll.enable();
-                            d.removeEventListener("scroll",scrollDownJudge);
+                            d.removeEventListener("scroll",scrollJudge);
                         }
         
-                        d.addEventListener("scroll",scrollDownJudge);
+                        d.addEventListener("scroll",scrollJudge);
                     });
                 })();
             }
