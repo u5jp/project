@@ -4,8 +4,9 @@ config["pageTitle"] = "お問い合わせ"
 
 <!DOCTYPE html>
 <html lang="ja">
-    <%- include("./_partial/_head",config) %>
+    <%- include(relativePath + "_partial/_head",config) %>
 <body>
+    <div><%= relativePath %> <%= absolutePath %> </div>
     <main>
         <section>
         <h1>TOP</h1>

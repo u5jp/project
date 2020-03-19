@@ -151,27 +151,29 @@ console.log("crazytdst");
 
         //KVcarousel
         (()=>{
-            const $carousel = d.getElementsByClassName("p-kv_carousel")[0];
-            const $children = $carousel.children;
+            const $kvCarousel = d.getElementsByClassName("p-kv_carousel")[0];
+            const $bannerCarousel = d.getElementsByClassName("p-photoGallery_wrap")[0];
             const time = 5000;
 
-            let changeImage = () => {
+            let changeImage = ($children) => {
                 let current = 0;
+                domEach($children,(child) => {
+                    child.addEventListener('animationend', () => {
+                        child.classList.remove('is-animate');
+                    });
+                })
                 return ()=> {
                 current = current === $children.length-1?0:current += 1;
                 $children[current].classList.add('is-animate');
                 }
             }
-            let kvAnimate = changeImage();
+            let kvAnimate = changeImage($kvCarousel.children);
+            let bannerAnimate = changeImage($bannerCarousel.children);
 
             kvAnimate();
             setInterval(()=>{kvAnimate()},time);
-
-            domEach($children,(child) => {
-                child.addEventListener('animationend', () => {
-                    child.classList.remove('is-animate');
-                });
-            })
+            bannerAnimate ()
+            setInterval(()=>{bannerAnimate()},time);
 
         })();
 
