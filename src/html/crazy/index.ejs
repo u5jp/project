@@ -3,15 +3,65 @@ config["pageTitle"] = "株式会社CRAZY(株式会社クレイジー) | CRAZY,In
 config["dsc"] = "株式会社CRAZY(株式会社クレイジー)の公式サイト。CRAZY&nbsp;WEDDING、CRAZY&nbsp;KITCHENなどの事業内容紹介や、働き方、採用、会社情報を掲載しています。"
 %>
 
+
+<% 
+
+outline = [
+    {
+        "h2":"COMPANY",
+        "p":"会社概要・オフィス"
+    }, 
+    {
+        "h2":"BUSINESS",
+        "p":"CRAZYが展開するサービス・事業一覧"
+    }, 
+    {
+        "h2":"PEOPLE",
+        "p":"CRAZYで働くすべてのメンバーのご紹介"
+    }
+] 
+
+
+news = [
+	{
+		"date":"NEWS 2020/3/13",
+		"text":"CRAZY WEDDING BOOK 一般販売 開始いたしました"
+	}, 
+	{
+		"date":"NEWS 2020/2/22",
+		"text":"新型コロナウイルス感染症（COVID-19）の感染拡大に伴う対応について"
+	}, 
+	{
+		"date":"MEDIA 2020/1/24",
+		"text":"「気鋭のリーダー10人に学ぶ 新しい子育て」に弊社代表 森山の インタビュー記事が掲載されました"
+	}
+]
+
+magazine = [
+	{
+		"date":"BUSINESS 2020/3/8",
+		"text":"CRAZY初の地方式場リニューアル——提案したのは「未完成な会場」だった"
+	}, 
+	{
+		"date":"INTERVIEW 2020/1/18",
+		"text":"【後編】「私たち、結婚しないことを誓います」“良い夫婦”にちなんだ1,122万円で前代未聞の式開催"
+	}, 
+	{
+		"date":"EVENT 2019/12/10",
+		"text":"「主語は“YOU”ではなく“I”」——感情を原動力にする組織論【TOP LIVE】"
+	}
+]
+
+
+%>
+
 <!DOCTYPE html>
 <html lang="ja">
 <%- include(relativePath + "_partial/_crazy_head",config) %>
 <body>
 <%- include(relativePath + "_partial/_crazy_headerNav") %>
 <main class="crazy">
-	<p><%- absolutePath %></p>
 	<section class="p-kv">
-		
 		<div class="p-kv_carousel">
 			<img src="images/lp-kv_01.jpg" alt="IAキャラクター">
 			<img src="images/lp-kv_02.jpg" alt="IAキャラクター">
@@ -44,42 +94,20 @@ config["dsc"] = "株式会社CRAZY(株式会社クレイジー)の公式サイ�
 		</section>
 
 		<ul class="p-outline">
-			<li class="p-itemSlideIn-wrap mod-sub">
-				<div class="c-imageSlideIn-wrap">
-					<div class="c-imageSlideIn-wrap-in">
-						<img src="images/p-outline_01.jpg" alt="">
+			<% for (var i = 0; i < outline.length; i++) { %>
+				<li class="p-itemSlideIn-wrap mod-sub">
+					<div class="c-imageSlideIn-wrap">
+						<div class="c-imageSlideIn-wrap-in">
+							<img src="images/p-outline_0<%= i + 1 %>.jpg" alt="">
+						</div>
 					</div>
-				</div>
-				<div class="c-textSlideIn-wrap">
-					<h2>COMPANY</h2>
-					<p>会社概要・オフィス</p>
-					<p class="under_line"><span>READ MORE</span></p>
-				</div>
-			</li>
-			<li class="p-itemSlideIn-wrap">
-				<div class="c-imageSlideIn-wrap">
-					<div class="c-imageSlideIn-wrap-in">
-						<img src="images/p-outline_02.jpg" alt="">
+					<div class="c-textSlideIn-wrap">
+						<h2><%= outline[i].h2 %></h2>
+						<p><%= outline[i].p  %></p>
+						<p class="under_line"><span>READ MORE</span></p>
 					</div>
-				</div>
-				<div class="c-textSlideIn-wrap">
-					<h2>BUSINESS</h2>
-					<p>CRAZYが展開するサービス・事業一覧</p>
-					<p class="under_line"><span>READ MORE</span></p>
-				</div>
-			</li>
-			<li class="p-itemSlideIn-wrap mod-sub">
-				<div class="c-imageSlideIn-wrap">
-					<div class="c-imageSlideIn-wrap-in">
-						<img src="images/p-outline_03.jpg" alt="">
-					</div>
-				</div>
-				<div class="c-textSlideIn-wrap">
-					<h2>PEOPLE</h2>
-					<p>CRAZYで働くすべてのメンバーのご紹介</p>
-					<p class="under_line"><span>READ MORE</span></p>
-				</div>
-			</li>
+				</li>
+			<% } %>
 		</ul>
 
 		<section class="p-news">
@@ -97,39 +125,19 @@ config["dsc"] = "株式会社CRAZY(株式会社クレイジー)の公式サイ�
 					</div>
 				</div>
 				<ul class="p-news_contents_sub p-itemSlideIn-wrap_sub">
-					<li class="p-itemSlideIn-wrap">
-						<div class="c-imageSlideIn-wrap">
-							<div class="c-imageSlideIn-wrap-in">
-								<img src="images/p-news_02.jpg" alt="">
+					<% for (var i = 0; i < news.length; i++) { %>
+						<li class="p-itemSlideIn-wrap">
+							<div class="c-imageSlideIn-wrap">
+								<div class="c-imageSlideIn-wrap-in">
+									<img src="images/p-news_0<%= i + 2 %>.jpg" alt="">
+								</div>
 							</div>
-						</div>
-						<div class="c-textSlideIn-wrap">
-							<p>NEWS 2020/3/13</p>
-							<p><span class="hoverOpacity">CRAZY WEDDING BOOK 一般販売 開始いたしました</span></p>
-						</div>
-					</li>
-					<li class="p-itemSlideIn-wrap">
-						<div class="c-imageSlideIn-wrap">
-							<div class="c-imageSlideIn-wrap-in">
-								<img src="images/p-news_03.jpg" alt="">
+							<div class="c-textSlideIn-wrap">
+								<p><%= news[i].date %></p>
+								<p><%= news[i].text %></p>
 							</div>
-						</div>
-						<div class="c-textSlideIn-wrap">
-							<p>NEWS 2020/2/22</p>
-							<p><span class="hoverOpacity">新型コロナウイルス感染症（COVID-19）の感染拡大に伴う対応について</span></p>
-						</div>
-					</li>
-					<li class="p-itemSlideIn-wrap">
-						<div class="c-imageSlideIn-wrap">
-							<div class="c-imageSlideIn-wrap-in">
-								<img src="images/p-news_04.jpg" alt="">
-							</div>
-						</div>
-						<div class="c-textSlideIn-wrap">
-							<p>MEDIA 2020/1/24</p>
-							<p>「気鋭のリーダー10人に学ぶ 新しい子育て」に弊社代表 森山の インタビュー記事が掲載されました</p>
-						</div>
-					</li>
+						</li>
+					<% } %>
 				</ul>
 			</div>
 			<div class="c-button_wrap">
@@ -176,39 +184,19 @@ config["dsc"] = "株式会社CRAZY(株式会社クレイジー)の公式サイ�
 					</div>
 				</div>
 				<ul class="p-news_contents_sub p-itemSlideIn-wrap_sub">
-					<li class="p-itemSlideIn-wrap">
-						<div class="c-imageSlideIn-wrap">
-							<div class="c-imageSlideIn-wrap-in">
-								<img src="images/p-news_02.jpg" alt="">
+					<% for (var i = 0; i < magazine.length; i++) { %>
+						<li class="p-itemSlideIn-wrap">
+							<div class="c-imageSlideIn-wrap">
+								<div class="c-imageSlideIn-wrap-in">
+									<img src="images/p-news_0<%= i + 2 %>.jpg" alt="">
+								</div>
 							</div>
-						</div>
-						<div class="c-textSlideIn-wrap">
-							<p>NEWS 2020/3/13</p>
-							<p><span class="hoverOpacity">CRAZY WEDDING BOOK 一般販売 開始いたしました</span></p>
-						</div>
-					</li>
-					<li class="p-itemSlideIn-wrap">
-						<div class="c-imageSlideIn-wrap">
-							<div class="c-imageSlideIn-wrap-in">
-								<img src="images/p-news_03.jpg" alt="">
+							<div class="c-textSlideIn-wrap">
+								<p><%= magazine[i].date %></p>
+								<p><%= magazine[i].text %></p>
 							</div>
-						</div>
-						<div class="c-textSlideIn-wrap">
-							<p>NEWS 2020/2/22</p>
-							<p><span class="hoverOpacity">新型コロナウイルス感染症（COVID-19）の感染拡大に伴う対応について</span></p>
-						</div>
-					</li>
-					<li class="p-itemSlideIn-wrap">
-						<div class="c-imageSlideIn-wrap">
-							<div class="c-imageSlideIn-wrap-in">
-								<img src="images/p-news_04.jpg" alt="">
-							</div>
-						</div>
-						<div class="c-textSlideIn-wrap">
-							<p>MEDIA 2020/1/24</p>
-							<p><span class="hoverOpacity">「気鋭のリーダー10人に学ぶ 新しい子育て」に弊社代表 森山の インタビュー記事が掲載されました</span></p>
-						</div>
-					</li>
+						</li>
+					<% } %>
 				</ul>
 			</div>
 			<div class="c-button_wrap">
