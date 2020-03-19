@@ -22,14 +22,9 @@ _:-ms-lang(x), .p-kv {
 	padding-top: 103vh !important;
 }
 
-
 .crazy{
 	height: 10000px;
-	font-family: "Noto Sans JP", 游ゴシック体, "Yu Gothic", YuGothic, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", メイリオ, Meiryo, sans-serif;
 	-webkit-font-smoothing: antialiased;
-	background: #ddd;
-
-
 	//kvセクション start
 
 	.p-kv{
@@ -225,14 +220,17 @@ _:-ms-lang(x), .p-kv {
 				line-height: 1.1;
 				letter-spacing: 0.3em;
 				font-weight: bold;
-				&:after{
-					height: 2px;
-					width: 35px;
-					content: "";
-					display: block;
-					margin-top: 11px;
-					background: rgb(0, 0, 0);
-					transition: width 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+				span{
+					display: inline-block;
+					&:after{
+						height: 2px;
+						width: 35px;
+						content: "";
+						display: block;
+						margin-top: 11px;
+						background: rgb(0, 0, 0);
+						transition: width 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+					}
 				}
 			}
 		}
@@ -241,9 +239,12 @@ _:-ms-lang(x), .p-kv {
 				transform: scale(1.1);
 			}
 			.under_line{
-				&:after{
-					width: 100px;
+				span:after{
+					width: 100%;
 				}
+			}
+			.hoverOpacity{
+				opacity: .3;
 			}
 		}
 	}
@@ -303,11 +304,11 @@ _:-ms-lang(x), .p-kv {
 					letter-spacing: 1;
 					line-height: 1.4;
 				}
-				.hoverAnime{
+				.hoverOpacity{
 					transition: opacity .4s;
 				}
 				&:hover{
-					.hoverAnime{
+					.hoverOpacity{
 						opacity: .3;
 					}
 				}
@@ -345,38 +346,67 @@ _:-ms-lang(x), .p-kv {
 	.p-photoGallery{
 		width: 66.6%;
 		margin: 8% auto 0;
-		.p-photoGallery_wrap{
-			margin: 0 auto;
-			padding-top: 44.1%;
-			position: relative;
-			background: #fff;
-			img{
-				@keyframes slideIndexJoinusBanner {
-					0% {
+		.c-imageSlideIn-wrap{
+			.p-photoGallery_wrap{
+				position: relative;
+				opacity: 0;
+				transition: opacity .6s .9s;
+				.p-photoGallery_wrap_in{
+					margin: 0 auto;
+					padding-top: 44.1%;
+					position: relative;
+					background-color: rgb(234, 234, 234);
+					z-index: 11;
+					img{
+						@keyframes slideIndexJoinusBanner {
+							0% {
+								opacity: 0;
+								z-index: 10;
+							}
+							30% {
+								opacity: 1;
+								z-index: 1;
+							}
+							70% {
+								opacity: 1;
+								z-index: 1;
+							}
+							100% {
+								opacity: 0;
+							}
+						}
+						width: 100%;
+						position: absolute;
+						top: 0px;
+						right: 0px;
+						bottom: 0px;
+						left: 0px;
 						opacity: 0;
-						z-index: 10;
-					}
-					30% {
-						opacity: 1;
-						z-index: 1;
-					}
-					70% {
-						opacity: 1;
-						z-index: 1;
-					}
-					100% {
-						opacity: 0;
+						&.is-animate{
+							animation:slideIndexJoinusBanner 6s cubic-bezier(0.19, 1, 0.22, 1);
+						}
 					}
 				}
-				width: 100%;
-				position: absolute;
-				top: 0px;
-				right: 0px;
-				bottom: 0px;
-				left: 0px;
-				opacity: 0;
-				&.is-animate{
-					animation:slideIndexJoinusBanner 6s cubic-bezier(0.19, 1, 0.22, 1);
+				.c-textSlideIn-wrap{
+					position: absolute;
+					right: 20%;
+					left: 20%;
+					top: 0;
+					bottom: 0;
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
+					z-index: 20;
+					h2{
+						font-size: 38px;
+						letter-spacing: 0.1em;
+						line-height: 1.1;
+					}
+				}
+			}
+			&.is-shown{
+				.p-photoGallery_wrap{
+					opacity: 1;
 				}
 			}
 		}

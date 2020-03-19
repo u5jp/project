@@ -1,5 +1,5 @@
-import $ from "jquery"
-
+import '../polyfill//object-fit-images-master/dist/ofi.min.js';
+import '../polyfill/IntersectionObserver-master/polyfill/intersection-observer.js';
 console.log("crazytdst");
 // $(function() {
 //     $("#btn").click(function() {
@@ -61,56 +61,82 @@ console.log("crazytdst");
     // }
     
     w.addEventListener("DOMContentLoaded",() =>{
-
         (()=>{
+            //KVcarousel
+            const $kvCarousel = d.getElementsByClassName("p-kv_carousel")[0];
+            const $bannerCarousel = d.getElementsByClassName("p-photoGallery_wrap_in")[0];
+            const kvTime = 5000;
+            const bannerTime = 4000;
 
-            w.addEventListener("load",()=>{
-        
-            const intersectionObserverOption = {
-                // ルートとして指定するDOM（無ければviewport）
-                root: document.querySelector('.root'),
-                // 上下100px、左右20px手前で発火
-                rootMargin: "0px 0px -200px",
-                // 交差領域が50%変化するたびに発火
-                threshold: [0, 0.5, 1.0]
-            };
-
-            const intersectionObserverTarget = d.querySelectorAll(".p-contents > *");
-            const intersectionObserver = new IntersectionObserver(callback,intersectionObserverOption);
-        
-            for(var i=0; i < intersectionObserverTarget.length;i++){
-                intersectionObserver.observe(intersectionObserverTarget[i]);
-            }
-
-            const shown=(target)=>{
-                // if(!target.classList.contains("p-introduction")){
-                    let $children = target.querySelectorAll(".p-introduction_text,.p-itemSlideIn-wrap,.c-imageSlideIn-wrap,.c-textSlideIn-wrap,.c-button");
-                    console.log(target);
-                    console.log($children);
-                    for(let i=0; i<$children.length;i++){
-                        $children[i].classList.add("is-shown")
-                        console.log("target");
-                    // }
+            let changeImage = ($children) => {
+                let current = -1;
+                domEach($children,(child) => {
+                    child.addEventListener('animationend', () => {
+                        child.classList.remove('is-animate');
+                    });
+                })
+                return ()=> {
+                current = current === $children.length-1?0:current += 1;
+                $children[current].classList.add('is-animate');
                 }
             }
-        
-            function callback(entries, object) {
-                console.log(entries,object);
-                entries.forEach((entry)=>{
-                    // 交差していない
-                    if (!entry.isIntersecting) return;
+            let kvAnimate = changeImage($kvCarousel.children);
+
+            kvAnimate();
+            setInterval(()=>{kvAnimate()},kvTime);
+
+            w.addEventListener("load",()=>{
+                const intersectionObserverOption = {
+                    // ルートとして指定するDOM（無ければviewport）
+                    root: document.querySelector('.root'),
+                    // 上下100px、左右20px手前で発火
+                    rootMargin: "0px 0px -200px",
+                    // 交差領域が50%変化するたびに発火
+                    threshold: [0, 0.5, 1.0]
+                };
+
+                const intersectionObserverTarget = d.querySelectorAll(".p-contents > *");
+                const intersectionObserver = new IntersectionObserver(callback,intersectionObserverOption);
             
-                    // ターゲット要素
-                    console.log(entry);
-                    console.log(entry.target);
-        
-                    shown(entry.target)
+                for(var i=0; i < intersectionObserverTarget.length;i++){
+                    intersectionObserver.observe(intersectionObserverTarget[i]);
+                }
+
+                const shown=(target)=>{
+                    // if(!target.classList.contains("p-introduction")){
+                        let $children = target.querySelectorAll(".p-introduction_text,.p-itemSlideIn-wrap,.c-imageSlideIn-wrap,.c-textSlideIn-wrap,.c-button");
+                        console.log(target);
+                        console.log($children);
+                        for(let i=0; i<$children.length;i++){
+                            $children[i].classList.add("is-shown")
+                            console.log("target");
+                        }
+                        if(target.classList.contains("p-photoGallery")){
+                            console.log("test");
+                            let bannerAnimate = changeImage($bannerCarousel.children);
+                            bannerAnimate ()
+                            setInterval(()=>{bannerAnimate()},bannerTime);
+                        }
+                }
             
-                    // 監視の解除
-                    //object.unobserve(entry.target);
-                });
-            };
-        });
+
+                function callback(entries, object) {
+                    console.log(entries,object);
+                    entries.forEach((entry)=>{
+                        // 交差していない
+                        if (!entry.isIntersecting) return;
+                
+                        // ターゲット要素
+                        console.log(entry);
+                        console.log(entry.target);
+            
+                        shown(entry.target)
+                
+                        // 監視の解除
+                        object.unobserve(entry.target);
+                    });
+                };
+            });
 
         })();
 
@@ -148,35 +174,7 @@ console.log("crazytdst");
                 })
             });
         })();
-
-        //KVcarousel
-        (()=>{
-            const $kvCarousel = d.getElementsByClassName("p-kv_carousel")[0];
-            const $bannerCarousel = d.getElementsByClassName("p-photoGallery_wrap")[0];
-            const time = 5000;
-
-            let changeImage = ($children) => {
-                let current = 0;
-                domEach($children,(child) => {
-                    child.addEventListener('animationend', () => {
-                        child.classList.remove('is-animate');
-                    });
-                })
-                return ()=> {
-                current = current === $children.length-1?0:current += 1;
-                $children[current].classList.add('is-animate');
-                }
-            }
-            let kvAnimate = changeImage($kvCarousel.children);
-            let bannerAnimate = changeImage($bannerCarousel.children);
-
-            kvAnimate();
-            setInterval(()=>{kvAnimate()},time);
-            bannerAnimate ()
-            setInterval(()=>{bannerAnimate()},time);
-
-        })();
-
+        
         if(!(userAgent.indexOf('msie') != -1 || userAgent.indexOf('trident') != -1 || userAgent.indexOf('edge') != -1)){
             console.log("IE以外");
         //KV→コンテンツ移動
@@ -213,9 +211,9 @@ console.log("crazytdst");
                 }
                 // scroll.disable();
                 let scrollJudge = (e) =>{
-                    console.log(window.pageYOffset);
-                    console.log(e);
-                    console.log(e.deltaY);
+                    // console.log(window.pageYOffset);
+                    // console.log(e);
+                    // console.log(e.deltaY);
                     let kvY = parseTranslate3d($kvSec.style.transform)[1];
                     let mainSecY = parseTranslate3d($mainSec.style.transform)[1];
                     const $intro = d.getElementsByClassName("p-introduction")[0];
@@ -228,7 +226,7 @@ console.log("crazytdst");
                     // console.log(e.changedTouches[0].pageY);
 
                     if(window.pageYOffset == 0 && e.deltaY <= 0){
-                        console.log("上")
+                        // console.log("上")
                         if(mainSecY  == 0){
                             juggeInvalid();
                             w.addEventListener("resize",resize);
@@ -241,7 +239,7 @@ console.log("crazytdst");
                             $mainSec.style.transform = "translate3d(0px,"+ window.innerHeight +"px,0px)"
                         }
                     }else if(e.deltaY > 0 || startY > e.changedTouches[0].pageY){
-                        console.log("下")
+                        // console.log("下")
                         if(kvY  == 0){
                             juggeInvalid();
                             $mainSec.addEventListener('transitionend', () => {
@@ -268,7 +266,6 @@ console.log("crazytdst");
                     e.preventDefault();
                     startY = e.touches[0].pageY;
                 }
-
                 d.addEventListener(mousewheelevent,scrollJudge);
                 d.addEventListener("click",scrollJudge);
                 d.addEventListener("touchmove",scrollJudge);
@@ -335,7 +332,7 @@ console.log("crazytdst");
                             // let kvY = parseTranslate3d($kvSec.style.transform)[1];
                             // let mainSecY = parseTranslate3d($mainSec.style.transform)[1];
 
-                            if($mainSec.style.display == "none" && $kvSec.offsetHeight == window.pageYOffset + window.innerHeight){
+                            if($mainSec.style.display == "none" && $kvSec.offsetHeight <= window.pageYOffset + window.innerHeight){
                                 console.log("下");
                                 juggeInvalid();
                                 $mainSec.style.display = "block";

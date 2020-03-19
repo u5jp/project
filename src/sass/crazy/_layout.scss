@@ -115,6 +115,10 @@
 		}
 	}
 
+	html{
+		font-family: "Noto Sans JP", 游ゴシック体, "Yu Gothic", YuGothic, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", メイリオ, Meiryo, sans-serif;
+	}
+
 	.c-nav{
 		// perspective: 500px;
 
@@ -323,7 +327,6 @@
 				perspective:500px;
 				>li{
 					letter-spacing: 0.15em;
-					font-weight: bold;
 					opacity: 0;
 					transform: translate3d(0px, 0px, 50px);
 					>a{
