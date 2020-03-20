@@ -23,14 +23,10 @@ _:-ms-lang(x), .p-kv {
 }
 
 .crazy{
-	height: 10000px;
 	-webkit-font-smoothing: antialiased;
 	//kvセクション start
-
 	.p-kv{
-		//IEtest
 		position: fixed;
-		//
 		overflow: hidden;
 		top: 0;
 		right: 0;
@@ -146,7 +142,6 @@ _:-ms-lang(x), .p-kv {
 				}
 			}
 		}
-
 		.p-kv_scroll{
 			position: fixed;
 			z-index: 1000;

@@ -1,10 +1,6 @@
 <%
 config["pageTitle"] = "株式会社CRAZY(株式会社クレイジー) | CRAZY,Inc."
 config["dsc"] = "株式会社CRAZY(株式会社クレイジー)の公式サイト。CRAZY&nbsp;WEDDING、CRAZY&nbsp;KITCHENなどの事業内容紹介や、働き方、採用、会社情報を掲載しています。"
-%>
-
-
-<% 
 
 outline = [
     {
@@ -21,8 +17,11 @@ outline = [
     }
 ] 
 
-
 news = [
+	{
+		"date":"PRESS RELEASE 2020/2/20",
+		"text":"【星野リゾート×CRAZY WEDDING共同開発】「ナシ婚」を選択する方に向け、結婚式に代わる新サービス「IWAI旅」を開始"
+	}, 
 	{
 		"date":"NEWS 2020/3/13",
 		"text":"CRAZY WEDDING BOOK 一般販売 開始いたしました"
@@ -39,6 +38,10 @@ news = [
 
 magazine = [
 	{
+		"date":"EVENT 2020/1/15",
+		"text":"【前編】「私たち、結婚しないことを誓います」“良い夫婦”にちなんだ1,122万円で前代未聞の式開催"
+	}, 
+	{
 		"date":"BUSINESS 2020/3/8",
 		"text":"CRAZY初の地方式場リニューアル——提案したのは「未完成な会場」だった"
 	}, 
@@ -51,8 +54,6 @@ magazine = [
 		"text":"「主語は“YOU”ではなく“I”」——感情を原動力にする組織論【TOP LIVE】"
 	}
 ]
-
-
 %>
 
 <!DOCTYPE html>
@@ -95,7 +96,7 @@ magazine = [
 
 		<ul class="p-outline">
 			<% for (var i = 0; i < outline.length; i++) { %>
-				<li class="p-itemSlideIn-wrap mod-sub">
+				<li class="p-itemSlideIn-wrap">
 					<div class="c-imageSlideIn-wrap">
 						<div class="c-imageSlideIn-wrap-in">
 							<img src="images/p-outline_0<%= i + 1 %>.jpg" alt="">
@@ -120,21 +121,21 @@ magazine = [
 						</div>
 					</div>
 					<div class="c-textSlideIn-wrap">
-						<p>PRESS RELEASE 2020/2/20</p>
-						<p><span class="hoverOpacity">【星野リゾート×CRAZY WEDDING共同開発】「ナシ婚」を選択する方に向け、結婚式に代わる新サービス「IWAI旅」を開始</span></p>
+						<p><%= news[0].date %></p>
+						<p><span class="hoverOpacity"><%= news[0].text %></span></p>
 					</div>
 				</div>
 				<ul class="p-news_contents_sub p-itemSlideIn-wrap_sub">
-					<% for (var i = 0; i < news.length; i++) { %>
+					<% for (var i = 1; i < news.length; i++) { %>
 						<li class="p-itemSlideIn-wrap">
 							<div class="c-imageSlideIn-wrap">
 								<div class="c-imageSlideIn-wrap-in">
-									<img src="images/p-news_0<%= i + 2 %>.jpg" alt="">
+									<img src="images/p-news_0<%= i + 1 %>.jpg" alt="">
 								</div>
 							</div>
 							<div class="c-textSlideIn-wrap">
 								<p><%= news[i].date %></p>
-								<p><%= news[i].text %></p>
+								<p><span class="hoverOpacity"><%= news[i].text %></span></p>
 							</div>
 						</li>
 					<% } %>
@@ -175,25 +176,25 @@ magazine = [
 				<div class="p-itemSlideIn-wrap p-itemSlideIn-wrap_main">
 					<div class="c-imageSlideIn-wrap">
 						<div class="c-imageSlideIn-wrap-in">
-							<img src="images/p-news_01.jpg" alt="">
+							<img src="images/p-news_05.jpg" alt="">
 						</div>
 					</div>
 					<div class="c-textSlideIn-wrap">
-						<p>PRESS RELEASE 2020/2/20</p>
-						<p><span class="hoverOpacity">【星野リゾート×CRAZY WEDDING共同開発】「ナシ婚」を選択する方に向け、結婚式に代わる新サービス「IWAI旅」を開始</span></p>
+						<p><%= magazine[0].date %></p>
+						<p><span class="hoverOpacity"><%= magazine[0].text %></span></p>
 					</div>
 				</div>
 				<ul class="p-news_contents_sub p-itemSlideIn-wrap_sub">
-					<% for (var i = 0; i < magazine.length; i++) { %>
+					<% for (var i = 1; i < magazine.length; i++) { %>
 						<li class="p-itemSlideIn-wrap">
 							<div class="c-imageSlideIn-wrap">
 								<div class="c-imageSlideIn-wrap-in">
-									<img src="images/p-news_0<%= i + 2 %>.jpg" alt="">
+									<img src="images/p-news_0<%= i + 5 %>.jpg" alt="">
 								</div>
 							</div>
 							<div class="c-textSlideIn-wrap">
 								<p><%= magazine[i].date %></p>
-								<p><%= magazine[i].text %></p>
+								<p><span class="hoverOpacity"><%= magazine[i].text %></span></p>
 							</div>
 						</li>
 					<% } %>
@@ -210,7 +211,9 @@ magazine = [
 
 	</section>
 </main>
-
+<footer>
+	
+</footer>
 
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/object-fit-images/3.2.3/ofi.js"></script>
 <script>objectFitImages();</script>
