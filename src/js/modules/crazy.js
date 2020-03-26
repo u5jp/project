@@ -43,7 +43,7 @@ console.log("crazytdst");
     }
 
 
-    // const mutationObserverTarget = d.querySelectorAll(".p-contents .p-itemSlideIn-wrap");
+    // const mutationObserverTarget = d.querySelectorAll(".p-contents .p-itemSlideIn);
     // const mutationObserver = new MutationObserver((mutations) => {
     //     mutations.forEach((mutation) => {
     //         // 何かしたいこと
@@ -95,7 +95,7 @@ console.log("crazytdst");
                     threshold: [0, 0.5, 1.0]
                 };
 
-                const intersectionObserverTarget = d.querySelectorAll(".p-contents > *");
+                const intersectionObserverTarget = d.querySelectorAll(".p-contents > * , .l-footer");
                 const intersectionObserver = new IntersectionObserver(callback,intersectionObserverOption);
             
                 for(var i=0; i < intersectionObserverTarget.length;i++){
@@ -104,7 +104,7 @@ console.log("crazytdst");
 
                 const shown=(target)=>{
                     // if(!target.classList.contains("p-introduction")){
-                        let $children = target.querySelectorAll(".p-introduction_text,.p-itemSlideIn-wrap,.c-imageSlideIn-wrap,.c-textSlideIn-wrap,.c-button");
+                        let $children = target.querySelectorAll(".p-introduction_text,.p-itemSlideIn,.c-imageSlideIn,.c-textSlideIn,.c-button_in");
                         console.log(target);
                         console.log($children);
                         for(let i=0; i<$children.length;i++){
@@ -143,9 +143,9 @@ console.log("crazytdst");
 
         //nav
         (()=>{
-            const $hambuger = d.getElementsByClassName("c-nav_hamburger")[0];
-            const $popup = d.getElementsByClassName("c-nav_popup")[0];
-            const $logo = d.getElementsByClassName("c-nav_logo")[0];
+            const $hambuger = d.getElementsByClassName("l-nav_hamburger")[0];
+            const $popup = d.getElementsByClassName("l-nav_popup")[0];
+            const $logo = d.getElementsByClassName("l-nav_logo")[0];
             const navsArray = [$hambuger,$popup,$logo]
             
             $hambuger.addEventListener("click",() =>{
@@ -218,8 +218,8 @@ console.log("crazytdst");
                     let mainSecY = parseTranslate3d($mainSec.style.transform)[1];
                     const $intro = d.getElementsByClassName("p-introduction")[0];
                     const $text= d.getElementsByClassName("p-introduction_text")[0];
-                    const $button = d.querySelector(".p-introduction .c-button");
-                    const $lead = d.querySelector(".p-introduction .c-textSlideIn-wrap");
+                    const $button = d.querySelector(".p-introduction .c-button_in");
+                    const $lead = d.querySelector(".p-introduction .c-textSlideIn");
                     const introArray = [$intro,$text,$button,$lead]
 
                     // console.log(startY);

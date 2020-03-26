@@ -1,15 +1,19 @@
-.c-button_wrap{
-    .c-button{
+.c-button{
+    .c-button_in{
         position: relative;
         cursor: pointer;
         text-transform: uppercase;
         letter-spacing: 0.3em;
-        width: 220px;
-        padding: 20px 0;
+        width: 160px;
+        padding: 16px 0;
         display: inline-flex;
         justify-content: center;
         align-items: center;
         background-color: rgba(0,0,0,0);
+        @include mediaQuery{
+            width: 220px;
+            padding: 20px 0;
+        }
         &:before{
             content: "";
             display: block;
@@ -37,17 +41,17 @@
         }
         &.is-shown{
             //addclassテスト用
-            .c-button_column{
+            .c-button_in_column{
                 &:before,&:after{
                 transform: scaleY(1);
                 }
             }
-            .c-button_row{
+            .c-button_in_row{
                 &:before,&:after{
                 transform: scaleX(1);
                 }
             }
-            .c-button_word{
+            .c-button_in_word{
                 opacity: 1;
             }
             &:before{
@@ -59,11 +63,11 @@
                 transform: scaleX(1);
                 transform-origin: left;
             }
-            .c-button_word{
+            .c-button_in_word{
                 color: #fff;
             }
         }
-        .c-button_word{
+        .c-button_in_word{
             display: block;
             font-size: 11px;
             line-height: 1.1;
@@ -74,7 +78,7 @@
             opacity: 0;
             transition: color,opacity .3s;
         }
-        .c-button_column{
+        .c-button_in_column{
             &:before,&:after{
                 content: "";
                 display: block;
@@ -96,7 +100,7 @@
                 transform-origin: top;
             }
         }
-        .c-button_row{
+        .c-button_in_row{
             &:before,&:after{
                 content: "";
                 display: block;
@@ -119,9 +123,55 @@
             }
         }
     }
+    &.c-button-footer{
+        margin: 35px 25px 0;
+        @include mediaQuery{
+            margin: 45px 0 0;
+        }
+        .c-button_in{
+            width: 100%;
+            padding: 25px 0;
+            margin: 0 auto;
+            @include mediaQuery{
+                width: 440px;
+                padding: 40px 0;
+            }
+            &:before{
+                background-color: rgb(51, 51, 51);
+            }
+            .c-button_in_word{
+                color: #fff;
+                font-size: 13px;
+                font-weight: bold;
+                @include mediaQuery{
+                    font-size: 12px;
+                    font-weight: normal;
+                }
+                .c-button_in_word_mailLogo{
+                    fill: #fff;
+                    display: inline-block;
+                    vertical-align: middle;
+                    width: 20px;
+                    height: 15px;
+                    margin-right: 20px;
+                }
+            }
+            .c-button_in_column{
+                &:before,&:after{
+                    background-color: rgb(102, 102, 102);
+                }
+            }
+            .c-button_in_row{
+                &:before,&:after{
+                    background-color: rgb(102, 102, 102);
+                }
+            }
+        }
+        
+    }
 }
 
-.c-textSlideIn-wrap{
+.c-textSlideIn{
     display: inline-block;
     overflow: hidden;
     transform: translate3d(-100.5%, 0, 0);
@@ -139,12 +189,12 @@
     }
 }
 
-.c-imageSlideIn-wrap{
+.c-imageSlideIn{
     display: inline-block;
     overflow: hidden;
     position: relative;
     width: 100%;
-    .c-imageSlideIn-wrap-in{
+    .c-imageSlideIn_in{
     transform: translate3d(-100.5%, 0, 0);
     transition:transform 1s cubic-bezier(0.075, 0.82, 0.165, 1);
     &:before{
@@ -172,7 +222,7 @@
         }
     }
     &.is-shown{
-        .c-imageSlideIn-wrap-in{
+        .c-imageSlideIn_in{
             transform: translate3d(0, 0, 0);
             &:before{
                 transform: scaleX(0);

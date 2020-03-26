@@ -64,9 +64,9 @@ magazine = [
 <main class="crazy">
 	<section class="p-kv">
 		<div class="p-kv_carousel">
-			<img src="images/lp-kv_01.jpg" alt="IAキャラクター">
-			<img src="images/lp-kv_02.jpg" alt="IAキャラクター">
-			<img src="images/lp-kv_03.jpg" alt="IAキャラクター">
+			<img src="images/p-kv_01.jpg" alt="IAキャラクター">
+			<img src="images/p-kv_02.jpg" alt="IAキャラクター">
+			<img src="images/p-kv_03.jpg" alt="IAキャラクター">
 		</div>
 		<div class="p-kv_textBox">
 			<div class="p-kv_textBox_lead">
@@ -83,26 +83,26 @@ magazine = [
 	<section class="p-contents">
 
 		<section class="p-introduction">
-			<h2><span class="c-textSlideIn-wrap"><span>WHO WE ARE</span></span></h2>
-			<p class="p-introduction_text">CRAZYは、企業の可能性を模索しているビジネス集団です。<br>既存の考え方・働き方にとらわれず、業界・事業を抜本から更新し<br>新たな可能性や真に理想だと言える組織運営の取り組みを発明しています。<br>私たちの活動の根幹は、理想から物事を「本質的に 美しく ユニークに」再定義する営み。<br>そして「クレイジーと言われるレベルでそれを行うこと」が<br>未来に必要な新しいサンプルをこの社会に生み出すことだと信じています。</p>
-			<div class="c-button_wrap">
-				<a href='"/whoweare/' class='c-button'>
-					<span class="c-button_word">READ MORE</span>
-					<span class="c-button_column"></span>
-					<span class="c-button_row"></span>
+			<h2><span class="c-textSlideIn"><span>WHO WE ARE</span></span></h2>
+			<p class="p-introduction_text">CRAZYは、企業の可能性を模索しているビジネス集団です。<br class="mod-disyplayNone_mobile">既存の考え方・働き方にとらわれず、業界・事業を抜本から更新し<br class="mod-disyplayNone_mobile">新たな可能性や真に理想だと言える組織運営の取り組みを発明しています。<br>私たちの活動の根幹は、理想から物事を「本質的に 美しく ユニークに」再定義する営み。<br class="mod-disyplayNone_mobile">そして「クレイジーと言われるレベルでそれを行うこと」が<br class="mod-disyplayNone_mobile">未来に必要な新しいサンプルをこの社会に生み出すことだと信じています。</p>
+			<div class="c-button">
+				<a href='"/whoweare/' class='c-button_in'>
+					<span class="c-button_in_word">READ MORE</span>
+					<span class="c-button_in_column"></span>
+					<span class="c-button_in_row"></span>
 				</a>
 			</div>
 		</section>
 
 		<ul class="p-outline">
 			<% for (var i = 0; i < outline.length; i++) { %>
-				<li class="p-itemSlideIn-wrap">
-					<div class="c-imageSlideIn-wrap">
-						<div class="c-imageSlideIn-wrap-in">
+				<li class="p-itemSlideIn">
+					<div class="c-imageSlideIn">
+						<div class="c-imageSlideIn_in">
 							<img src="images/p-outline_0<%= i + 1 %>.jpg" alt="">
 						</div>
 					</div>
-					<div class="c-textSlideIn-wrap">
+					<div class="c-textSlideIn">
 						<h2><%= outline[i].h2 %></h2>
 						<p><%= outline[i].p  %></p>
 						<p class="under_line"><span>READ MORE</span></p>
@@ -112,28 +112,28 @@ magazine = [
 		</ul>
 
 		<section class="p-news">
-			<h2><span class="c-textSlideIn-wrap"><span>NEWS & EVENT</span></span></h2>
+			<h2><span class="c-textSlideIn"><span>NEWS & EVENT</span></span></h2>
 			<div class="p-news_contents">
-				<div class="p-itemSlideIn-wrap p-itemSlideIn-wrap_main">
-					<div class="c-imageSlideIn-wrap">
-						<div class="c-imageSlideIn-wrap-in">
+				<div class="p-itemSlideIn p-itemSlideIn-main">
+					<div class="c-imageSlideIn">
+						<div class="c-imageSlideIn_in">
 							<img src="images/p-news_01.jpg" alt="">
 						</div>
 					</div>
-					<div class="c-textSlideIn-wrap">
+					<div class="c-textSlideIn">
 						<p><%= news[0].date %></p>
 						<p><span class="hoverOpacity"><%= news[0].text %></span></p>
 					</div>
 				</div>
-				<ul class="p-news_contents_sub p-itemSlideIn-wrap_sub">
+				<ul class="p-news_contents_sub p-itemSlideIn-sub">
 					<% for (var i = 1; i < news.length; i++) { %>
-						<li class="p-itemSlideIn-wrap">
-							<div class="c-imageSlideIn-wrap">
-								<div class="c-imageSlideIn-wrap-in">
+						<li class="p-itemSlideIn">
+							<div class="c-imageSlideIn">
+								<div class="c-imageSlideIn_in">
 									<img src="images/p-news_0<%= i + 1 %>.jpg" alt="">
 								</div>
 							</div>
-							<div class="c-textSlideIn-wrap">
+							<div class="c-textSlideIn">
 								<p><%= news[i].date %></p>
 								<p><span class="hoverOpacity"><%= news[i].text %></span></p>
 							</div>
@@ -141,26 +141,26 @@ magazine = [
 					<% } %>
 				</ul>
 			</div>
-			<div class="c-button_wrap">
-				<a href='"/whoweare/' class='c-button'>
-					<span class="c-button_word">READ MORE</span>
-					<span class="c-button_column"></span>
-					<span class="c-button_row"></span>
+			<div class="c-button">
+				<a href='"/whoweare/' class='c-button_in'>
+					<span class="c-button_in_word">READ MORE</span>
+					<span class="c-button_in_column"></span>
+					<span class="c-button_in_row"></span>
 				</a>
 			</div>
 		</section>
 
 		<section class="p-photoGallery">
-			<div class="p-itemSlideIn-wrap">
-			<div class="c-imageSlideIn-wrap">
-				<div class="c-imageSlideIn-wrap-in">
+			<div class="p-itemSlideIn">
+			<div class="c-imageSlideIn">
+				<div class="c-imageSlideIn_in">
 					<div class="p-photoGallery_wrap">
 						<div class="p-photoGallery_wrap_in">
 							<img src="images/p-photoGallery_01.jpg" alt="IAキャラクター">
 							<img src="images/p-photoGallery_02.jpg" alt="IAキャラクター">
 							<img src="images/p-photoGallery_03.jpg" alt="IAキャラクター">
 						</div>
-						<div class="c-textSlideIn-wrap">
+						<div class="c-textSlideIn">
 							<h2>RECRUIT</h2>
 							<p class="under_line"><span>JOIN US</span></p>
 						</div>
@@ -171,28 +171,28 @@ magazine = [
 		</section>
 
 		<section class="p-news">
-			<h2><span class="c-textSlideIn-wrap"><span>NEWS & EVENT</span></span></h2>
+			<h2><span class="c-textSlideIn"><span>CRAZY MAGAZINE</span></span></h2>
 			<div class="p-news_contents">
-				<div class="p-itemSlideIn-wrap p-itemSlideIn-wrap_main">
-					<div class="c-imageSlideIn-wrap">
-						<div class="c-imageSlideIn-wrap-in">
+				<div class="p-itemSlideIn p-itemSlideIn-main">
+					<div class="c-imageSlideIn">
+						<div class="c-imageSlideIn_in">
 							<img src="images/p-news_05.jpg" alt="">
 						</div>
 					</div>
-					<div class="c-textSlideIn-wrap">
+					<div class="c-textSlideIn">
 						<p><%= magazine[0].date %></p>
 						<p><span class="hoverOpacity"><%= magazine[0].text %></span></p>
 					</div>
 				</div>
-				<ul class="p-news_contents_sub p-itemSlideIn-wrap_sub">
+				<ul class="p-news_contents_sub p-itemSlideIn-sub">
 					<% for (var i = 1; i < magazine.length; i++) { %>
-						<li class="p-itemSlideIn-wrap">
-							<div class="c-imageSlideIn-wrap">
-								<div class="c-imageSlideIn-wrap-in">
+						<li class="p-itemSlideIn">
+							<div class="c-imageSlideIn">
+								<div class="c-imageSlideIn_in">
 									<img src="images/p-news_0<%= i + 5 %>.jpg" alt="">
 								</div>
 							</div>
-							<div class="c-textSlideIn-wrap">
+							<div class="c-textSlideIn">
 								<p><%= magazine[i].date %></p>
 								<p><span class="hoverOpacity"><%= magazine[i].text %></span></p>
 							</div>
@@ -200,11 +200,12 @@ magazine = [
 					<% } %>
 				</ul>
 			</div>
-			<div class="c-button_wrap">
-				<a href='"/whoweare/' class='c-button'>
-					<span class="c-button_word">READ MORE</span>
-					<span class="c-button_column"></span>
-					<span class="c-button_row"></span>
+
+			<div class="c-button">
+				<a href='"/whoweare/' class='c-button_in'>
+					<span class="c-button_in_word">VIEW ALL</span>
+					<span class="c-button_in_column"></span>
+					<span class="c-button_in_row"></span>
 				</a>
 			</div>
 		</section>
@@ -212,12 +213,8 @@ magazine = [
 	</section>
 </main>
 <footer>
-	
+	<%- include(relativePath + "_partial/_crazy_footer") %>
 </footer>
-
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/object-fit-images/3.2.3/ofi.js"></script>
-<script>objectFitImages();</script>
-<script src="https://polyfill.io/v2/polyfill.min.js?features=IntersectionObserver"></script> -->
 <script src="../../js/bundle.js"></script>
 </body>
 </html>
