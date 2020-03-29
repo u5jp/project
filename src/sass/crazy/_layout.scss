@@ -7,10 +7,11 @@
 
 $breakpoints: (
 	'mobile': 'screen and (max-width: 767px)',
-	'mobileOnly': 'screen and (max-width: 582px)',
-	'tablet': 'screen and (min-width: 583px) and (max-width: 767px)',
 	'desktop': 'screen and (min-width: 768px)',
-	'desktopFollow': 'screen and (min-width: 583px)',
+	'portrait': '(orientation: portrait) , (min-width: 768px)',
+	'landscapeORdesktop': '(orientation: landscape) , (min-width: 768px)',
+	'landscapeANDmobile': '(orientation: landscape) and (max-width: 767px)',
+	'portraitANDmobile': '(orientation: portrait) and (max-width: 767px)',
 ) !default;
 
 @mixin mediaQuery($breakpoint: desktop) {
@@ -29,23 +30,25 @@ $breakpoints: (
 	}
 }
 
-.mod-disyplayNone_mobile_only {
-	@include mediaQuery($breakpoint: mobileOnly) {
-	display: none !important;
-	}
-}
-
-.mod-disyplayNone_tablet {
-	@include mediaQuery($breakpoint: tablet) {
-		display: none !important;
-	}
-}
-
 .mod-disyplayNone_desktop {
 	@include mediaQuery() {
 		display: none !important;
 	}
 }
+
+.mod-disyplayNone_portrait {
+	@include mediaQuery($breakpoint:portrait) {
+		display: none !important;
+	}
+}
+
+.mod-disyplayNone_landscape {
+	@include mediaQuery($breakpoint:landscapeORdesktop) {
+		display: none !important;
+	}
+}
+
+
 
 //
 

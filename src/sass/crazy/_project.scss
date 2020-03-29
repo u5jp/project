@@ -22,6 +22,11 @@ _:-ms-lang(x), .p-kv {
 	padding-top: 103vh !important;
 }
 
+// _:-ms-lang(x), .p-contents {
+// 	margin-bottom: -103vh !important;
+// 	overflow: hidden;
+// }
+
 .crazy{
 	-webkit-font-smoothing: antialiased;
 	//kvセクション start
@@ -154,29 +159,31 @@ _:-ms-lang(x), .p-kv {
 				}
 			}
 		}
-		.p-kv_scroll{
-			position: fixed;
-			z-index: 1000;
-			width: 1px;
-			height: 54px;
-			bottom: 25px;
-			left: 60px;
-			background-color: #ababab;
-			&_pointer{
-				width: 9px;
-				height: 9px;
+		@include mediaQuery{
+			.p-kv_scroll{
 				position: absolute;
-				left: -4px;
-				top: -4px;
-				animation: moveScrollPointer 1.2s cubic-bezier(.215,.61,.355,1) 0s infinite normal;
-				&:before{
-					content: "";
-					display: block;
+				z-index: 1000;
+				width: 1px;
+				height: 54px;
+				bottom: 25px;
+				left: 60px;
+				background-color: #ababab;
+				&_pointer{
 					width: 9px;
 					height: 9px;
-					border-radius: 50%;
-					background-color: #000;
-					animation: moveScrollPointerIn 1.2s cubic-bezier(.215,.61,.355,1) 0s infinite normal;
+					position: absolute;
+					left: -4px;
+					top: -4px;
+					animation: moveScrollPointer 1.2s cubic-bezier(.215,.61,.355,1) 0s infinite normal;
+					&:before{
+						content: "";
+						display: block;
+						width: 9px;
+						height: 9px;
+						border-radius: 50%;
+						background-color: #000;
+						animation: moveScrollPointerIn 1.2s cubic-bezier(.215,.61,.355,1) 0s infinite normal;
+					}
 				}
 			}
 		}
@@ -203,12 +210,14 @@ _:-ms-lang(x), .p-kv {
 		.p-introduction_text{
 			font-size: 13px;
 			margin-top: 30px;
-			line-height: 2.3;
+			line-height: 1.8;
+			letter-spacing: .025em;
 			opacity: 0;
 			transition:opacity 0.8s 0.4s;
 			@include mediaQuery{
 				text-align: center;
 				font-size: 15px;
+				line-height: 2.3;
 			}
 			&.is-shown{
 				opacity: 1;
@@ -269,9 +278,11 @@ _:-ms-lang(x), .p-kv {
 	.p-outline{
 		padding-top: 50px;
 		margin: 0 25px;
-		overflow: hidden;
-		display: flex;
-		justify-content: space-between;
+		@include mediaQuery(landscapeORdesktop){
+			overflow: hidden;
+			display: flex;
+			justify-content: space-between;
+		}
 		@include mediaQuery{
 			padding-top: 9%;
 			margin: 0 10%;
@@ -279,7 +290,15 @@ _:-ms-lang(x), .p-kv {
 		>li{
 			display: flex;
 			flex-direction: column;
-			width: 30.5556%;
+			&:not(:first-child){
+				margin-top: 30px;
+			}
+			@include mediaQuery(landscapeORdesktop){
+				width: 30.5556%;
+				&:nth-child(n+1){
+					margin-top: 0;
+				}
+			}
 			.c-textSlideIn{
 				h2{
 					margin-top: 20px;
@@ -316,8 +335,10 @@ _:-ms-lang(x), .p-kv {
 		}
 		.p-news_contents{
 			margin-top: 6%;
+			@include mediaQuery(landscapeORdesktop){
 			display: flex;
 			justify-content: space-between;
+			}
 
 			.c-textSlideIn{
 				>:first-child{
@@ -348,25 +369,45 @@ _:-ms-lang(x), .p-kv {
 				}
 			}
 			.p-itemSlideIn-main{
-				width: 48%;
+				width: 100%;
+				margin-bottom: 20px;
+				@include mediaQuery(landscapeORdesktop){
+					width: 48%;
+					margin-bottom: 0;
+				}
 				.c-textSlideIn{
 					padding-top: 15px;
 				}
 			}
 
 			.p-itemSlideIn-sub{
-				width: 48%;
+				width: 100%;
+				display: flex;
+				justify-content: space-between;
+				@include mediaQuery(landscapeORdesktop){
+					width: 48%;
+					display: block;
+				}
 				.p-itemSlideIn{
-					display: flex;
-					&:not(:first-child){
-						margin-top: 7.24638%;
+					width: 48%;
+					&:last-child{
+						display: none;
 					}
-					.c-imageSlideIn{
-						width: 26%;
-					}
-					.c-textSlideIn{
-						width: 73.2%;
-						padding-left: 30px;
+					@include mediaQuery(landscapeORdesktop){
+						width: 100%;
+						&:nth-child(n+1){
+							display: flex;
+						}
+						&:not(:first-child){
+							margin-top: 7.24638%;
+						}
+						.c-imageSlideIn{
+							width: 26%;
+						}
+						.c-textSlideIn{
+							width: 73.2%;
+							padding-left: 30px;
+						}
 					}
 				}
 			}
@@ -389,6 +430,10 @@ _:-ms-lang(x), .p-kv {
 			padding-top: 8%;
 			margin: 0 auto;
 		}
+		@include mediaQuery(portraitANDmobile){
+			
+		}
+
 		.c-imageSlideIn{
 			.p-photoGallery_wrap{
 				position: relative;
@@ -456,9 +501,10 @@ _:-ms-lang(x), .p-kv {
 						}
 					}
 					p{
+						font-size: 20px;
 						margin-top: 10px;
 						@include mediaQuery{
-							font-size: 20px;
+							font-size: 11px;
 						}
 					}
 				}
