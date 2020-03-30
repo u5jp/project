@@ -508,9 +508,9 @@ html{
 		}
 		.l-nav_popup_list_sns{
 			display: flex;
-			margin: 40px 0;
+			margin: 40px 0 40px -18px;
 			@include mediaQuery{
-				margin: 40px;
+				margin: 40px 40px 40px -18px;
 			}
 			margin-left: -18px;
 			>li{

@@ -431,7 +431,7 @@ _:-ms-lang(x), .p-kv {
 			margin: 0 auto;
 		}
 		@include mediaQuery(portraitANDmobile){
-			
+			margin:0 25px;
 		}
 
 		.c-imageSlideIn{
@@ -448,33 +448,44 @@ _:-ms-lang(x), .p-kv {
 					@include mediaQuery{
 						padding-top: 44.1%;
 					}
-					img{
-						@keyframes slideIndexJoinusBanner {
-							0% {
-								opacity: 0;
-								z-index: 10;
+					@include mediaQuery(portraitANDmobile){
+						padding-top: 62.5%;
+					}
+					picture{
+						img{
+							@keyframes slideIndexJoinusBanner {
+								0% {
+									opacity: 0;
+									z-index: 10;
+								}
+								30% {
+									opacity: 1;
+									z-index: 1;
+								}
+								70% {
+									opacity: 1;
+									z-index: 1;
+								}
+								100% {
+									opacity: 0;
+								}
 							}
-							30% {
-								opacity: 1;
-								z-index: 1;
-							}
-							70% {
-								opacity: 1;
-								z-index: 1;
-							}
-							100% {
-								opacity: 0;
-							}
+							width: 100%;
+							height: 100%;
+							object-fit: cover;
+							object-position:center top;
+							font-family: 'object-fit:cover;object-position:center top';
+							position: absolute;
+							top: 0px;
+							right: 0px;
+							bottom: 0px;
+							left: 0px;
+							opacity: 0;
 						}
-						width: 100%;
-						position: absolute;
-						top: 0px;
-						right: 0px;
-						bottom: 0px;
-						left: 0px;
-						opacity: 0;
 						&.is-animate{
-							animation:slideIndexJoinusBanner 6s cubic-bezier(0.19, 1, 0.22, 1);
+							img{
+								animation:slideIndexJoinusBanner 6s cubic-bezier(0.19, 1, 0.22, 1);
+							}
 						}
 					}
 				}
