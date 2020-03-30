@@ -6,6 +6,7 @@
  */
 
 $breakpoints: (
+	'smallMobile': 'screen and (max-width: 413px)',
 	'mobile': 'screen and (max-width: 767px)',
 	'desktop': 'screen and (min-width: 768px)',
 	'portrait': '(orientation: portrait) , (min-width: 768px)',
@@ -179,7 +180,6 @@ html{
 	@include mediaQuery{
 		width: 164px;
 		height: 33.1353px;
-		height: 18px;
 	}
 	.c-crazy-logo__elm1 {
 		fill: rgb(255, 255, 255);
@@ -356,13 +356,13 @@ html{
 	}
 	@include mediaQuery(){
 		.l-nav_utility{
+			margin-top: -125px;
 			position: fixed;
 			z-index: 1000;
 			width: 32px;
 			line-height: 1.5;
 			top: 50%;
 			right: 45px;
-			transform: translateY(-50%);
 			.l-nav_utility_sns{
 				>li{
 					padding: 10px 0;
@@ -457,6 +457,9 @@ html{
 				line-height: 1.5;
 				font-weight: normal;
 			}
+			@include mediaQuery(smallMobile){
+				font-size: 3.75vw;
+			}
 			>li{
 				letter-spacing: 0.15em;
 				opacity: 0;
@@ -505,7 +508,10 @@ html{
 		}
 		.l-nav_popup_list_sns{
 			display: flex;
-			margin: 40px;
+			margin: 40px 0;
+			@include mediaQuery{
+				margin: 40px;
+			}
 			margin-left: -18px;
 			>li{
 				position: relative;
