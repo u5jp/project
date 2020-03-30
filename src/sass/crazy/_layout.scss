@@ -1,5 +1,3 @@
-//responsive
-
 /*
  * メディアクエリ mixin
  * 変数$breakpointsだけはややこしくなるのでここで定義
@@ -48,10 +46,6 @@ $breakpoints: (
 		display: none !important;
 	}
 }
-
-
-
-//
 
 //nav start
 
@@ -214,7 +208,6 @@ html{
 }
 
 .l-nav{
-	// perspective: 500px;
 	.l-nav_logo{
 		position: fixed;
 		top: 21px;
@@ -289,16 +282,8 @@ html{
 				&::before,&:after{
 					background: #000;
 				}
-				&[class*="line"]{
-					// &::before,&:after{
-					// 	background: #000;
-					// }
-				}
 				&[class*="cross"]{
 					left: -24px;
-					// &::before,&:after{
-					// 	background: #fff;
-					// }
 				}
 			}
 		}
@@ -307,12 +292,6 @@ html{
 				>div::after,>div::before{
 					background: #fff;
 				}
-				// >div[class*="line"]{
-				// 	left: 24px;
-				// }
-				// >div[class*="cross"]{
-				// 	left: 0;
-				// }
 			}
 		}
 	}

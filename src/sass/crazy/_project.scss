@@ -22,11 +22,6 @@ _:-ms-lang(x), .p-kv {
 	padding-top: 105vh !important;
 }
 
-// _:-ms-lang(x), .p-contents {
-// 	margin-bottom: -103vh !important;
-// 	overflow: hidden;
-// }
-
 .crazy{
 	-webkit-font-smoothing: antialiased;
 	//kvセクション start
@@ -160,6 +155,24 @@ _:-ms-lang(x), .p-kv {
 			}
 		}
 		@include mediaQuery{
+			.p-kv_pager{
+				height: 1px;
+				position: absolute;
+				right: 50px;
+				bottom: 25px;
+				z-index: 20;
+				display: flex;
+				>div{
+					width: 12px;
+					height: 1px;
+					margin-left: 10px;
+					background-color: #ababab;
+					&.is-active{
+						background-color: #000;
+					}
+				}
+
+			}
 			.p-kv_scroll{
 				position: absolute;
 				z-index: 1000;
@@ -516,6 +529,9 @@ _:-ms-lang(x), .p-kv {
 						margin-top: 10px;
 						@include mediaQuery{
 							font-size: 11px;
+						}
+						@include mediaQuery(portraitANDmobile){
+							font-size: 11.5px;
 						}
 					}
 				}
