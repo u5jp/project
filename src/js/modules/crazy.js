@@ -16,7 +16,7 @@ console.log("crazytdst");
 
 ((w,d) =>{
     d.body.style.position="fixed";
-    d.body.scrollTop = d.documentElement.scrollTop = 0;
+    //d.body.scrollTop = d.documentElement.scrollTop = 0;
 
     const domEach = ( elements , callback ) => {
 		Array.prototype.forEach.call( elements ,(element) => {
@@ -277,8 +277,8 @@ console.log("crazytdst");
                             w.addEventListener("resize",resize);
                             $mainSec.addEventListener('transitionend', () => {
                                 // scroll.disable();
-                                d.addEventListener(mousewheelevent,{handleEvent: scrollJudge,event:wheel});
-                                d.addEventListener("touchmove",{handleEvent: scrollJudge,event:touch});
+                                w.addEventListener(mousewheelevent,{handleEvent: scrollJudge,event:wheel});
+                                w.addEventListener("touchmove",{handleEvent: scrollJudge,event:touch});
                                 d.body.style.position="fixed";
                             },{once: true});
                             $kvSec.style.transform = "translate3d(0px,0px,0px)"
@@ -291,8 +291,8 @@ console.log("crazytdst");
                             e.currentTarget.removeEventListener(this.event.name,this);
                             $mainSec.addEventListener('transitionend', () => {
                                 // scroll.enable();
-                                d.addEventListener(mousewheelevent,{handleEvent: scrollJudge,event:wheel});
-                                d.addEventListener("touchmove",{handleEvent: scrollJudge,event:touch});
+                                w.addEventListener(mousewheelevent,{handleEvent: scrollJudge,event:wheel});
+                                w.addEventListener("touchmove",{handleEvent: scrollJudge,event:touch});
                                 // for(let i=0;i < introArray.length;i++){
                                 //     introArray[i].classList.add("is-shown");
                                 // }
@@ -319,7 +319,7 @@ console.log("crazytdst");
                 // d.addEventListener(mousewheelevent,scrollJudge);
                 d.addEventListener("click",scrollJudge);
                 // d.addEventListener("touchmove",scrollJudge);
-                d.addEventListener("touchstart",startData);
+                w.addEventListener("touchstart",startData);
                 w.addEventListener("resize",resize);
                 // d.addEventListener("touchmove",function(e){
                 //     console.log("startY",startY);
@@ -327,8 +327,8 @@ console.log("crazytdst");
                 //     console.log(window.pageYOffset);
                 // });
 
-                d.addEventListener(mousewheelevent,{handleEvent: scrollJudge,event:wheel});
-                d.addEventListener("touchmove",{handleEvent: scrollJudge,event:touch});
+                w.addEventListener(mousewheelevent,{handleEvent: scrollJudge,event:wheel});
+                w.addEventListener("touchmove",{handleEvent: scrollJudge,event:touch});
             });
         })();
         }
@@ -338,6 +338,10 @@ console.log("crazytdst");
                 console.log("IE");
                 //KV→コンテンツ移動
                 (()=>{
+                    window.addEventListener('beforeunload', function(e){
+                        d.body.scrollTop = d.documentElement.scrollTop = 0;
+                        window.location.reload(false);
+                    });
                     var preventScroll={
                         x:0,
                         y:0,
@@ -363,6 +367,7 @@ console.log("crazytdst");
                         d.body.style.position="static";
                         const $kvSec = d.getElementsByClassName("p-kv")[0];
                         const $mainSec = d.getElementsByClassName("p-contents")[0];
+                        const $footer = d.getElementsByClassName("l-footer")[0];
                         const $crazy = d.getElementsByClassName("crazy")[0];
 
                         const $intro = d.getElementsByClassName("p-introduction")[0];
@@ -372,15 +377,14 @@ console.log("crazytdst");
                         const introArray = [$intro,$text,$button,$lead]
 
 
-                        // $kvSec.style.transform = "translate3d(0px,0px,0px)";
-                        // $mainSec.style.transform = "translate3d(0px,"+ window.innerHeight +"px,0px)";
+                        $kvSec.style.transform = "translate3d(0px,0px,0px)";
+                        $mainSec.style.transform = "translate3d(0px,+"+ window.innerHeight +"px,0px)";
                         
-                        $mainSec.style.display = "none";
+                        //$mainSec.style.display = "none";
                         console.log($crazy);
-                        $crazy.style.transform = "translate3d(0px,0px,0px)";
-                        $crazy.style.transition = "transform .8s cubic-bezier(1,0,0,1) .1s"
-                        // $kvSec.style.transition = "transform .8s cubic-bezier(1,0,0,1) .1s"
-                        // $mainSec.style.transition = "transform .8s cubic-bezier(1,0,0,1) .1s"
+
+                        $kvSec.style.transition = "transform .8s cubic-bezier(1,0,0,1) .1s"
+                        $mainSec.style.transition = "transform .8s cubic-bezier(1,0,0,1) .1s"
 
                         let parseTranslate3d = (string) => {
                             var array = string.replace('translate3d', '').match(/-?[\d\.]+/g);
@@ -388,6 +392,24 @@ console.log("crazytdst");
                                 array[i] = Number(array[i]);
                             }
                             return array;
+                        }
+
+                        let scrollJudgeUp = (e) =>{
+                            if(window.pageYOffset==0){
+                                w.removeEventListener("scroll",scrollJudgeUp);
+                                console.log("上");
+                                // juggeInvalid();
+                                preventScroll.enable();
+                                $kvSec.addEventListener('transitionend', function transitionendUp(e){
+                                    e.currentTarget.removeEventListener(e.type, transitionendUp);
+                                    console.log("traen上");
+                                    w.addEventListener("scroll",scrollJudge);
+                                    preventScroll.disable();
+                                });
+                                // $crazy.style.transform = "translate3d(0px,0px,0px)"
+                                $kvSec.style.transform = "translate3d(0px,0px,0px)";
+                                $mainSec.style.transform = "translate3d(0px," + window.innerHeight + "px,0px)";
+                            }
                         }
                         
                         let scrollJudge = (e) =>{
@@ -397,50 +419,30 @@ console.log("crazytdst");
                             // let kvY = parseTranslate3d($kvSec.style.transform)[1];
                             // let mainSecY = parseTranslate3d($mainSec.style.transform)[1];
 
-                            if($mainSec.style.display == "none" && $kvSec.offsetHeight <= window.pageYOffset + window.innerHeight){
+                            if($kvSec.offsetHeight + 10 <= window.pageYOffset + window.innerHeight <= $kvSec.offsetHeight + 30){
+                                w.removeEventListener("scroll",scrollJudge);
+                                console.log()
                                 console.log("下");
-                                juggeInvalid();
-                                $mainSec.style.display = "block";
-                                $crazy.addEventListener('transitionend', function transitionend(e){
+                                // juggeInvalid();
+                                preventScroll.enable();
+                                $mainSec.addEventListener('transitionend', function transitionendDown(e){
+                                    e.currentTarget.removeEventListener(e.type, transitionendDown);
                                     console.log("traen下");
                                     preventScroll.disable();
-                                    e.currentTarget.removeEventListener(e.type, transitionend);
-                                    d.addEventListener("scroll",scrollJudge);
-
+                                    w.addEventListener("scroll",scrollJudgeUp);
                                     for(let i=0;i < introArray.length;i++){
                                         introArray[i].classList.add("is-shown");
                                     }
-
                                 });
-                                $crazy.style.transform = "translate3d(0px, - "+ $kvSec.offsetHeight + "px,0px)"
-                                // $kvSec.style.transform = "translate3d(0px,-"+ window.innerHeight + "px,0px)";
-                                // $mainSec.style.transform = "translate3d(0px,-"+ window.innerHeight + "px,0px)";
-                            }else if($mainSec.style.display == "block" && window.pageYOffset==0){
-                                console.log("上");
-                                juggeInvalid();
-                                $crazy.addEventListener('transitionend', function transitionend(e){
-                                    console.log("traen上");
-                                    $mainSec.style.display = "none";
-                                    preventScroll.disable();
-                                    e.currentTarget.removeEventListener(e.type, transitionend);
-                                    d.addEventListener("scroll",scrollJudge);
-                                });
-                                $crazy.style.transform = "translate3d(0px,0px,0px)"
-                                // $kvSec.style.transform = "translate3d(0px,0px,0px)";
-                                // $mainSec.style.transform = "translate3d(0px,0px,0px)";
+                                
+                                //$crazy.style.transform = "translate3d(0px, - "+ $kvSec.offsetHeight + "px,0px)"
+                                $kvSec.style.transform = "translate3d(0px,-"+ (window.innerHeight + 30 ) + "px,0px)";
+                                $mainSec.style.transform = "translate3d(0px,"+ (window.pageYOffset + 30) + "px,0px)";
+                                $footer.style.transform = "translate3d(0px," + (window.pageYOffset + 30) + "px,0px)";
                             }
                         }
-                        let resize = (e) =>{
-                            console.log("tes");
-                            // $mainSec.style.transform = "translate3d(0px,"+ window.innerHeight +"px,0px)";
-                        }
-
-                        let juggeInvalid = (e) =>{
-                            preventScroll.enable();
-                            d.removeEventListener("scroll",scrollJudge);
-                        }
         
-                        d.addEventListener("scroll",scrollJudge);
+                        w.addEventListener("scroll",scrollJudge);
                     });
                 })();
             }
