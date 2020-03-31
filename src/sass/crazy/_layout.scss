@@ -390,14 +390,17 @@ html{
 			z-index: 10;
 
 			&.is-openedChild{
-				.l-nav_popup_list_items{
+				.l-nav_popup_items{
 					width: 50%;
 					a,span:not(.is-opened){
 						color: #454545;
 					}
 				}
 			}
-			
+			.l-nav_popup_list_in{
+				width: 100%;
+				position: relative;
+			}
 		}
 		&.is-opened{
 			.l-nav_popup_list{
@@ -405,7 +408,7 @@ html{
 			pointer-events: auto;
 			transform: translate3d(0px, 0px, 0px);
 			transition: transform 0.6s cubic-bezier(0.075, 0.82, 0.165, 1);
-			.l-nav_popup_list_items{
+			.l-nav_popup_items{
 				ul{
 					>li{
 						opacity: 1;
@@ -420,7 +423,7 @@ html{
 			}
 		}
 
-		.l-nav_popup_list_items{
+		.l-nav_popup_items{
 			display: flex;
 			flex-direction: column;
 			justify-content: center;
@@ -495,7 +498,7 @@ html{
 				}
 			}
 		}
-		.l-nav_popup_list_items_sns{
+		.l-nav_popup_items_sns{
 			display: flex;
 			margin: 25px 0 0 -18px;
 			@include mediaQuery{

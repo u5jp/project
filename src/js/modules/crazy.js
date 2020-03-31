@@ -132,7 +132,7 @@ import '../polyfill/IntersectionObserver-master/polyfill/intersection-observer.j
             const $logo = d.getElementsByClassName("l-nav_logo")[0];
             const navsArray = [$hambuger,$popup,$logo]
             
-            const $navLink = d.querySelectorAll(".l-nav_popup_list_items span");
+            const $navLink = d.querySelectorAll(".l-nav_popup_items span");
             const $navChildren = d.getElementsByClassName("l-nav_popup_children");
             const $popupList = d.getElementsByClassName("l-nav_popup_list")[0];
             const $popupBg = d.getElementsByClassName("l-nav_popup_bg")[0];
