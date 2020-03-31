@@ -256,6 +256,7 @@ import '../polyfill/IntersectionObserver-master/polyfill/intersection-observer.j
                         mainSecY = parseTranslate3d($mainSec.style.transform)[1];
                         $mainSec.style.transition = "transform .8s cubic-bezier(1,0,0,1) .1s"
 
+                        console.log('testtt')
                         if(this.event.up(e)){
                             // console.log("上")
                             if(mainSecY  == 0){
@@ -268,7 +269,7 @@ import '../polyfill/IntersectionObserver-master/polyfill/intersection-observer.j
                                 $mainSec.style.transform = "translate3d(0px,"+ window.innerHeight +"px,0px)"
                             }
                         }else if(this.event.down(e)){
-                            console.log("下")
+                            // console.log("下")
                             if(kvY  == 0){
                                 $mainSec.classList.add('is-animate');
                                 e.currentTarget.removeEventListener(this.event.name,this);
@@ -284,6 +285,7 @@ import '../polyfill/IntersectionObserver-master/polyfill/intersection-observer.j
                     }
 
                     const resize = ()=>{
+                        kvY = parseTranslate3d($kvSec.style.transform)[1];
                         if(kvY  == 0){
                             $mainSec.style.transform = "translate3d(0px,"+ window.innerHeight +"px,0px)";
                         }
@@ -296,6 +298,7 @@ import '../polyfill/IntersectionObserver-master/polyfill/intersection-observer.j
                 });
             }
         })();
+
 
 
         (()=>{
