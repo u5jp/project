@@ -197,9 +197,10 @@ import '../polyfill/IntersectionObserver-master/polyfill/intersection-observer.j
                     $kvSec.style.transform = "translate3d(0px,0px,0px)";
                     $mainSec.style.transform = "translate3d(0px,"+ window.innerHeight +"px,0px)";
 
+                    let kvY,mainSecY
                     let startY;
 
-                    //transdorm:translste3dのyの値のみを返す関数
+                    //transdorm:translste3dの値を返す関数
                     let parseTranslate3d = (string) => {
                         var array = string.replace('translate3d', '').match(/-?[\d\.]+/g);
                         for (var i = 0; i < array.length; i++) {
@@ -248,12 +249,11 @@ import '../polyfill/IntersectionObserver-master/polyfill/intersection-observer.j
                         e.preventDefault();
                         startY = e.touches[0].pageY;
                     }
-
                     //whellした際のメイン処理
                     let scrollJudge = function(e){
 
-                        let kvY = parseTranslate3d($kvSec.style.transform)[1];
-                        let mainSecY = parseTranslate3d($mainSec.style.transform)[1];
+                        kvY = parseTranslate3d($kvSec.style.transform)[1];
+                        mainSecY = parseTranslate3d($mainSec.style.transform)[1];
                         $mainSec.style.transition = "transform .8s cubic-bezier(1,0,0,1) .1s"
 
                         if(this.event.up(e)){
@@ -269,7 +269,7 @@ import '../polyfill/IntersectionObserver-master/polyfill/intersection-observer.j
                                 $mainSec.style.transform = "translate3d(0px,"+ window.innerHeight +"px,0px)"
                             }
                         }else if(this.event.down(e)){
-                            // console.log("下")
+                            console.log("下")
                             if(kvY  == 0){
                                 $mainSec.classList.add('is-animate');
                                 e.currentTarget.removeEventListener(this.event.name,this);
@@ -285,6 +285,13 @@ import '../polyfill/IntersectionObserver-master/polyfill/intersection-observer.j
                         }
                     }
 
+                    const resize = ()=>{
+                        if(kvY  == 0){
+                            $mainSec.style.transform = "translate3d(0px,"+ window.innerHeight +"px,0px)";
+                        }
+                    }
+
+                    w.addEventListener("resize",resize);
                     w.addEventListener("touchstart",startData);
                     w.addEventListener(mousewheelevent,{handleEvent: scrollJudge,event:wheel});
                     w.addEventListener("touchmove",{handleEvent: scrollJudge,event:touch});
