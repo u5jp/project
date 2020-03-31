@@ -132,6 +132,13 @@ import '../polyfill/IntersectionObserver-master/polyfill/intersection-observer.j
             const $logo = d.getElementsByClassName("l-nav_logo")[0];
             const navsArray = [$hambuger,$popup,$logo]
             
+            const $navLink = d.querySelectorAll(".l-nav_popup_list_items span");
+            const $navChildren = d.getElementsByClassName("l-nav_popup_children");
+            const $popupList = d.getElementsByClassName("l-nav_popup_list")[0];
+            const $popupBg = d.getElementsByClassName("l-nav_popup_bg")[0];
+
+            let preIndex = null;
+
             $hambuger.addEventListener("click",() =>{
                 if(!$popup.classList.contains("is-opened")){
                     for(let i=0;i < navsArray.length;i++){
@@ -141,8 +148,52 @@ import '../polyfill/IntersectionObserver-master/polyfill/intersection-observer.j
                     for(let i=0;i < navsArray.length;i++){
                         navsArray[i].classList.remove("is-opened")
                     }
+
+                    $popupList.classList.remove("is-openedChild");
+                    for(let i=0;i < $navChildren.length;i++){
+                        $navChildren[i].classList.remove("is-opened")
+                    }
                 }
             });
+            const domEach = ( elements , callback ) => {
+                Array.prototype.forEach.call( elements ,(element ,index) => {
+                    callback( element,index );
+                });
+            }
+            domEach($navLink,(child,index) => {
+                child.addEventListener("click", () => {
+                    // for(let i=0;i < $navChildren.length;i++){
+                    //     $navChildren[i].classList.remove("is-opened")
+                    // }
+                    // for(let i=0;i < $navLink.length;i++){
+                    //     $navLink[i].classList.remove("is-opened")
+                    // }
+                    // console.log(preIndex);
+
+                    if(preIndex === null){
+                        child.classList.add('is-opened');
+                        $navChildren[index].classList.add("is-opened");
+                        $popupList.classList.add("is-openedChild");
+                        $popupBg.classList.add("is-openedChild");
+                        preIndex = index;
+                    }else if(preIndex != index){
+                        $navChildren[preIndex].classList.remove("is-opened");
+                        $navLink[preIndex].classList.remove("is-opened")
+                        child.classList.add('is-opened');
+                        $navChildren[index].classList.add("is-opened");
+                        $popupList.classList.add("is-openedChild");
+                        $popupBg.classList.add("is-openedChild");
+                        preIndex = index;
+                    }else{
+                        child.classList.remove('is-opened');
+                        $navChildren[index].classList.remove("is-opened");
+                        $popupList.classList.remove("is-openedChild");
+                        $popupBg.classList.remove("is-openedChild");
+                        preIndex = null;
+                    }
+                });
+            })
+
         })();
 
         (()=>{
