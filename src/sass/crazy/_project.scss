@@ -19,7 +19,33 @@ _:-ms-lang(x), body {
 
 _:-ms-lang(x), .p-kv {
 	position: absolute !important;
-	padding-top: 105vh !important;
+	padding-top: 103vh !important;
+}
+
+
+@keyframes moveScrollPointer {
+	0% {
+		transform: translate3d(0px, 0px, 0px);
+	}
+	100% {
+		transform: translate3d(0px, 54px, 0px);
+	}
+}
+@keyframes moveScrollPointerIn {
+	0% {
+		transform: scale(0);
+	}
+
+	10% {
+		transform: scale(1);
+	}
+
+	65% {
+		transform: scale(1);
+	}
+	100% {
+		transform: scale(0);
+	}
 }
 
 .crazy{
@@ -173,6 +199,7 @@ _:-ms-lang(x), .p-kv {
 				}
 
 			}
+			
 			.p-kv_scroll{
 				position: absolute;
 				z-index: 1000;
@@ -190,6 +217,7 @@ _:-ms-lang(x), .p-kv {
 					animation: moveScrollPointer 1.2s cubic-bezier(.215,.61,.355,1) 0s infinite normal;
 					&:before{
 						content: "";
+						transform: scale(0);
 						display: block;
 						width: 9px;
 						height: 9px;
@@ -219,6 +247,9 @@ _:-ms-lang(x), .p-kv {
 			@include mediaQuery{
 				font-size: 48px;
 			}
+			@include mediaQuery(smallMobile){
+				font-size: 6.25vw;
+			}
 		}
 		.p-introduction_text{
 			font-size: 13px;
@@ -231,6 +262,9 @@ _:-ms-lang(x), .p-kv {
 				text-align: center;
 				font-size: 15px;
 				line-height: 2.3;
+			}
+			@include mediaQuery(smallMobile){
+				font-size: 3.125vw;
 			}
 			&.is-shown{
 				opacity: 1;
@@ -259,6 +293,10 @@ _:-ms-lang(x), .p-kv {
 				line-height: 1.1;
 				letter-spacing: 0.3em;
 				font-weight: bold;
+				@include mediaQuery(smallMobile){
+					margin-top: 10px;
+					font-size: 2.8125vw;
+				}
 				span{
 					display: inline-block;
 					&:after{
@@ -319,12 +357,18 @@ _:-ms-lang(x), .p-kv {
 					letter-spacing: 0.05em;
 					line-height: 1.25;
 					font-weight: bold;
+					@include mediaQuery(smallMobile){
+						font-size: 4.0625vw;
+					}
 				}
 				h2+p{
 					margin-top: 10px;
 					font-size: 12px;
 					letter-spacing: 0.05em;
 					line-height: 2;
+					@include mediaQuery(smallMobile){
+						font-size: 2.8125vw;
+					}
 				}
 			}
 		}
@@ -339,11 +383,14 @@ _:-ms-lang(x), .p-kv {
 		}
 		h2{
 			text-align: center;
-			font-size: 19px;
+			font-size: 19.4062px;
 			line-height: 1.7;
 			letter-spacing: .05em;
 			@include mediaQuery{
 				font-size: 21px;
+			}
+			@include mediaQuery(smallMobile){
+				font-size: 4.6875vw;
 			}
 		}
 		.p-news_contents{
@@ -354,22 +401,48 @@ _:-ms-lang(x), .p-kv {
 			}
 
 			.c-textSlideIn{
+				padding-top: 15px;
+				@include mediaQuery(landscapeORdesktop){
+					padding-top: 0;
+				}
 				>:first-child{
 					font-size: 11.5px;
 					line-height: 1.5;
 					color: #969696;
-					letter-spacing: .025em;
+					letter-spacing: 0.2em;
 					@include mediaQuery{
 						font-size: 10px;
+					}
+					@include mediaQuery(smallMobile){
+						font-size: 2.8125vw;
+					}
+					&:before{
+						content: "";
+						display: inline-block;
+						vertical-align: middle;
+						background-color: rgb(150, 150, 150);
+
+						width: 3px;
+						height: 1px;
+						margin-right: 6px;
+						margin-bottom: 2px;
+						@include mediaQuery{
+							width: 4px;
+							height: 2px;
+							margin-right: 10px;
+							margin-bottom: 3px;
+						}
 					}
 				}
 				>:last-child{
 					margin-top: 10px;
 					font-size: 17px;
-					letter-spacing: 1;
 					line-height: 1.4;
 					@include mediaQuery{
 						font-size: 14px;
+					}
+					@include mediaQuery(smallMobile){
+						font-size: 4.0625vw;
 					}
 				}
 				.hoverOpacity{
@@ -419,6 +492,11 @@ _:-ms-lang(x), .p-kv {
 						}
 						.c-textSlideIn{
 							width: 73.2%;
+							padding-left: 20px;
+						}
+					}
+					@include mediaQuery{
+						.c-textSlideIn{
 							padding-left: 30px;
 						}
 					}
@@ -517,21 +595,24 @@ _:-ms-lang(x), .p-kv {
 						left: 20%;
 					}
 					h2{
-						font-size: 26px;
+						font-size: 25.875px;
 						letter-spacing: 0.1em;
 						line-height: 1.1;
 						@include mediaQuery{
 							font-size: 38px;
 						}
+						@include mediaQuery(smallMobile){
+							font-size: 6.25vw;
+						}
 					}
 					p{
-						font-size: 20px;
+						font-size: 11.5px;
 						margin-top: 10px;
 						@include mediaQuery{
 							font-size: 11px;
 						}
 						@include mediaQuery(portraitANDmobile){
-							font-size: 11.5px;
+							font-size: 2.8125vw;
 						}
 					}
 				}

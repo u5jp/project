@@ -138,30 +138,6 @@ $breakpoints: (
 //nav用mixin end
 
 //nav用style start
-@keyframes moveScrollPointer {
-	0% {
-		transform: translate3d(0px, 0px, 0px);
-	}
-	100% {
-		transform: translate3d(0px, 54px, 0px);
-	}
-}
-@keyframes moveScrollPointerIn {
-	0% {
-		transform: scale(0);
-	}
-
-	10% {
-		transform: scale(1);
-	}
-
-	65% {
-		transform: scale(1);
-	}
-	100% {
-		transform: scale(0);
-	}
-}
 
 html{
 	font-family: "Noto Sans JP", 游ゴシック体, "Yu Gothic", YuGothic, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", メイリオ, Meiryo, sans-serif;
@@ -407,6 +383,10 @@ html{
 			display: flex;
 			align-items: center;
 			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
 			z-index: 10;
 
 			&.is-openedChild{
@@ -451,14 +431,10 @@ html{
 			>ul{
 				font-size: 15.5px;
 				letter-spacing: 0.15em;
-				line-height: 2;
-				font-weight: bold;
-				padding-top: 50px;
+				line-height: 1.5;
 				perspective:500px;
 				@include mediaQuery{
 					font-size: 14px;
-					line-height: 1.5;
-					font-weight: normal;
 				}
 				@include mediaQuery(smallMobile){
 					font-size: 3.75vw;
@@ -474,6 +450,9 @@ html{
 						padding: 9px 0;
 						@include mediaQuery{
 							padding: 14px 0;
+						}
+						@include mediaQuery(landscapeANDmobile){
+							padding: 5px 0px;
 						}
 
 						@include mediaQuery{
@@ -502,12 +481,15 @@ html{
 					&:last-child{
 						cursor:auto;
 						&:before{
-							margin-top: 36px;
+							margin-top:27px;
 							height: 1px;
 							width: 15px;
 							content: "";
 							display: block;
 							background-color: grey;
+							@include mediaQuery{
+								margin-top: 36px;
+							}
 						}
 					}
 				}
@@ -515,9 +497,9 @@ html{
 		}
 		.l-nav_popup_list_items_sns{
 			display: flex;
-			margin: 40px 0 40px -18px;
+			margin: 25px 0 0 -18px;
 			@include mediaQuery{
-				margin: 40px 40px 40px -18px;
+				margin: 40px 40px 0 -18px;
 			}
 			margin-left: -18px;
 			>li{
@@ -563,12 +545,9 @@ html{
 				font-size: 15.5px;
 				letter-spacing: 0.15em;
 				line-height: 2;
-				font-weight: bold;
-				padding-top: 50px;
 				@include mediaQuery{
 					font-size: 14px;
 					line-height: 1.5;
-					font-weight: normal;
 				}
 				@include mediaQuery(smallMobile){
 					font-size: 3.75vw;
@@ -621,6 +600,7 @@ html{
 			background: #000;
 			display: flex;
 			align-items: center;
+			overflow: hidden;
 			.l-nav_popup_bg_child{
 				width: 50%;
 				position: absolute;
@@ -628,7 +608,7 @@ html{
 				right: 0px;
 				bottom: 0px;
 				z-index: 2;
-				background-color: #222222;
+				background-color: #161616;
 				transform: translateX(100%);
 				transition: 0.6s cubic-bezier(0.075, 0.82, 0.165, 1);
 			}
@@ -690,12 +670,15 @@ html{
 		>li{
 			text-transform: uppercase;
 			font-size: 11.5px;
-			font-weight: bold;
 			letter-spacing: 0.2em;
 			margin: 7px 10px;
 			@include mediaQuery{
+				font-weight: bold;
 				margin: 9px 12px;
 				font-size: 11px;
+			}
+			@include mediaQuery(smallMobile){
+				font-size: 2.8125vw;
 			}
 			a{
 				position: relative;

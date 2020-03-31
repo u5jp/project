@@ -148,13 +148,22 @@
                     font-size: 12px;
                     font-weight: normal;
                 }
+                @include mediaQuery(smallMobile){
+                    font-size: 3.125vw;
+                    font-weight: normal;
+                }
                 .c-button_in_word_mailLogo{
                     fill: #fff;
                     display: inline-block;
                     vertical-align: middle;
-                    width: 20px;
-                    height: 15px;
-                    margin-right: 20px;
+                    width: 13px;
+                    height: 9.75px;
+                    margin-right: 12px;
+                    @include mediaQuery{
+                        width: 20px;
+                        height: 15px;
+                        margin-right: 20px;
+                    }
                 }
             }
             .c-button_in_column{
