@@ -261,8 +261,7 @@ import '../polyfill/IntersectionObserver-master/polyfill/intersection-observer.j
                             if(mainSecY  == 0){
                                 e.currentTarget.removeEventListener(this.event.name,this);
                                 $mainSec.addEventListener('transitionend', () => {
-                                    w.addEventListener(mousewheelevent,{handleEvent: scrollJudge,event:wheel});
-                                    w.addEventListener("touchmove",{handleEvent: scrollJudge,event:touch});
+                                    w.addEventListener(this.event.name,{handleEvent: this.handleEvent,event:this.event});
                                     d.body.style.position="fixed";
                                 },{once: true});
                                 $kvSec.style.transform = "translate3d(0px,0px,0px)"
@@ -274,8 +273,7 @@ import '../polyfill/IntersectionObserver-master/polyfill/intersection-observer.j
                                 $mainSec.classList.add('is-animate');
                                 e.currentTarget.removeEventListener(this.event.name,this);
                                 $mainSec.addEventListener('transitionend', () => {
-                                    w.addEventListener(mousewheelevent,{handleEvent: scrollJudge,event:wheel});
-                                    w.addEventListener("touchmove",{handleEvent: scrollJudge,event:touch});
+                                    w.addEventListener(this.event.name,{handleEvent: this.handleEvent,event:this.event});
                                     $mainSec.classList.remove('is-animate');
                                     d.body.style.position="static";
                                 },{once: true});
