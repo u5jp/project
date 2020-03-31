@@ -7,9 +7,9 @@ import '../polyfill/IntersectionObserver-master/polyfill/intersection-observer.j
 
      // HTMLcollectionやNodeListをforEachで回すための関数
     const domEach = ( elements , callback ) => {
-		Array.prototype.forEach.call( elements ,(element) => {
-			callback( element );
-		});
+        Array.prototype.forEach.call( elements ,(element ,index) => {
+            callback( element,index );
+        });
     }
     var userAgent = window.navigator.userAgent.toLowerCase();
     
@@ -138,6 +138,25 @@ import '../polyfill/IntersectionObserver-master/polyfill/intersection-observer.j
             const $popupBg = d.getElementsByClassName("l-nav_popup_bg")[0];
 
             let preIndex = null;
+            let preChild =null;
+
+            const openChild = (child,index) => {
+                child.classList.add('is-opened');
+                $navChildren[index].classList.add("is-opened");
+                $popupList.classList.add("is-openedChild");
+                $popupBg.classList.add("is-openedChild");
+                preIndex = index;
+                preChild = child;
+            }
+
+            const closeChild = (child,index) => {
+                child.classList.remove('is-opened');
+                $navChildren[index].classList.remove("is-opened");
+                $popupList.classList.remove("is-openedChild");
+                $popupBg.classList.remove("is-openedChild");
+                preIndex = null;
+                preChild = null;
+            }
 
             $hambuger.addEventListener("click",() =>{
                 if(!$popup.classList.contains("is-opened")){
@@ -148,48 +167,19 @@ import '../polyfill/IntersectionObserver-master/polyfill/intersection-observer.j
                     for(let i=0;i < navsArray.length;i++){
                         navsArray[i].classList.remove("is-opened")
                     }
-
-                    $popupList.classList.remove("is-openedChild");
-                    for(let i=0;i < $navChildren.length;i++){
-                        $navChildren[i].classList.remove("is-opened")
-                    }
+                    closeChild(preChild,preIndex)
                 }
             });
-            const domEach = ( elements , callback ) => {
-                Array.prototype.forEach.call( elements ,(element ,index) => {
-                    callback( element,index );
-                });
-            }
             domEach($navLink,(child,index) => {
                 child.addEventListener("click", () => {
-                    // for(let i=0;i < $navChildren.length;i++){
-                    //     $navChildren[i].classList.remove("is-opened")
-                    // }
-                    // for(let i=0;i < $navLink.length;i++){
-                    //     $navLink[i].classList.remove("is-opened")
-                    // }
-                    // console.log(preIndex);
-
                     if(preIndex === null){
-                        child.classList.add('is-opened');
-                        $navChildren[index].classList.add("is-opened");
-                        $popupList.classList.add("is-openedChild");
-                        $popupBg.classList.add("is-openedChild");
-                        preIndex = index;
+                        openChild(child,index);
                     }else if(preIndex != index){
                         $navChildren[preIndex].classList.remove("is-opened");
                         $navLink[preIndex].classList.remove("is-opened")
-                        child.classList.add('is-opened');
-                        $navChildren[index].classList.add("is-opened");
-                        $popupList.classList.add("is-openedChild");
-                        $popupBg.classList.add("is-openedChild");
-                        preIndex = index;
+                        openChild(child,index);
                     }else{
-                        child.classList.remove('is-opened');
-                        $navChildren[index].classList.remove("is-opened");
-                        $popupList.classList.remove("is-openedChild");
-                        $popupBg.classList.remove("is-openedChild");
-                        preIndex = null;
+                        closeChild(child,index)
                     }
                 });
             })

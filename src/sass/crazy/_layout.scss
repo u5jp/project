@@ -426,13 +426,15 @@ html{
 			transform: translate3d(0px, 0px, 0px);
 			transition: transform 0.6s cubic-bezier(0.075, 0.82, 0.165, 1);
 			.l-nav_popup_list_items{
-				>li{
-					opacity: 1;
-					transform: translate3d(0px, 0px, 0px);
-					transition-duration: 0.6s;
-					transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
-					transition-property: transform, opacity;
-					@include menuOpenDelay;
+				ul{
+					>li{
+						opacity: 1;
+						transform: translate3d(0px, 0px, 0px);
+						transition-duration: 0.6s;
+						transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+						transition-property: transform, opacity;
+						@include menuOpenDelay;
+				}
 				}
 			}
 			}
@@ -444,64 +446,69 @@ html{
 			justify-content: center;
 			align-items: center;
 			width: 100%;
-			transition: 0.8s  cubic-bezier(0.19, 1, 0.22, 1);
+			transition: 0.8s cubic-bezier(0.19, 1, 0.22, 1);
 
-			font-size: 15.5px;
-			letter-spacing: 0.15em;
-			line-height: 2;
-			font-weight: bold;
-			padding-top: 50px;
-			perspective:500px;
-			@include mediaQuery{
-				font-size: 14px;
-				line-height: 1.5;
-				font-weight: normal;
-			}
-			@include mediaQuery(smallMobile){
-				font-size: 3.75vw;
-			}
-			>li{
-				opacity: 0;
-				transform: translate3d(0px, 0px, 50px);
-				>a,span{
-					cursor: pointer;
-					position: relative;
-					color: #fff;
-					display: inline-block;
-					padding: 9px 0;
-					@include mediaQuery{
-						padding: 14px 0;
-					}
-					&:before{
-						content: "";
-						display: block;
-						position: absolute;
-						width:100%;
-						height: 2px;
-						right:0;
-						left: auto;
-						background-color: #fff;
-						bottom: 50%;
-						transform: scaleX(0);
-						transition: transform 0.3s;
-						transform-origin: right center;
-					}
-					&:hover{
-						&:before{
-							transform: scaleX(1);
-							transform-origin: left center;
+			>ul{
+				font-size: 15.5px;
+				letter-spacing: 0.15em;
+				line-height: 2;
+				font-weight: bold;
+				padding-top: 50px;
+				perspective:500px;
+				@include mediaQuery{
+					font-size: 14px;
+					line-height: 1.5;
+					font-weight: normal;
+				}
+				@include mediaQuery(smallMobile){
+					font-size: 3.75vw;
+				}
+				>li{
+					opacity: 0;
+					transform: translate3d(0px, 0px, 50px);
+					>a,span{
+						cursor: pointer;
+						position: relative;
+						color: #fff;
+						display: inline-block;
+						padding: 9px 0;
+						@include mediaQuery{
+							padding: 14px 0;
+						}
+
+						@include mediaQuery{
+							&:before{
+								content: "";
+								display: block;
+								position: absolute;
+								width:100%;
+								height: 2px;
+								right:0;
+								left: auto;
+								background-color: #fff;
+								bottom: 50%;
+								transform: scaleX(0);
+								transition: transform 0.3s;
+								transform-origin: right center;
+							}
+							&:hover{
+								&:before{
+									transform: scaleX(1);
+									transform-origin: left center;
+								}
+							}
 						}
 					}
-				}
-				&:last-child{
-					cursor:auto;
-					&:before{
-						margin-top: 36px;
-						height: 1px;
-						width: 15px;
-						content: "";
-						display: block;
-						background-color: grey;
+					&:last-child{
+						cursor:auto;
+						&:before{
+							margin-top: 36px;
+							height: 1px;
+							width: 15px;
+							content: "";
+							display: block;
+							background-color: grey;
+						}
 					}
 				}
 			}
@@ -576,24 +583,26 @@ html{
 						@include mediaQuery{
 							padding: 14px 0;
 						}
-						&:before{
-							content: "";
-							display: block;
-							position: absolute;
-							width:100%;
-							height: 2px;
-							right:0;
-							left: auto;
-							background-color: #fff;
-							bottom: 50%;
-							transform: scaleX(0);
-							transition: transform 0.3s;
-							transform-origin: right center;
-						}
-						&:hover{
+						@include mediaQuery{
 							&:before{
-								transform: scaleX(1);
-								transform-origin: left center;
+								content: "";
+								display: block;
+								position: absolute;
+								width:100%;
+								height: 2px;
+								right:0;
+								left: auto;
+								background-color: #fff;
+								bottom: 50%;
+								transform: scaleX(0);
+								transition: transform 0.3s;
+								transform-origin: right center;
+							}
+							&:hover{
+								&:before{
+									transform: scaleX(1);
+									transform-origin: left center;
+								}
 							}
 						}
 					}
@@ -611,7 +620,6 @@ html{
 			height: 100%;
 			background: #000;
 			display: flex;
-			//justify-content: center;
 			align-items: center;
 			.l-nav_popup_bg_child{
 				width: 50%;
