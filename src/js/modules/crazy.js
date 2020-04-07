@@ -24,7 +24,7 @@ import '../polyfill/IntersectionObserver-master/polyfill/intersection-observer.j
             const bannerTime = 4000;
 
             //フォトカルーセル
-            let changeImage = ($children,$pager) => {
+            const changeImage = ($children,$pager) => {
                 let current = -1;
                 domEach($children,(child) => {
                     child.addEventListener('animationend', () => {
@@ -44,8 +44,8 @@ import '../polyfill/IntersectionObserver-master/polyfill/intersection-observer.j
                     }
                 }
             }
-            let kvAnimate = changeImage($kvCarousel.children,$kv_pager );
-            let bannerAnimate = changeImage($bannerCarousel.children);
+            const kvAnimate = changeImage($kvCarousel.children,$kv_pager );
+            const bannerAnimate = changeImage($bannerCarousel.children);
 
             //KVtext
             (()=>{
@@ -261,9 +261,11 @@ import '../polyfill/IntersectionObserver-master/polyfill/intersection-observer.j
                             // console.log("上")
                             if(mainSecY  == 0){
                                 e.currentTarget.removeEventListener(this.event.name,this);
+                                d.body.style.overflow="hidden";
                                 $mainSec.addEventListener('transitionend', () => {
                                     w.addEventListener(this.event.name,{handleEvent: this.handleEvent,event:this.event});
                                     d.body.style.position="fixed";
+                                    d.body.style.overflow="auto";
                                 },{once: true});
                                 $kvSec.style.transform = "translate3d(0px,0px,0px)"
                                 $mainSec.style.transform = "translate3d(0px,"+ window.innerHeight +"px,0px)"
@@ -271,8 +273,8 @@ import '../polyfill/IntersectionObserver-master/polyfill/intersection-observer.j
                         }else if(this.event.down(e)){
                             // console.log("下")
                             if(kvY  == 0){
-                                $mainSec.classList.add('is-animate');
                                 e.currentTarget.removeEventListener(this.event.name,this);
+                                $mainSec.classList.add('is-animate');
                                 $mainSec.addEventListener('transitionend', () => {
                                     w.addEventListener(this.event.name,{handleEvent: this.handleEvent,event:this.event});
                                     $mainSec.classList.remove('is-animate');

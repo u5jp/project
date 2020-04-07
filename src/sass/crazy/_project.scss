@@ -393,13 +393,57 @@ _:-ms-lang(x), .p-kv {
 				font-size: 4.6875vw;
 			}
 		}
-		.p-news_contents{
-			margin-top: 6%;
-			@include mediaQuery(landscapeORdesktop){
-			display: flex;
-			justify-content: space-between;
-			}
 
+		.p-news_contents_grid{
+			margin-top: 6%;
+			overflow: hidden;
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+			@include mediaQuery(landscapeORdesktop){
+				display: block;
+			}
+			> :first-child{
+				width: 100%;
+				margin-bottom: 20px;
+				@include mediaQuery(landscapeORdesktop){
+					width: 48%;
+					float: left;
+					margin-bottom: 0;
+				}
+				.c-textSlideIn{
+					padding-top: 15px;
+				}
+			}
+			> :not(:first-child){
+				width: 48%;
+				&:last-child{
+					display: none;
+				}
+				@include mediaQuery(landscapeORdesktop){
+					width: 48%;
+					float: right;
+					&:nth-child(n+1){
+						display: flex;
+					}
+					&:nth-child(n + 3){
+						margin-top: 3.5%;
+					}
+					.c-imageSlideIn{
+						width: 26%;
+					}
+					.c-textSlideIn{
+						width: 73.2%;
+						padding-left: 20px;
+					}
+				}
+				@include mediaQuery{
+					.c-textSlideIn{
+						padding-left: 30px;
+					}
+				}
+			}
+			
 			.c-textSlideIn{
 				padding-top: 15px;
 				@include mediaQuery(landscapeORdesktop){
@@ -421,7 +465,6 @@ _:-ms-lang(x), .p-kv {
 						display: inline-block;
 						vertical-align: middle;
 						background-color: rgb(150, 150, 150);
-
 						width: 3px;
 						height: 1px;
 						margin-right: 6px;
@@ -451,54 +494,6 @@ _:-ms-lang(x), .p-kv {
 				&:hover{
 					.hoverOpacity{
 						opacity: .3;
-					}
-				}
-			}
-			.p-itemSlideIn-main{
-				width: 100%;
-				margin-bottom: 20px;
-				@include mediaQuery(landscapeORdesktop){
-					width: 48%;
-					margin-bottom: 0;
-				}
-				.c-textSlideIn{
-					padding-top: 15px;
-				}
-			}
-
-			.p-itemSlideIn-sub{
-				width: 100%;
-				display: flex;
-				justify-content: space-between;
-				@include mediaQuery(landscapeORdesktop){
-					width: 48%;
-					display: block;
-				}
-				.p-itemSlideIn{
-					width: 48%;
-					&:last-child{
-						display: none;
-					}
-					@include mediaQuery(landscapeORdesktop){
-						width: 100%;
-						&:nth-child(n+1){
-							display: flex;
-						}
-						&:not(:first-child){
-							margin-top: 7.24638%;
-						}
-						.c-imageSlideIn{
-							width: 26%;
-						}
-						.c-textSlideIn{
-							width: 73.2%;
-							padding-left: 20px;
-						}
-					}
-					@include mediaQuery{
-						.c-textSlideIn{
-							padding-left: 30px;
-						}
 					}
 				}
 			}

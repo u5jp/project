@@ -118,34 +118,21 @@ magazine = [
 
 		<section class="p-news">
 			<h2><span class="c-textSlideIn"><span>NEWS & EVENT</span></span></h2>
-			<div class="p-news_contents">
-				<div class="p-itemSlideIn p-itemSlideIn-main">
-					<div class="c-imageSlideIn">
-						<div class="c-imageSlideIn_in">
-							<img src="images/p-news_01.jpg" alt="<%= news[0].text %>">
+			<ul class="p-news_contents_grid">
+				<% for (var i = 0; i < news.length; i++) { %>
+					<li class="p-itemSlideIn">
+						<div class="c-imageSlideIn">
+							<div class="c-imageSlideIn_in">
+								<img src="images/p-news_0<%= i + 1 %>.jpg" alt="<%= news[i].text %>">
+							</div>
 						</div>
-					</div>
-					<div class="c-textSlideIn">
-						<p><%= news[0].date %></p>
-						<p><span class="hoverOpacity"><%= news[0].text %></span></p>
-					</div>
-				</div>
-				<ul class="p-news_contents_sub p-itemSlideIn-sub">
-					<% for (var i = 1; i < news.length; i++) { %>
-						<li class="p-itemSlideIn">
-							<div class="c-imageSlideIn">
-								<div class="c-imageSlideIn_in">
-									<img src="images/p-news_0<%= i + 1 %>.jpg" alt="<%= news[i].text %>">
-								</div>
-							</div>
-							<div class="c-textSlideIn">
-								<p><%= news[i].date %></p>
-								<p><span class="hoverOpacity"><%= news[i].text %></span></p>
-							</div>
-						</li>
-					<% } %>
-				</ul>
-			</div>
+						<div class="c-textSlideIn">
+							<p><%= news[i].date %></p>
+							<p><span class="hoverOpacity"><%= news[i].text %></span></p>
+						</div>
+					</li>
+				<% } %>
+			</ul>
 			<div class="c-button">
 				<a href='"/whoweare/' class='c-button_in'>
 					<span class="c-button_in_word">READ MORE</span>
@@ -186,35 +173,21 @@ magazine = [
 
 		<section class="p-news">
 			<h2><span class="c-textSlideIn"><span>CRAZY MAGAZINE</span></span></h2>
-			<div class="p-news_contents">
-				<div class="p-itemSlideIn p-itemSlideIn-main">
-					<div class="c-imageSlideIn">
-						<div class="c-imageSlideIn_in">
-							<img src="images/p-news_05.jpg" alt="<%= magazine[0].text %>">
+			<ul class="p-news_contents_grid">
+				<% for (var i = 0; i < magazine.length; i++) { %>
+					<li class="p-itemSlideIn">
+						<div class="c-imageSlideIn">
+							<div class="c-imageSlideIn_in">
+								<img src="images/p-news_0<%= i + 5 %>.jpg" alt="<%= magazine[i].text %>">
+							</div>
 						</div>
-					</div>
-					<div class="c-textSlideIn">
-						<p><%= magazine[0].date %></p>
-						<p><span class="hoverOpacity"><%= magazine[0].text %></span></p>
-					</div>
-				</div>
-				<ul class="p-news_contents_sub p-itemSlideIn-sub">
-					<% for (var i = 1; i < magazine.length; i++) { %>
-						<li class="p-itemSlideIn">
-							<div class="c-imageSlideIn">
-								<div class="c-imageSlideIn_in">
-									<img src="images/p-news_0<%= i + 5 %>.jpg" alt="<%= magazine[i].text %>">
-								</div>
-							</div>
-							<div class="c-textSlideIn">
-								<p><%= magazine[i].date %></p>
-								<p><span class="hoverOpacity"><%= magazine[i].text %></span></p>
-							</div>
-						</li>
-					<% } %>
-				</ul>
-			</div>
-
+						<div class="c-textSlideIn">
+							<p><%= magazine[i].date %></p>
+							<p><span class="hoverOpacity"><%= magazine[i].text %></span></p>
+						</div>
+					</li>
+				<% } %>
+			</ul>
 			<div class="c-button">
 				<a href='"/whoweare/' class='c-button_in'>
 					<span class="c-button_in_word">VIEW ALL</span>

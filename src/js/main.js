@@ -9,6 +9,7 @@ import crazy from './modules/crazy.js';
 const babel = () => {
     console.log("hello World")
     console.dir($);
+    console.dir($);
 }
 
 babel()
