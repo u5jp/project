@@ -10,6 +10,7 @@
 
 body{
 	width: 100%;
+	position: fixed;
 }
 
 //IE・edge対応
@@ -21,7 +22,6 @@ _:-ms-lang(x), .p-kv {
 	position: absolute !important;
 	padding-top: 103vh !important;
 }
-
 
 @keyframes moveScrollPointer {
 	0% {
@@ -240,7 +240,7 @@ _:-ms-lang(x), .p-kv {
 			padding-top: 9%;
 			margin: 0 10% 0;
 		}
-		h2{
+		h1{
 			text-align: center;
 			font-size: 26px;
 			line-height: 1.1;

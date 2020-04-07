@@ -2,7 +2,7 @@ import '../polyfill//object-fit-images-master/dist/ofi.min.js';
 import '../polyfill/IntersectionObserver-master/polyfill/intersection-observer.js';
 
 ((w,d) =>{
-    d.body.style.position="fixed";
+    //d.body.style.position="fixed";
     //d.body.scrollTop = d.documentElement.scrollTop = 0;
 
      // HTMLcollectionやNodeListをforEachで回すための関数

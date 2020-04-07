@@ -145,23 +145,20 @@
                 font-size: 13px;
                 font-weight: bold;
                 @include mediaQuery{
-                    font-size: 12px;
                     font-weight: normal;
                 }
                 @include mediaQuery(smallMobile){
                     font-size: 3.125vw;
                     font-weight: normal;
                 }
-                .c-button_in_word_mailLogo{
-                    fill: #fff;
+                &:before{
+                    content:url(/html/crazy/images/mail.svg);
                     display: inline-block;
                     vertical-align: middle;
-                    width: 13px;
-                    height: 9.75px;
+                    transform: scale(0.6);
                     margin-right: 12px;
                     @include mediaQuery{
-                        width: 20px;
-                        height: 15px;
+                        transform: scale(1);
                         margin-right: 20px;
                     }
                 }

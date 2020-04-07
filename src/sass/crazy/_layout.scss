@@ -322,13 +322,14 @@ html{
 				>li{
 					padding: 10px 0;
 					a{
-						svg{
+						img{
 							margin: 0 auto;
-							transition:transform 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
+							-webkit-backface-visibility: hidden;
+							transition:0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
 						}
 					}
 					&:hover{
-						svg{
+						img{
 							transform: scale(1.4);
 						}
 					}
@@ -519,9 +520,16 @@ html{
 						fill: #fff;
 						transition:transform 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
 					}
+					img{
+						-webkit-backface-visibility: hidden;
+						transition:transform 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
+					}
 				}
 				&:hover{
 					svg{
+						transform: scale(1.4);
+					}
+					img{
 						transform: scale(1.4);
 					}
 				}
