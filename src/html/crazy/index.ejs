@@ -62,20 +62,20 @@ magazine = [
 <body>
 <%- include(relativePath + "_partial/_crazy_headerNav") %>
 <main class="crazy">
-	<div class="p-kv">
-		<div class="p-kv_carousel">
+	<div id="js-kv" class="p-kv">
+		<div id = "js-kv_carousel" class="p-kv_carousel">
 			<img src="images/p-kv_01.jpg" alt="crazy KV">
 			<img src="images/p-kv_02.jpg" alt="crazy KV">
 			<img src="images/p-kv_03.jpg" alt="crazy KV">
 		</div>
-		<div class="p-kv_textBox">
-			<div class="p-kv_textBox_lead">
+		<div id="js-kv_textBox" class="p-kv_textBox">
+			<div id="js-kv_textBox_lead" class="p-kv_textBox_lead">
 				<div><span>HUMAN</span></div>
 				<div><span>BUSINESS</span></div>
 				<div><span>COMPANY</span></div>
 			</div>
 		</div>
-		<div class='p-kv_pager'>
+		<div id="js-kv_pager" class='p-kv_pager'>
 			<div></div>
 			<div></div>
 			<div></div>
@@ -85,13 +85,13 @@ magazine = [
 		</div>
 	</div>
 
-	<section class="p-contents">
+	<section id="js-contents" class="p-contents">
 
-		<section class="p-introduction">
-			<h1><span class="c-textSlideIn"><span>WHO WE ARE</span></span></h1>
-			<p class="p-introduction_text">CRAZYは、企業の可能性を模索しているビジネス集団です。<br class="mod-disyplayNone_mobile">既存の考え方・働き方にとらわれず、業界・事業を抜本から更新し<br class="mod-disyplayNone_mobile">新たな可能性や真に理想だと言える組織運営の取り組みを発明しています。<br>私たちの活動の根幹は、理想から物事を「本質的に 美しく ユニークに」再定義する営み。<br class="mod-disyplayNone_mobile">そして「クレイジーと言われるレベルでそれを行うこと」が<br class="mod-disyplayNone_mobile">未来に必要な新しいサンプルをこの社会に生み出すことだと信じています。</p>
+		<section class="p-introduction js-intersection">
+			<h1><span class="c-textSlideIn js-shown"><span>WHO WE ARE</span></span></h1>
+			<p class="p-introduction_text js-shown">CRAZYは、企業の可能性を模索しているビジネス集団です。<br class="mod-disyplayNone_mobile">既存の考え方・働き方にとらわれず、業界・事業を抜本から更新し<br class="mod-disyplayNone_mobile">新たな可能性や真に理想だと言える組織運営の取り組みを発明しています。<br>私たちの活動の根幹は、理想から物事を「本質的に 美しく ユニークに」再定義する営み。<br class="mod-disyplayNone_mobile">そして「クレイジーと言われるレベルでそれを行うこと」が<br class="mod-disyplayNone_mobile">未来に必要な新しいサンプルをこの社会に生み出すことだと信じています。</p>
 			<div class="c-button">
-				<a href='"/whoweare/' class='c-button_in'>
+				<a href='"/whoweare/' class='c-button_in js-shown'>
 					<span class="c-button_in_word">READ MORE</span>
 					<span class="c-button_in_column"></span>
 					<span class="c-button_in_row"></span>
@@ -99,15 +99,15 @@ magazine = [
 			</div>
 		</section>
 
-		<ul class="p-outline">
+		<ul class="p-outline js-intersection">
 			<% for (var i = 0; i < outline.length; i++) { %>
 				<li class="p-itemSlideIn">
-					<div class="c-imageSlideIn">
+					<div class="c-imageSlideIn js-shown">
 						<div class="c-imageSlideIn_in">
 							<img src="images/p-outline_0<%= i + 1 %>.jpg" alt="<%= outline[i].h2 %>">
 						</div>
 					</div>
-					<div class="c-textSlideIn">
+					<div class="c-textSlideIn js-shown">
 						<h2><%= outline[i].h2 %></h2>
 						<p><%= outline[i].p  %></p>
 						<p class="under_line"><span>READ MORE</span></p>
@@ -116,17 +116,17 @@ magazine = [
 			<% } %>
 		</ul>
 
-		<section class="p-news">
-			<h2><span class="c-textSlideIn"><span>NEWS & EVENT</span></span></h2>
+		<section class="p-news js-intersection">
+			<h2><span class="c-textSlideIn js-shown"><span>NEWS & EVENT</span></span></h2>
 			<ul class="p-news_contents_grid">
 				<% for (var i = 0; i < news.length; i++) { %>
 					<li class="p-itemSlideIn">
-						<div class="c-imageSlideIn">
+						<div class="c-imageSlideIn js-shown">
 							<div class="c-imageSlideIn_in">
 								<img src="images/p-news_0<%= i + 1 %>.jpg" alt="<%= news[i].text %>">
 							</div>
 						</div>
-						<div class="c-textSlideIn">
+						<div class="c-textSlideIn js-shown">
 							<p><%= news[i].date %></p>
 							<p><span class="hoverOpacity"><%= news[i].text %></span></p>
 						</div>
@@ -134,7 +134,7 @@ magazine = [
 				<% } %>
 			</ul>
 			<div class="c-button">
-				<a href='"/whoweare/' class='c-button_in'>
+				<a href='"/whoweare/' class='c-button_in js-shown'>
 					<span class="c-button_in_word">READ MORE</span>
 					<span class="c-button_in_column"></span>
 					<span class="c-button_in_row"></span>
@@ -142,12 +142,12 @@ magazine = [
 			</div>
 		</section>
 
-		<section class="p-photoGallery">
+		<section class="p-photoGallery js-intersection">
 			<div class="p-itemSlideIn">
-			<div class="c-imageSlideIn">
+			<div class="c-imageSlideIn js-shown">
 				<div class="c-imageSlideIn_in">
 					<div class="p-photoGallery_wrap">
-						<div class="p-photoGallery_wrap_in">
+						<div id="js-photoGallery_carousel" class="p-photoGallery_wrap_in">
 							<picture>
 								<source media="(orientation: portrait) and (max-width: 767px)" srcset="images/mobile/p-photoGallery_01.jpg">
 								<img src="images/p-photoGallery_01.jpg" alt='recruit join us'>
@@ -161,7 +161,7 @@ magazine = [
 								<img src="images/p-photoGallery_03.jpg" alt='recruit join us'>
 							</picture>
 						</div>
-						<div class="c-textSlideIn">
+						<div class="c-textSlideIn js-shown">
 							<h2>RECRUIT</h2>
 							<p class="under_line"><span>JOIN US</span></p>
 						</div>
@@ -171,17 +171,17 @@ magazine = [
 			</div>
 		</section>
 
-		<section class="p-news">
-			<h2><span class="c-textSlideIn"><span>CRAZY MAGAZINE</span></span></h2>
+		<section class="p-news js-intersection">
+			<h2><span class="c-textSlideIn js-shown"><span>CRAZY MAGAZINE</span></span></h2>
 			<ul class="p-news_contents_grid">
 				<% for (var i = 0; i < magazine.length; i++) { %>
 					<li class="p-itemSlideIn">
-						<div class="c-imageSlideIn">
+						<div class="c-imageSlideIn js-shown">
 							<div class="c-imageSlideIn_in">
 								<img src="images/p-news_0<%= i + 5 %>.jpg" alt="<%= magazine[i].text %>">
 							</div>
 						</div>
-						<div class="c-textSlideIn">
+						<div class="c-textSlideIn js-shown">
 							<p><%= magazine[i].date %></p>
 							<p><span class="hoverOpacity"><%= magazine[i].text %></span></p>
 						</div>
@@ -189,7 +189,7 @@ magazine = [
 				<% } %>
 			</ul>
 			<div class="c-button">
-				<a href='"/whoweare/' class='c-button_in'>
+				<a href='"/whoweare/' class='c-button_in js-shown'>
 					<span class="c-button_in_word">VIEW ALL</span>
 					<span class="c-button_in_column"></span>
 					<span class="c-button_in_row"></span>
