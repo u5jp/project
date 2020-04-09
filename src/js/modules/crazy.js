@@ -50,7 +50,7 @@ import '../polyfill/IntersectionObserver-master/polyfill/intersection-observer.j
                 const lead = d.getElementById('js-kv_textBox_lead');
                 const isActive = 'is-active'
                 const isShow = 'is-show'
-                w.addEventListener('load',function(){
+                w.addEventListener('load',()=>{
                     lead.classList.add(isActive);
                     domEach(lead.children,(child) => {
                         child.addEventListener('transitionend', function textTransitionend(e){

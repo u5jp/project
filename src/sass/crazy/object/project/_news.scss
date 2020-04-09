@@ -49,14 +49,18 @@
     }
     > :not(:first-child){
         width: 48%;
-        &:last-child{
-            display: none;
+        @include mediaQuery(portraitANDmobile){
+            &:last-child{
+                display: none;
+            }
         }
         @include mediaQuery(landscapeORdesktop){
             width: 48%;
             float: right;
             &:nth-child(n+1){
-                display: flex;
+                a{
+                    display: flex;
+                }
             }
             &:nth-child(n + 3){
                 margin-top: 3.5%;

@@ -5,53 +5,64 @@ config["dsc"] = "株式会社CRAZY(株式会社クレイジー)の公式サイ�
 outline = [
     {
         "h2":"COMPANY",
-        "p":"会社概要・オフィスなど"
+		"p":"会社概要・オフィスなど",
+		"a":"https://www.crazy.co.jp/company/"
     }, 
     {
         "h2":"BUSINESS",
-        "p":"CRAZYが展開するサービス・事業一覧"
+		"p":"CRAZYが展開するサービス・事業一覧",
+		"a":"https://www.crazy.co.jp/business/"
     }, 
     {
         "h2":"PEOPLE",
-        "p":"CRAZYで働くすべてのメンバーのご紹介"
+		"p":"CRAZYで働くすべてのメンバーのご紹介",
+		"a":"https://www.crazy.co.jp/people/"
     }
 ] 
 
 news = [
 	{
 		"date":"PRESS RELEASE 2020/2/20",
-		"text":"【星野リゾート×CRAZY WEDDING共同開発】「ナシ婚」を選択する方に向け、結婚式に代わる新サービス「IWAI旅」を開始"
+		"text":"【星野リゾート×CRAZY WEDDING共同開発】「ナシ婚」を選択する方に向け、結婚式に代わる新サービス「IWAI旅」を開始",
+		"a":"https://www.crazy.co.jp/news/articles/iwaitabi/"
 	}, 
 	{
 		"date":"NEWS 2020/3/13",
-		"text":"CRAZY WEDDING BOOK 一般販売 開始いたしました"
+		"text":"CRAZY WEDDING BOOK 一般販売 開始いたしました",
+		"a":"https://www.crazy.co.jp/news/articles/crazy-wedding-book/"
 	}, 
 	{
 		"date":"NEWS 2020/2/22",
-		"text":"新型コロナウイルス感染症（COVID-19）の感染拡大に伴う対応について"
+		"text":"新型コロナウイルス感染症（COVID-19）の感染拡大に伴う対応について",
+		"a":"https://www.crazy.co.jp/news/articles/0408/"
 	}, 
 	{
 		"date":"MEDIA 2020/1/24",
-		"text":"「気鋭のリーダー10人に学ぶ 新しい子育て」に弊社代表 森山の インタビュー記事が掲載されました"
+		"text":"「気鋭のリーダー10人に学ぶ 新しい子育て」に弊社代表 森山の インタビュー記事が掲載されました",
+		"a":"https://www.crazy.co.jp/news/articles/atarashiikosodate/"
 	}
 ]
 
 magazine = [
 	{
 		"date":"EVENT 2020/1/15",
-		"text":"【前編】「私たち、結婚しないことを誓います」“良い夫婦”にちなんだ1,122万円で前代未聞の式開催"
+		"text":"【前編】「私たち、結婚しないことを誓います」“良い夫婦”にちなんだ1,122万円で前代未聞の式開催",
+		"a":"https://www.crazy.co.jp/blog/articles/expo-horiemon-1/"
 	}, 
 	{
 		"date":"BUSINESS 2020/3/8",
-		"text":"CRAZY初の地方式場リニューアル——提案したのは「未完成な会場」だった"
+		"text":"CRAZY初の地方式場リニューアル——提案したのは「未完成な会場」だった",
+		"a":"https://www.crazy.co.jp/blog/articles/creative/"
 	}, 
 	{
 		"date":"INTERVIEW 2020/1/18",
-		"text":"【後編】「私たち、結婚しないことを誓います」“良い夫婦”にちなんだ1,122万円で前代未聞の式開催"
+		"text":"【後編】「私たち、結婚しないことを誓います」“良い夫婦”にちなんだ1,122万円で前代未聞の式開催",
+		"a":"https://www.crazy.co.jp/blog/articles/expo-horiemon-2/"
 	}, 
 	{
 		"date":"EVENT 2019/12/10",
-		"text":"「主語は“YOU”ではなく“I”」——感情を原動力にする組織論【TOP LIVE】"
+		"text":"「主語は“YOU”ではなく“I”」——感情を原動力にする組織論【TOP LIVE】",
+		"a":"https://www.crazy.co.jp/blog/articles/toplive/"
 	}
 ]
 %>
@@ -102,16 +113,18 @@ magazine = [
 		<ul class="p-outline js-intersection">
 			<% for (var i = 0; i < outline.length; i++) { %>
 				<li class="p-itemSlideIn">
-					<div class="c-imageSlideIn js-shown">
-						<div class="c-imageSlideIn_in">
-							<img src="images/p-outline_0<%= i + 1 %>.jpg" alt="<%= outline[i].h2 %>">
+					<a href="<%= outline[i].a %>">
+						<div class="c-imageSlideIn js-shown">
+							<div class="c-imageSlideIn_in">
+								<img src="images/p-outline_0<%= i + 1 %>.jpg" alt="<%= outline[i].h2 %>">
+							</div>
 						</div>
-					</div>
-					<div class="c-textSlideIn js-shown">
-						<h2><%= outline[i].h2 %></h2>
-						<p><%= outline[i].p  %></p>
-						<p class="under_line"><span>READ MORE</span></p>
-					</div>
+						<div class="c-textSlideIn js-shown">
+							<h2><%= outline[i].h2 %></h2>
+							<p><%= outline[i].p  %></p>
+							<p class="under_line"><span>READ MORE</span></p>
+						</div>
+					</a>
 				</li>
 			<% } %>
 		</ul>
@@ -121,15 +134,17 @@ magazine = [
 			<ul class="p-news_contents">
 				<% for (var i = 0; i < news.length; i++) { %>
 					<li class="p-itemSlideIn">
-						<div class="c-imageSlideIn js-shown">
-							<div class="c-imageSlideIn_in">
-								<img src="images/p-news_0<%= i + 1 %>.jpg" alt="<%= news[i].text %>">
+						<a href="<%= news[i].a %>">
+							<div class="c-imageSlideIn js-shown">
+								<div class="c-imageSlideIn_in">
+									<img src="images/p-news_0<%= i + 1 %>.jpg" alt="<%= news[i].text %>">
+								</div>
 							</div>
-						</div>
-						<div class="c-textSlideIn js-shown">
-							<p><%= news[i].date %></p>
-							<p><span class="hoverOpacity"><%= news[i].text %></span></p>
-						</div>
+							<div class="c-textSlideIn js-shown">
+								<p><%= news[i].date %></p>
+								<p><span class="hoverOpacity"><%= news[i].text %></span></p>
+							</div>
+						</a>
 					</li>
 				<% } %>
 			</ul>
@@ -176,15 +191,17 @@ magazine = [
 			<ul class="p-news_contents">
 				<% for (var i = 0; i < magazine.length; i++) { %>
 					<li class="p-itemSlideIn">
-						<div class="c-imageSlideIn js-shown">
-							<div class="c-imageSlideIn_in">
-								<img src="images/p-news_0<%= i + 5 %>.jpg" alt="<%= magazine[i].text %>">
+						<a href="<%= magazine[i].a %>">
+							<div class="c-imageSlideIn js-shown">
+								<div class="c-imageSlideIn_in">
+									<img src="images/p-news_0<%= i + 5 %>.jpg" alt="<%= magazine[i].text %>">
+								</div>
 							</div>
-						</div>
-						<div class="c-textSlideIn js-shown">
-							<p><%= magazine[i].date %></p>
-							<p><span class="hoverOpacity"><%= magazine[i].text %></span></p>
-						</div>
+							<div class="c-textSlideIn js-shown">
+								<p><%= magazine[i].date %></p>
+								<p><span class="hoverOpacity"><%= magazine[i].text %></span></p>
+							</div>
+						</a>
 					</li>
 				<% } %>
 			</ul>
