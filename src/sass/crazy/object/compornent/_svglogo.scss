@@ -37,4 +37,14 @@
 	&.c-svgLogo-center{
 		margin: 0 auto;
 	}
+
+	&.is-opened{
+		fill:#fff;
+		.c-crazy-logo__elm2{
+			fill: rgb(255, 255, 255);
+		}
+		.c-crazy-logo__elm4{
+			stroke: rgb(255, 255, 255);
+		}
+	}
 }
