@@ -1,0 +1,165 @@
+
+$breakpoints: (
+	'smallMobile': 'screen and (max-width: 413px)',
+	'mobile': 'screen and (max-width: 767px)',
+	'desktop': 'screen and (min-width: 768px)',
+	'portrait': '(orientation: portrait) , (min-width: 768px)',
+	'landscapeORdesktop': '(orientation: landscape) , (min-width: 768px)',
+	'landscapeANDmobile': '(orientation: landscape) and (max-width: 767px)',
+	'portraitANDmobile': '(orientation: portrait) and (max-width: 767px)',
+) !default;
+
+@mixin mediaQuery($breakpoint: desktop) {
+	@media #{map-get($breakpoints, $breakpoint)} {
+		@content;
+	}
+}
+
+/*
+ * デバイス毎に表示をコントロールするクラス
+ */
+
+.mod-disyplayNone_mobile {
+	@include mediaQuery($breakpoint: mobile) {
+		display: none !important;
+	}
+}
+
+.mod-disyplayNone_desktop {
+	@include mediaQuery() {
+		display: none !important;
+	}
+}
+
+.mod-disyplayNone_portrait {
+	@include mediaQuery($breakpoint:portrait) {
+		display: none !important;
+	}
+}
+
+.mod-disyplayNone_landscape {
+	@include mediaQuery($breakpoint:landscapeORdesktop) {
+		display: none !important;
+	}
+}
+
+//nav用mixin
+
+@mixin menuOpenDelay{
+	@for $value from 1 through 10{
+		&:nth-child(#{$value}){
+			transition-delay: 0.10 + $value*0.04s;
+		}
+	}
+}
+
+@mixin lines($delays) {
+	@each $delay in $delays{
+		$value: index($delays, $delay);
+		.l-nav_hamburger_line#{$value}{
+			top:$value * 8 + 3 + px;
+		}
+		.l-nav_hamburger_line#{$value}{
+			>div{
+				transition: 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+				transition-delay: $delay+s;
+			}
+		}
+		&:hover{
+			.l-nav_hamburger_line#{$value}{
+				>div{
+					&:before,&:after{
+						transform: translateX(200%);
+						transition-property:transform;
+						transition-timing-function:cubic-bezier(0.19, 1, 0.22, 1) ;
+						transition-duration:1s;
+						transition-delay:$value*50 + ms;
+					}
+				}
+			}
+		}
+		&.is-opened{
+			.l-nav_hamburger_line#{$value}{
+				>div{
+					left: 24px !important;
+					&:before,&:after{
+						transition: none;
+					}
+				}
+			}
+		}
+	}
+}
+
+@mixin crosses($delays,$rotates) {
+	@each $delay in $delays{
+		$value: index($delays, $delay);
+		.l-nav_hamburger_cross#{$value}{
+			top: 19px;
+			transform:rotate(nth($rotates,$value)+deg);
+		}
+		&:hover{
+			.l-nav_hamburger_cross#{$value}{
+				>div{
+					&:before,&:after{
+						transform: translateX(200%);
+						transition: none;
+					}
+				}
+			}
+		}
+		&.is-opened{
+			.l-nav_hamburger_cross#{$value}{
+				>div{
+					left: 0px !important;
+					transition: 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+					transition-delay: $delay+s;
+				}
+			}
+			&:hover{
+				.l-nav_hamburger_cross#{$value}{
+					>div{
+						&:before,&:after{
+							transition-property:transform;
+							transition-timing-function:cubic-bezier(0.19, 1, 0.22, 1) ;
+							transition-duration:1s;
+							transition-delay:$value*50 + ms;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+//nav用mixin end
+
+//carousel leadText用 start
+@mixin leadDelay{
+	@for $value from 1 through 10{
+		&:nth-child(#{$value}){
+			transition-delay: ($value - 1) * 0.15s;
+		}
+	}
+}
+//carousel leadText用 end
+
+html{
+    font-family: "Noto Sans JP", 游ゴシック体, "Yu Gothic", YuGothic, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", メイリオ, Meiryo, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+//nav用mixin end
+body{
+	width: 100%;
+	position: fixed;
+}
+
+//IE・edge対応
+_:-ms-lang(x), body {
+	position: static !important;
+}
+
+_:-ms-lang(x), .p-kv {
+	position: absolute !important;
+	padding-top: 103vh !important;
+}

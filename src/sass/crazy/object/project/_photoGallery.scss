@@ -1,0 +1,113 @@
+.p-photoGallery{
+    padding-top:50px;
+    margin:0 50px;
+
+    @include mediaQuery{
+        width: 66.6%;
+        padding-top: 8%;
+        margin: 0 auto;
+    }
+    @include mediaQuery(portraitANDmobile){
+        margin:0 25px;
+    }
+
+    .c-imageSlideIn{
+        .p-photoGallery_carousel{
+            position: relative;
+            opacity: 0;
+            transition: opacity .6s .9s;
+            .c-textSlideIn{
+                position: absolute;
+                right: 9%;
+                left: 9%;
+                top: 0;
+                bottom: 0;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                z-index: 20;
+                @include mediaQuery{
+                    right: 20%;
+                    left: 20%;
+                }
+                h2{
+                    font-size: 25.875px;
+                    letter-spacing: 0.1em;
+                    line-height: 1.1;
+                    @include mediaQuery{
+                        font-size: 38px;
+                    }
+                    @include mediaQuery(smallMobile){
+                        font-size: 6.25vw;
+                    }
+                }
+                p{
+                    font-size: 11.5px;
+                    margin-top: 10px;
+                    @include mediaQuery{
+                        font-size: 11px;
+                    }
+                    @include mediaQuery(portraitANDmobile){
+                        font-size: 2.8125vw;
+                    }
+                }
+            }
+        }
+        &.is-shown{
+            .p-photoGallery_carousel{
+                opacity: 1;
+            }
+        }
+    }
+}
+
+.p-photoGallery_carousel_in{
+    margin: 0 auto;
+    padding-top: 38.5%;
+    position: relative;
+    background-color: rgb(234, 234, 234);
+    z-index: 11;
+    @include mediaQuery{
+        padding-top: 44.1%;
+    }
+    @include mediaQuery(portraitANDmobile){
+        padding-top: 62.5%;
+    }
+    picture{
+        img{
+            @keyframes slideIndexJoinusBanner {
+                0% {
+                    opacity: 0;
+                    z-index: 10;
+                }
+                30% {
+                    opacity: 1;
+                    z-index: 1;
+                }
+                70% {
+                    opacity: 1;
+                    z-index: 1;
+                }
+                100% {
+                    opacity: 0;
+                }
+            }
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position:center top;
+            font-family: 'object-fit:cover;object-position:center top';
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            bottom: 0px;
+            left: 0px;
+            opacity: 0;
+        }
+        &.is-animate{
+            img{
+                animation:slideIndexJoinusBanner 6s cubic-bezier(0.19, 1, 0.22, 1);
+            }
+        }
+    }
+}

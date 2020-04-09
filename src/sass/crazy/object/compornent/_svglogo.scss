@@ -1,0 +1,40 @@
+.c-svgLogo{
+	fill:#000;
+	width: 105.42857px;
+    height: 16px;
+	@include mediaQuery{
+		width: 164px;
+		height: 33.1353px;
+	}
+	.c-crazy-logo__elm1 {
+		fill: rgb(255, 255, 255);
+	}
+	.c-crazy-logo__elm2 {
+		fill: rgb(35, 24, 21);
+		transition-duration: 0.6s;
+	}
+	.c-crazy-logo__elm3 {
+		mask: url(#crazy-logo-clippath);
+		-webkit-mask: url(#crazy-logo-clippath);
+	}
+	.c-crazy-logo__elm4 {
+		fill: none;
+		stroke-width: 1.17px;
+		stroke: rgb(35, 24, 21);
+		stroke-miterlimit: 10;
+		transition-duration: 0.6s;
+	}
+	
+	&.c-svgLogo-white{
+		fill:#fff;
+		.c-crazy-logo__elm2{
+			fill: rgb(255, 255, 255);
+		}
+		.c-crazy-logo__elm4{
+			stroke: rgb(255, 255, 255);
+		}
+	}
+	&.c-svgLogo-center{
+		margin: 0 auto;
+	}
+}

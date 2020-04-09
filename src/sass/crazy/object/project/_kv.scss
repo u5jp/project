@@ -1,0 +1,208 @@
+@keyframes slideIndexKv {
+    0% {
+        opacity: 0;
+        transform: translate3d(-50px, 0px, 0px);
+        z-index: 10;
+    }
+    70% {
+        opacity: 1;
+        z-index: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translate3d(0px, 0px, 0px);
+    }
+}
+
+@keyframes moveScrollPointer {
+	0% {
+		transform: translate3d(0px, 0px, 0px);
+	}
+	100% {
+		transform: translate3d(0px, 54px, 0px);
+	}
+}
+
+@keyframes moveScrollPointerIn {
+	0% {
+		transform: scale(0);
+	}
+
+	10% {
+		transform: scale(1);
+	}
+
+	65% {
+		transform: scale(1);
+	}
+	100% {
+		transform: scale(0);
+	}
+}
+
+.p-kv{
+    position: fixed;
+    overflow: hidden;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transition:transform .8s cubic-bezier(1,0,0,1) .1s;
+    z-index: 100;
+    background: #fff;
+}
+
+.p-kv_carousel{
+    img{
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        font-family: 'object-fit:cover;';
+        &.is-animate{
+            animation: slideIndexKv 6s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+    }
+}
+
+.p-kv_textBox{
+    position: absolute;
+    top: 6.91667%;
+    bottom: 6.91667%;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.p-kv_textBox_lead{
+    overflow: hidden;
+    //IE対応
+    display: flex;
+    flex-direction: column;
+    //
+
+    >div{
+        transform: translateX(-100.5%);
+        transition-duration: 0.8s;
+        transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+        transition-property: transform;
+        @include leadDelay();
+        >span{
+            position: relative;
+            display: block;
+            float: left;
+            padding-bottom: 4px;
+            @include mediaQuery{
+                padding-bottom: 8px;
+            }
+        }
+        &.is-show{
+            >span{
+                &:before{
+                    transform:scaleY(0);
+                }
+            }
+        }
+
+        >span{
+            font-size: 38px;
+            font-weight: bold;
+            @include mediaQuery{
+                font-size: 75px;
+            }
+            &:before{
+                content: "";
+                position: absolute;
+                top: 4px;
+                right: 0;
+                bottom: 0%;
+                left: 0;
+                background: #000;
+                transform-origin: bottom;
+                transition-delay: 0s;
+                transition-duration: 1s;
+                transition-timing-function: cubic-bezier(.075,.82,.165,1);
+                @include mediaQuery{
+                    top: 12px;
+                }
+            }
+            &:after{
+                content: "";
+                display: block;
+                position: absolute;
+                bottom: 0px;
+                right: 0px;
+                left: 0px;
+                height: 3px;
+                
+                background: #000;
+                @include mediaQuery{
+                    height: 7px;
+                }
+            }
+        }
+    }
+
+    &.is-active{
+        >div{
+            transform: translateX(0%);
+        }
+    }
+}
+
+@include mediaQuery{
+    .p-kv_pager{
+        height: 1px;
+        position: absolute;
+        right: 50px;
+        bottom: 25px;
+        z-index: 20;
+        display: flex;
+        >div{
+            width: 12px;
+            height: 1px;
+            margin-left: 10px;
+            background-color: #ababab;
+            &.is-active{
+                background-color: #000;
+            }
+        }
+
+    }
+    
+    .p-kv_scroll{
+        position: absolute;
+        z-index: 1000;
+        width: 1px;
+        height: 54px;
+        bottom: 25px;
+        left: 60px;
+        background-color: #ababab;
+        &_pointer{
+            width: 9px;
+            height: 9px;
+            position: absolute;
+            left: -4px;
+            top: -4px;
+            animation: moveScrollPointer 1.2s cubic-bezier(.215,.61,.355,1) 0s infinite normal;
+            &:before{
+                content: "";
+                transform: scale(0);
+                display: block;
+                width: 9px;
+                height: 9px;
+                border-radius: 50%;
+                background-color: #000;
+                animation: moveScrollPointerIn 1.2s cubic-bezier(.215,.61,.355,1) 0s infinite normal;
+            }
+        }
+    }
+}

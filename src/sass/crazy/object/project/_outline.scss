@@ -1,0 +1,47 @@
+.p-outline{
+    padding-top: 50px;
+    margin: 0 25px;
+    @include mediaQuery(landscapeORdesktop){
+        overflow: hidden;
+        display: flex;
+        justify-content: space-between;
+    }
+    @include mediaQuery{
+        padding-top: 9%;
+        margin: 0 10%;
+    }
+    >li{
+        display: flex;
+        flex-direction: column;
+        &:not(:first-child){
+            margin-top: 30px;
+        }
+        @include mediaQuery(landscapeORdesktop){
+            width: 30.5556%;
+            &:nth-child(n+1){
+                margin-top: 0;
+            }
+        }
+        .c-textSlideIn{
+            h2{
+                margin-top: 20px;
+                font-size: 18px;
+                letter-spacing: 0.05em;
+                line-height: 1.25;
+                font-weight: bold;
+                @include mediaQuery(smallMobile){
+                    font-size: 4.0625vw;
+                }
+            }
+            h2+p{
+                margin-top: 10px;
+                font-size: 12px;
+                letter-spacing: 0.05em;
+                line-height: 2;
+                @include mediaQuery(smallMobile){
+                    font-size: 2.8125vw;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,43 @@
+.p-introduction{
+    padding-top: 80px;
+    margin: 0 25px 0;
+    @include mediaQuery{
+        padding-top: 9%;
+        margin: 0 10% 0;
+    }
+    h1{
+        text-align: center;
+        font-size: 26px;
+        line-height: 1.1;
+        @include mediaQuery{
+            font-size: 48px;
+        }
+        @include mediaQuery(smallMobile){
+            font-size: 6.25vw;
+        }
+    }
+    .c-button{
+        margin-top: 30px;
+        text-align: center;
+    }
+}
+
+.p-introduction_text{
+    font-size: 13px;
+    margin-top: 30px;
+    line-height: 1.8;
+    letter-spacing: .025em;
+    opacity: 0;
+    transition:opacity 0.8s 0.4s;
+    @include mediaQuery{
+        text-align: center;
+        font-size: 15px;
+        line-height: 2.3;
+    }
+    @include mediaQuery(smallMobile){
+        font-size: 3.125vw;
+    }
+    &.is-shown{
+        opacity: 1;
+    }
+}

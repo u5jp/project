@@ -1,0 +1,46 @@
+.p-itemSlideIn{
+    overflow: hidden;
+    cursor: pointer;
+    .c-textSlideIn{
+        transition-delay: 0.4s;
+        >*{
+            transition-delay: 0.4s;
+        }
+        .under_line{
+            margin-top: 20px;
+            font-size: 11px;
+            line-height: 1.1;
+            letter-spacing: 0.3em;
+            font-weight: bold;
+            @include mediaQuery(smallMobile){
+                margin-top: 10px;
+                font-size: 2.8125vw;
+            }
+            span{
+                display: inline-block;
+                &:after{
+                    height: 2px;
+                    width: 35px;
+                    content: "";
+                    display: block;
+                    margin-top: 11px;
+                    background: rgb(0, 0, 0);
+                    transition: width 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+                }
+            }
+        }
+    }
+    &:hover{
+        img{
+            transform: scale(1.1);
+        }
+        .under_line{
+            span:after{
+                width: 100%;
+            }
+        }
+        .hoverOpacity{
+            opacity: .3;
+        }
+    }
+}

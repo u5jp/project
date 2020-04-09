@@ -1,5 +1,4 @@
-@import "https://fonts.googleapis.com/css?family=Noto+Sans+JP:100,300,400,500,700&display=swap";
-@import "reset.scss";
-@import "layout";
-@import "compornent";
-@import "project";
+@import "https://fonts.googleapis.com/css?family=Noto+Sans+JP:100,400,700&display=swap";
+@import "foundation/**";
+@import "layout/**";
+@import "object/**";
