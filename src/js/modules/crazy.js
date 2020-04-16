@@ -27,7 +27,6 @@ import '../polyfill/IntersectionObserver-master/polyfill/intersection-observer.j
                 const setSize = ()=>{
                     removeSize();
                     for(let i=0; i < list.length;i++){
-                        console.log(list[i].clientHeight)
                         list[i].children[0].style.height = list[i].clientHeight + 'px';
                     }
                 }
