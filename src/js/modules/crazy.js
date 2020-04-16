@@ -15,8 +15,8 @@ import '../polyfill/IntersectionObserver-master/polyfill/intersection-observer.j
 
         (()=>{
             //desktopスタイル時のfloat回り込み防止
-            w.addEventListener('load',function(){
-                const pcWidth = window.matchMedia('(orientation: landscape) , (min-width: 768px)');
+            w.addEventListener('load',()=>{
+                const pcWidth = w.matchMedia('(orientation: landscape) , (min-width: 768px)');
                 const list = d.getElementsByClassName('js-setSize');
 
                 const removeSize = ()=>{
