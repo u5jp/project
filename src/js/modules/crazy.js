@@ -246,38 +246,14 @@ import '../polyfill/IntersectionObserver-master/polyfill/intersection-observer.j
                     //デスクトップ・マウス端末の場合にイベントリスナで使用するオブジェクト
                     const wheel = {
                         name:'wheel',
-                        up:(e)=>{
-                            if(w.pageYOffset <= 0 && e.deltaY <= 0){
-                                return true;
-                            }else{
-                                return false;
-                            }
-                        },
-                        down:(e)=>{
-                            if(e.deltaY > 0){
-                                return true;
-                            } else{
-                                return false;
-                            }
-                        }
+                        up:(e)=>{return (w.pageYOffset <= 0 && e.deltaY <= 0)?true:false;},
+                        down:(e)=>{return (e.deltaY > 0)?true:false;}
                     }
                     //モバイル・タッチ端末の場合にイベントリスナで使用するオブジェクト
                     const touch = {
                         name:'touchmove',
-                        up:(e)=>{
-                            if(w.pageYOffset <= 0 && startY < e.changedTouches[0].pageY){
-                                return true;
-                            }else{
-                                return false;
-                            }
-                        },
-                        down:(e)=>{
-                            if(startY > e.changedTouches[0].pageY){
-                                return true;
-                            } else{
-                                return false;
-                            }
-                        }
+                        up:(e)=>{return (w.pageYOffset <= 0 && startY < e.changedTouches[0].pageY)?true:false;},
+                        down:(e)=>{return (startY > e.changedTouches[0].pageY)?true:false;}
                     }
                     //モバイルの場合のスワイプ方向を取るためのスタート位置を測定
                     const startData = (e) =>{
