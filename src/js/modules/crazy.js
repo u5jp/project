@@ -2,7 +2,6 @@ import '../polyfill//object-fit-images-master/dist/ofi.min.js';
 import '../polyfill/IntersectionObserver-master/polyfill/intersection-observer.js';
 
 ((w,d) =>{
-
      // HTMLcollectionやNodeListをforEachで回すための関数
     const domEach = ( elements , callback ) => {
         Array.prototype.forEach.call( elements ,(element ,index) => {
@@ -13,7 +12,41 @@ import '../polyfill/IntersectionObserver-master/polyfill/intersection-observer.j
     const isIeEdge = userAgent.indexOf('msie') != -1 || userAgent.indexOf('trident') != -1 || userAgent.indexOf('edge') != -1;
 
     w.addEventListener('DOMContentLoaded',() =>{
-        
+
+        (()=>{
+            //desktopスタイル時のfloat回り込み防止
+            w.addEventListener('load',function(){
+                const pcWidth = window.matchMedia('(orientation: landscape) , (min-width: 768px)');
+                const list = d.getElementsByClassName('js-setSize');
+
+                const removeSize = ()=>{
+                    for(let i=0; i < list.length;i++){
+                        list[i].children[0].setAttribute("style","");
+                    }
+                }
+                const setSize = ()=>{
+                    removeSize();
+                    for(let i=0; i < list.length;i++){
+                        console.log(list[i].clientHeight)
+                        list[i].children[0].style.height = list[i].clientHeight + 'px';
+                    }
+                }
+                
+                const checkBP = ()=> {
+                    if (pcWidth.matches) {
+                    //PCの処理
+                        w.addEventListener('resize', setSize);
+                    } else {
+                    //SPの処理
+                        removeSize();
+                        w.removeEventListener('resize', setSize);
+                    }
+                }
+                pcWidth.addListener(checkBP)
+                checkBP();
+            });
+        })();
+
         (()=>{
             const kvCarousel = d.getElementById('js-kv_carousel');
             const kv_pager = d.getElementById('js-kv_pager');

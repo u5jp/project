@@ -13,6 +13,9 @@
     >li{
         display: flex;
         flex-direction: column;
+        a{
+            flex-shrink: 0;//IE対応
+        }
         &:not(:first-child){
             margin-top: 30px;
         }
