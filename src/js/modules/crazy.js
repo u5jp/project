@@ -8,6 +8,7 @@ import '../polyfill/IntersectionObserver-master/polyfill/intersection-observer.j
             callback( element,index );
         });
     }
+    
     const userAgent = navigator.userAgent.toLowerCase();
     const isIeEdge = userAgent.indexOf('msie') != -1 || userAgent.indexOf('trident') != -1 || userAgent.indexOf('edge') != -1;
 
