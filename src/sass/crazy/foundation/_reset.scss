@@ -101,8 +101,8 @@ input, select {
     vertical-align:middle;
 }
 
+/*追加*/
 
-//reset 追加
 *,
 *::before,
 *::after {
@@ -124,6 +124,11 @@ li{
     display: block;
 }
 
-html{
-    font-size: 16px;
+body {
+    font-family: "Helvetica Neue",
+        Arial,
+        "Hiragino Kaku Gothic ProN",
+        "Hiragino Sans",
+        Meiryo,
+        sans-serif;
 }
