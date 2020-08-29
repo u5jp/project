@@ -1,0 +1,47 @@
+{
+  "description": "ichihashi",
+  "license": "MIT",
+  "scripts": {
+    "prod": "webpack --mode production",
+    "dev": "webpack --mode development -w"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/preset-env": "^7.8.4",
+    "autoprefixer": "^9.7.4",
+    "babel-loader": "^8.0.0-beta.6",
+    "browser-sync": "^2.26.7",
+    "css-loader": "^3.4.2",
+    "css-mqpacker": "^7.0.0",
+    "csswring": "^7.0.0",
+    "gulp": "^4.0.2",
+    "gulp-data": "^1.3.1",
+    "gulp-ejs": "^5.0.0",
+    "gulp-htmlmin": "^5.0.1",
+    "gulp-imagemin": "^7.1.0",
+    "gulp-postcss": "^8.0.0",
+    "gulp-rename": "^2.0.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-sass-glob": "^1.1.0",
+    "imagemin-pngquant": "^8.0.0",
+    "postcss-flexbugs-fixes": "^4.1.0",
+    "style-loader": "^1.1.3",
+    "url-loader": "^4.0.0",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10",
+    "webpack-stream": "^5.2.1"
+  },
+  "browserslist": [
+    "last 2 Chrome versions",
+    "last 2 Firefox versions",
+    "last 2 Safari versions",
+    "last 2 ChromeAndroid versions",
+    "last 2 iOS versions",
+    "last 2 Edge versions",
+    "ie 11"
+  ],
+  "dependencies": {
+    "jquery": "^3.4.1",
+    "slick-carousel": "^1.8.1"
+  }
+}
